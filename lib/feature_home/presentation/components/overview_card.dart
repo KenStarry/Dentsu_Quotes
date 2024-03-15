@@ -34,8 +34,9 @@ class _OverviewCardState extends State<OverviewCard> {
                 const Icon(Icons.more_horiz_rounded, color: textBlack100)
               ],
             ),
-          )
+          ),
           //  content
+          Expanded(child: widget.overviewCardModel.content)
         ],
       ),
     );

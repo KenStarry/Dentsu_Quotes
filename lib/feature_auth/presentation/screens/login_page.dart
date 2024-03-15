@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_auth/presentation/components/login_text_field_section.dart';
 import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +12,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late final TextEditingController _usernameController;
+  late final TextEditingController _passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _usernameController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -64,6 +76,21 @@ class _LoginPageState extends State<LoginPage> {
                           color: textWhite500),
                       textAlign: TextAlign.center,
                     ),
+                  ],
+                ),
+
+                //  login textfields
+                Column(
+                  children: [
+                    LoginTextFieldSection(
+                        controller: _usernameController,
+                        sectionTitle: 'Username',
+                        hintText: 'Enter your email or Username'),
+                    const SizedBox(height: 16),
+                    LoginTextFieldSection(
+                        controller: _usernameController,
+                        sectionTitle: 'Password',
+                        hintText: 'Enter your Password'),
                   ],
                 ),
 

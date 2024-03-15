@@ -3,6 +3,7 @@ import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -143,10 +144,12 @@ class _LoginPageState extends State<LoginPage> {
 
                   //  login button
                   FilledButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Get.to(() => )
+                      },
                       style: FilledButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColorDark,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 24, vertical: 15),
                           surfaceTintColor: Theme.of(context).primaryColorDark,
                           minimumSize: Size.fromHeight(32)),

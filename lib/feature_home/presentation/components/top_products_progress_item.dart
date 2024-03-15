@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/theme/colors.dart';
+import 'package:dentsu_quotes/theme/material_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -47,6 +48,7 @@ class TopProductsProgressItem extends StatelessWidget {
             lineHeight: 8,
             padding: EdgeInsets.zero,
             progressColor: color,
+            backgroundColor: generateMaterialColor(color).shade100,
             percent: percent,
             barRadius: Radius.circular(100),
           ),

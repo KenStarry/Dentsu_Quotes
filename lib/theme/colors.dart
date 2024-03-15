@@ -16,3 +16,6 @@ const textWhite700 = Color(0xFFE5E5E5);
 const textWhite500 = Color(0xFFCECECE);
 const textWhite300 = Color(0xFFB9B9B9);
 const textWhite100 = Color(0xFFA0A0A0);
+
+const myGreen = Color(0xff5ABEA6);
+const myBlue = Color(0xff387EA1);

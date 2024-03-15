@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_home/presentation/components/overview_cards_section.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,19 +16,23 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         color: Theme.of(context).scaffoldBackgroundColor,
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
+            const SliverToBoxAdapter(child: SizedBox(height: 24)),
             //  title
             SliverToBoxAdapter(
                 child: Text('Dashboard',
                     style: TextStyle(
                       fontSize: Theme.of(context).textTheme.titleLarge!.fontSize,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                       color: Theme.of(context).textTheme.titleLarge!.color
-                    )))
+                    ))),
+            const SliverToBoxAdapter(child: SizedBox(height: 24)),
+            //  home overview cards
+            OverviewCardsSection()
           ],
         ),
       ),

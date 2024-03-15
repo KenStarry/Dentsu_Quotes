@@ -2,6 +2,7 @@ import 'package:dentsu_quotes/feature_home/presentation/components/leads_content
 import 'package:dentsu_quotes/feature_home/presentation/components/overview_card.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/requests_content.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/requests_content_detail.dart';
+import 'package:dentsu_quotes/feature_home/presentation/components/top_products_content.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/total_leads_content.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/total_leads_content_detail.dart';
 import 'package:dentsu_quotes/theme/colors.dart';
@@ -60,8 +61,7 @@ class _OverviewCardsSectionState extends State<OverviewCardsSection> {
           onTap: () {}),
       OverviewCardModel(
           title: 'Top Products',
-          chart: TotalLeadsContent(),
-          details: Text('Hello'),
+          chart: const TopProductsContent(),
           onTap: () {}),
     ];
   }

@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             color: Colors.transparent,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //  logo
                 Column(
@@ -54,20 +54,37 @@ class _LoginPageState extends State<LoginPage> {
 
                     const SizedBox(height: 16),
 
-                    Text("A tool that leverage's the power of data and artificial intelligence to drive digital transformation at scale",
+                    Text(
+                      "A tool that leverage's the power of data and artificial intelligence to drive digital transformation at scale",
+                      style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.bodyLarge!.fontSize,
+                          fontWeight:
+                              Theme.of(context).textTheme.bodyLarge!.fontWeight,
+                          color: textWhite500),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+
+                //  login button
+                FilledButton(
+                    onPressed: () {},
+                    style: FilledButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColorDark,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+                        surfaceTintColor: Theme.of(context).primaryColorDark,
+                        minimumSize: Size.fromHeight(32)),
+                    child: Text('Log In',
                         style: TextStyle(
                             fontSize: Theme.of(context)
                                 .textTheme
-                                .bodyLarge!
+                                .bodyMedium!
                                 .fontSize,
-                            fontWeight: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .fontWeight,
-                            color: textWhite500),
-                    textAlign: TextAlign.center,),
-                  ],
-                )
+                            fontWeight: FontWeight.w700,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium!.color)))
               ],
             ),
           ),

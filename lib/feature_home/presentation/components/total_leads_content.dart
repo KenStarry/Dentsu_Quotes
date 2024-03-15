@@ -20,22 +20,24 @@ class TotalLeadsContent extends StatelessWidget {
           progressColor: Theme.of(context).primaryColor,
           backgroundColor: const Color(0xffFFE5D3),
           lineWidth: 12,
-          center: Container(
-            width: double.infinity,
-            height: double.infinity,
-            margin: const EdgeInsets.all(32),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: Text('47%',
-                  style: TextStyle(
-                      fontSize:
-                          Theme.of(context).textTheme.titleMedium!.fontSize,
-                      fontWeight:
-                          Theme.of(context).textTheme.titleMedium!.fontWeight,
-                      color: textWhite900)),
+          center: UnconstrainedBox(
+            child: Container(
+              width: 70,
+              height: 70,
+              margin: const EdgeInsets.all(32),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Text('47%',
+                    style: TextStyle(
+                        fontSize:
+                            Theme.of(context).textTheme.titleMedium!.fontSize,
+                        fontWeight:
+                            Theme.of(context).textTheme.titleMedium!.fontWeight,
+                        color: textWhite900)),
+              ),
             ),
           ),
         ),

@@ -39,7 +39,9 @@ class _OverviewCardState extends State<OverviewCard> {
           Expanded(child: widget.overviewCardModel.chart),
 
           //  details
-          widget.overviewCardModel.details
+          widget.overviewCardModel.details == null
+              ? const SizedBox.shrink()
+              : widget.overviewCardModel.details!
         ],
       ),
     );

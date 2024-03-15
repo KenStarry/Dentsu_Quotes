@@ -41,7 +41,9 @@ class _OverviewCardState extends State<OverviewCard> {
           //  details
           widget.overviewCardModel.details == null
               ? const SizedBox.shrink()
-              : widget.overviewCardModel.details!
+              : widget.overviewCardModel.details!,
+
+          const SizedBox(height: 12)
         ],
       ),
     );

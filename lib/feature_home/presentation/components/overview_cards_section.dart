@@ -1,5 +1,6 @@
 import 'package:dentsu_quotes/feature_home/presentation/components/overview_card.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/requests_content.dart';
+import 'package:dentsu_quotes/feature_home/presentation/components/requests_content_detail.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/total_leads_content.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/total_leads_content_detail.dart';
 import 'package:dentsu_quotes/theme/colors.dart';
@@ -47,7 +48,14 @@ class _OverviewCardsSectionState extends State<OverviewCardsSection> {
       OverviewCardModel(
           title: 'Requests',
           chart: const RequestsContent(),
-          details: Text('Hello'),
+          details: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RequestsContentDetail(iconColor: accent, detailText: 'Accounts'),
+              RequestsContentDetail(iconColor: myGreen, detailText: 'Insurance'),
+              RequestsContentDetail(iconColor: myBlue, detailText: 'Credit'),
+            ],
+          ),
           onTap: () {}),
       OverviewCardModel(
           title: 'Top Products',

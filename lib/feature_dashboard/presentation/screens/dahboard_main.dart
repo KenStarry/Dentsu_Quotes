@@ -5,6 +5,7 @@ import 'package:dentsu_quotes/feature_leads/presentation/screens/leads_page.dart
 import 'package:dentsu_quotes/feature_profile/presentation/screens/profile_page.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/screens/quotes_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -47,6 +48,12 @@ class _DashboardMainState extends State<DashboardMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Theme.of(context).primaryColor,
+          statusBarBrightness: Brightness.light,
+          systemNavigationBarColor: Theme.of(context).primaryColorDark,
+          systemNavigationBarIconBrightness: Brightness.dark
+        ),
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         leadingWidth: 88,

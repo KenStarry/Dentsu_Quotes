@@ -32,12 +32,13 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 //  logo
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     //  logo
                     SvgPicture.asset('assets/images/logo.svg',
                         width: 70, height: 70),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 32),
 
                     Text('Welcome to Dentsu LMS',
                         style: TextStyle(
@@ -49,7 +50,22 @@ class _LoginPageState extends State<LoginPage> {
                                 .textTheme
                                 .titleLarge!
                                 .fontWeight,
-                            color: textWhite900))
+                            color: textWhite900)),
+
+                    const SizedBox(height: 16),
+
+                    Text("A tool that leverage's the power of data and artificial intelligence to drive digital transformation at scale",
+                        style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .fontSize,
+                            fontWeight: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .fontWeight,
+                            color: textWhite500),
+                    textAlign: TextAlign.center,),
                   ],
                 )
               ],

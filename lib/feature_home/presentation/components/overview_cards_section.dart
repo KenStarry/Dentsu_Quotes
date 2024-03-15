@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_home/presentation/components/leads_content.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/overview_card.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/requests_content.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/requests_content_detail.dart';
@@ -42,8 +43,8 @@ class _OverviewCardsSectionState extends State<OverviewCardsSection> {
           onTap: () {}),
       OverviewCardModel(
           title: 'Leads',
-          chart: TotalLeadsContent(),
-          details: Text('Hello'),
+          chart: const LeadsContent(),
+          details: null,
           onTap: () {}),
       OverviewCardModel(
           title: 'Requests',

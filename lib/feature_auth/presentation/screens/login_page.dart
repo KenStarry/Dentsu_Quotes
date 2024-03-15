@@ -14,6 +14,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late final TextEditingController _usernameController;
   late final TextEditingController _passwordController;
+  bool keepMeLoggedIn = false;
 
   @override
   void initState() {
@@ -104,13 +105,22 @@ class _LoginPageState extends State<LoginPage> {
                       //  keep me logged in checkbox
                       Row(
                         children: [
-                          SvgPicture.asset(
-                            'assets/images/checked.svg',
-                            width: 24,
-                            height: 24,
-                            colorFilter: ColorFilter.mode(
-                                Theme.of(context).primaryColorDark,
-                                BlendMode.srcIn),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                keepMeLoggedIn = !keepMeLoggedIn;
+                              });
+                            },
+                            child: SvgPicture.asset(
+                              keepMeLoggedIn
+                                  ? 'assets/images/checked.svg'
+                                  : 'assets/images/unchecked.svg',
+                              width: 24,
+                              height: 24,
+                              colorFilter: ColorFilter.mode(
+                                  Theme.of(context).primaryColorDark,
+                                  BlendMode.srcIn),
+                            ),
                           ),
                           const SizedBox(width: 8),
                           Text('Keep me logged in',

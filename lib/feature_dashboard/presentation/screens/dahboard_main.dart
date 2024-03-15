@@ -1,9 +1,14 @@
 import 'package:dentsu_quotes/core/presentation/components/avatar.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/components/bottom_bar_item.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
+import 'package:dentsu_quotes/feature_leads/presentation/screens/leads_page.dart';
+import 'package:dentsu_quotes/feature_profile/presentation/screens/profile_page.dart';
+import 'package:dentsu_quotes/feature_quotes/presentation/screens/quotes_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../../../feature_home/presentation/screens/home_page.dart';
 
 class DashboardMain extends StatefulWidget {
   const DashboardMain({super.key});
@@ -14,6 +19,7 @@ class DashboardMain extends StatefulWidget {
 
 class _DashboardMainState extends State<DashboardMain> {
   late List<String> bottomBarItemAssets;
+  late List<Widget> screens;
 
   late final DashboardController _dashboardController;
 
@@ -21,6 +27,12 @@ class _DashboardMainState extends State<DashboardMain> {
   void initState() {
     super.initState();
 
+    screens = const <Widget>[
+      HomePage(),
+      LeadsPage(),
+      QuotesPage(),
+      ProfilePage()
+    ];
     bottomBarItemAssets = <String>[
       'assets/images/home.svg',
       'assets/images/leads.svg',
@@ -113,6 +125,12 @@ class _DashboardMainState extends State<DashboardMain> {
                     ))
                 .toList(),
           ),
+        ),
+      ),
+      body: Obx(
+        () => IndexedStack(
+          index: _dashboardController.activeTabIndex.value,
+          children: screens,
         ),
       ),
     );

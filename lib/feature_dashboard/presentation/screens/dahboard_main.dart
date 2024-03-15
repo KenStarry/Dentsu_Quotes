@@ -49,7 +49,7 @@ class _DashboardMainState extends State<DashboardMain> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
-        leadingWidth: 80,
+        leadingWidth: 88,
         toolbarHeight: 70,
         leading: UnconstrainedBox(
           child: SvgPicture.asset(

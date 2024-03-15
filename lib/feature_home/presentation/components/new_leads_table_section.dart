@@ -1,15 +1,16 @@
 import 'package:data_table_2/data_table_2.dart';
+import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-class NewLeadsSection extends StatefulWidget {
-  const NewLeadsSection({super.key});
+class NewLeadsTableSection extends StatefulWidget {
+  const NewLeadsTableSection({super.key});
 
   @override
-  State<NewLeadsSection> createState() => _NewLeadsSectionState();
+  State<NewLeadsTableSection> createState() => _NewLeadsTableSectionState();
 }
 
-class _NewLeadsSectionState extends State<NewLeadsSection> {
+class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
   final List<String> customers = [
     'Joseph Kimeu Walter',
     'Kani Odili',
@@ -50,7 +51,7 @@ class _NewLeadsSectionState extends State<NewLeadsSection> {
       SliverToBoxAdapter(
         child: Container(
           width: double.infinity,
-          height: 700,
+          height: 820,
           decoration: BoxDecoration(
               color: Theme.of(context).primaryColorDark,
               borderRadius: BorderRadius.circular(12)),
@@ -59,12 +60,16 @@ class _NewLeadsSectionState extends State<NewLeadsSection> {
               Container(
                 width: double.infinity,
                 height: 100,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColorDark,
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12))),
+                        topRight: Radius.circular(12)),
+                    border: Border(
+                        bottom: BorderSide(
+                            color: textBlack100.withOpacity(0.5), width: 3))),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text('New Leads',
@@ -75,6 +80,7 @@ class _NewLeadsSectionState extends State<NewLeadsSection> {
                           color: Theme.of(context).textTheme.bodyLarge!.color)),
                 ),
               ),
+              const SizedBox(height: 8),
               Expanded(
                 child: DataTable2(
                     dataRowHeight: 55,

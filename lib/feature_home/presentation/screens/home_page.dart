@@ -1,4 +1,4 @@
-import 'package:dentsu_quotes/feature_home/presentation/components/new_leads_section.dart';
+import 'package:dentsu_quotes/feature_home/presentation/components/new_leads_table_section.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/overview_cards_section.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
 
             //  new leads section
-            const NewLeadsSection()
+            const NewLeadsTableSection()
           ],
         ),
       ),

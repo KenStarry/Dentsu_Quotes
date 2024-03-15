@@ -27,7 +27,27 @@ class _DashboardMainState extends State<DashboardMain> {
         ),
         actions: [
           //  profile picture
-          const Avatar(avatarUrl: '', size: Size(30, 30)),
+          SizedBox(
+              width: 30,
+              height: 30,
+              child: Stack(
+                children: [
+                  const Align(
+                      alignment: Alignment.center,
+                      child: Avatar(avatarUrl: '', size: Size(30, 30))),
+
+                  //  live status checker
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.green),
+                    ),
+                  )
+                ],
+              )),
           const SizedBox(width: 8),
           IconButton(
               onPressed: () {},

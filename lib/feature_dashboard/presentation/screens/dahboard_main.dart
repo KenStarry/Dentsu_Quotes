@@ -64,6 +64,20 @@ class _DashboardMainState extends State<DashboardMain> {
               )),
         ],
       ),
+      bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).primaryColorDark,
+        surfaceTintColor: Theme.of(context).primaryColorDark,
+        height: 70,
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: Row(
+            children: [
+              //  home
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

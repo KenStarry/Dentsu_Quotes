@@ -20,7 +20,7 @@ class MyTheme {
       fontFamily: 'DMSans',
       textTheme: const TextTheme(
         bodySmall: TextStyle(
-            fontSize: 11, fontWeight: FontWeight.w500, color: textBlack500),
+            fontSize: 12, fontWeight: FontWeight.w500, color: textBlack500),
         bodyMedium: TextStyle(
             fontSize: 14, fontWeight: FontWeight.w500, color: textBlack500),
         bodyLarge: TextStyle(

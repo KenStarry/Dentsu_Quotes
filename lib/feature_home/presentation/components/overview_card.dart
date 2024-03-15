@@ -15,7 +15,7 @@ class _OverviewCardState extends State<OverviewCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 250,
+      width: 280,
       height: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       decoration: BoxDecoration(
@@ -36,7 +36,10 @@ class _OverviewCardState extends State<OverviewCard> {
             ),
           ),
           //  content
-          Expanded(child: widget.overviewCardModel.content)
+          Expanded(child: widget.overviewCardModel.chart),
+
+          //  details
+          widget.overviewCardModel.details
         ],
       ),
     );

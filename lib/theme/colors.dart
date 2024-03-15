@@ -9,7 +9,7 @@ const textBlack900 = Color(0xFF000000);
 const textBlack700 = Color(0xFF171717);
 const textBlack500 = Color(0xFF353535);
 const textBlack300 = Color(0xFF535353);
-const textBlack100 = Color(0xFF5F5F5F);
+const textBlack100 = Color(0xFFB2B2B2);
 
 const textWhite900 = Color(0xFFFFFFFF);
 const textWhite700 = Color(0xFFE5E5E5);

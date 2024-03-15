@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/core/presentation/components/avatar.dart';
+import 'package:dentsu_quotes/feature_dashboard/presentation/components/bottom_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -10,6 +11,13 @@ class DashboardMain extends StatefulWidget {
 }
 
 class _DashboardMainState extends State<DashboardMain> {
+  late final bottomBarItemAssets = <String>[
+    'assets/images/home.svg',
+    'assets/images/leads.svg',
+    'assets/images/quotes.svg',
+    'assets/images/profile.svg',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,16 +73,23 @@ class _DashboardMainState extends State<DashboardMain> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).primaryColorDark,
-        surfaceTintColor: Theme.of(context).primaryColorDark,
+        color: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
         height: 70,
+        padding: EdgeInsets.zero,
         child: Container(
           width: double.infinity,
           height: double.infinity,
+          decoration: BoxDecoration(
+              color: Theme.of(context).primaryColorDark,
+              borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(20), topLeft: Radius.circular(20))),
           child: Row(
-            children: [
-              //  home
-            ],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: bottomBarItemAssets
+                .map((asset) => BottomBarItem(asset: asset, onTap: () {}))
+                .toList(),
           ),
         ),
       ),

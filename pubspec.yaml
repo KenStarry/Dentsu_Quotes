@@ -21,6 +21,7 @@ dependencies:
   syncfusion_flutter_charts: ^25.1.35
   percent_indicator: ^4.2.3
   sliver_tools: ^0.2.12
+  data_table_2: ^2.5.11
 
 dev_dependencies:
   flutter_test:

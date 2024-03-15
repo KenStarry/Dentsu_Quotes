@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(
                 child: Text('Dashboard',
                     style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.titleLarge!.fontSize,
+                      fontSize: Theme.of(context).textTheme.titleMedium!.fontSize,
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).textTheme.titleLarge!.color
                     ))),

@@ -12,12 +12,27 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  flutter_native_splash: ^2.3.11
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+
+# dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#4A2860"
+  color_dark: "#4A2860"
+  image: "assets/images/logo.png"
+  android_12:
+    color: "#4A2860"
+    color_dark: "#4A2860"
+    image: "assets/images/logo.png"
+  android: true
+  ios: true
+  web: false
+  fullscreen: false
 
 flutter:
 

@@ -15,18 +15,23 @@ class BottomBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Center(
-        child: SvgPicture.asset(
-          asset,
-          width: 20,
-          height: 20,
-          colorFilter: ColorFilter.mode(
-              isActive
-                  ? Theme.of(context).primaryColor
-                  : textBlack100,
-              BlendMode.srcIn),
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 350),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+        color: Colors.transparent,
+        child: Center(
+          child: SvgPicture.asset(
+            asset,
+            width: 20,
+            height: 20,
+            colorFilter: ColorFilter.mode(
+                isActive
+                    ? Theme.of(context).primaryColor
+                    : textBlack100,
+                BlendMode.srcIn),
+          ),
         ),
       ),
     );

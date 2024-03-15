@@ -1,7 +1,9 @@
 import 'package:dentsu_quotes/core/presentation/components/avatar.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/components/bottom_bar_item.dart';
+import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class DashboardMain extends StatefulWidget {
   const DashboardMain({super.key});
@@ -11,12 +13,23 @@ class DashboardMain extends StatefulWidget {
 }
 
 class _DashboardMainState extends State<DashboardMain> {
-  late final bottomBarItemAssets = <String>[
-    'assets/images/home.svg',
-    'assets/images/leads.svg',
-    'assets/images/quotes.svg',
-    'assets/images/profile.svg',
-  ];
+  late List<String> bottomBarItemAssets;
+
+  late final DashboardController _dashboardController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    bottomBarItemAssets = <String>[
+      'assets/images/home.svg',
+      'assets/images/leads.svg',
+      'assets/images/quotes.svg',
+      'assets/images/profile.svg',
+    ];
+
+    _dashboardController = Get.find<DashboardController>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +101,16 @@ class _DashboardMainState extends State<DashboardMain> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: bottomBarItemAssets
-                .map((asset) => BottomBarItem(asset: asset, onTap: () {}))
+                .map((asset) => Obx(
+                      () => BottomBarItem(
+                          asset: asset,
+                          isActive: _dashboardController.activeTabIndex.value ==
+                              bottomBarItemAssets.indexOf(asset),
+                          onTap: () {
+                            _dashboardController.setActiveTabIndex(
+                                index: bottomBarItemAssets.indexOf(asset));
+                          }),
+                    ))
                 .toList(),
           ),
         ),

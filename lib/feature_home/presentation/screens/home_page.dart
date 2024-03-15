@@ -35,6 +35,16 @@ class _HomePageState extends State<HomePage> {
             //  home overview cards
             const OverviewCardsSection(),
 
+            const SliverToBoxAdapter(child: SizedBox(height: 32)),
+
+            //  title
+            SliverToBoxAdapter(
+                child: Text('New Leads',
+                    style: TextStyle(
+                        fontSize: Theme.of(context).textTheme.titleMedium!.fontSize,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).textTheme.titleLarge!.color))),
+
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
 
             //  new leads section

@@ -1,6 +1,8 @@
 import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../feature_home/presentation/components/new_leads_table_section.dart';
+
 class LeadsPage extends StatefulWidget {
   const LeadsPage({super.key});
 
@@ -71,6 +73,8 @@ class _LeadsPageState extends State<LeadsPage> {
               ],
             )),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
+            //  new leads section
+            const NewLeadsTableSection()
           ],
         ),
       ),

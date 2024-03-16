@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_textfield.dart';
 import 'package:flutter/material.dart';
 
 class ViewQuoteInformation extends StatefulWidget {
@@ -18,6 +19,7 @@ class _ViewQuoteInformationState extends State<ViewQuoteInformation> {
   late final TextEditingController _sourceController;
   late final TextEditingController _capturingUserController;
   late final Map<String, dynamic> information;
+  late final List<TextEditingController> controllers;
 
   @override
   void initState() {
@@ -33,6 +35,18 @@ class _ViewQuoteInformationState extends State<ViewQuoteInformation> {
     _sourceController = TextEditingController();
     _capturingUserController = TextEditingController();
 
+    controllers = <TextEditingController>[
+      _firstNameController,
+      _middleNameController,
+      _lastNameController,
+      _leadSourceController,
+      _quoteIdController,
+      _businessUnitController,
+      _leadIdController,
+      _sourceController,
+      _capturingUserController
+    ];
+
     information = <String, dynamic>{
       'First Name': 'Stacey',
       'Middle Name': 'Nyawira',
@@ -40,7 +54,7 @@ class _ViewQuoteInformationState extends State<ViewQuoteInformation> {
       'Originating Lead Source': 'Sales Agent',
       'Quote ID': 'QUO-02091-V2C8D9',
       'Owning Business Unit': 'Kenya',
-      'Lead ID': 0,
+      'Lead ID': 0.toString(),
       'Source': 'Agent portal',
       'Capturing User': 'Jeremy Kibor'
     };
@@ -51,7 +65,16 @@ class _ViewQuoteInformationState extends State<ViewQuoteInformation> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.red,
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Column(
+        children: information.entries
+            .map((entry) => QuoteInfoTextField(
+                header: entry.key,
+                controller:
+                    controllers[information.keys.toList().indexOf(entry.key)],
+                hintText: entry.value))
+            .toList(),
+      ),
     );
   }
 }

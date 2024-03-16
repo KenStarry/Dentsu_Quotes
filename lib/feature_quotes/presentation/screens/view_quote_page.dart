@@ -65,7 +65,7 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
               SliverToBoxAdapter(
                 child: Container(
                   width: double.infinity,
-                  height: 700,
+                  height: 130 * 9,
                   child: TabBarView(children: [
                     ViewQuoteInformation(),
                     Text("Setup"),

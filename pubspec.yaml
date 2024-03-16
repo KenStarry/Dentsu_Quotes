@@ -23,12 +23,17 @@ dependencies:
   sliver_tools: ^0.2.12
   data_table_2: ^2.5.11
   envied: ^0.5.2
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.8
+  freezed: ^2.4.7
+  json_serializable: ^6.7.1
 
 # dart run flutter_native_splash:create
 flutter_native_splash:

@@ -4,6 +4,7 @@ import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboar
 import 'package:dentsu_quotes/feature_leads/presentation/screens/leads_page.dart';
 import 'package:dentsu_quotes/feature_profile/presentation/screens/profile_page.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/screens/quotes_page.dart';
+import 'package:dentsu_quotes/feature_quotes/presentation/screens/view_quote_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,41 +20,37 @@ class DashboardMain extends StatefulWidget {
 }
 
 class _DashboardMainState extends State<DashboardMain> {
-  late List<String> bottomBarItemAssets;
-  late List<Widget> screens;
-
   late final DashboardController _dashboardController;
 
   @override
   void initState() {
     super.initState();
 
-    screens = const <Widget>[
-      HomePage(),
-      LeadsPage(),
-      QuotesPage(),
-      ProfilePage()
+    _dashboardController = Get.find<DashboardController>();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var screens = <Widget>[
+      const HomePage(),
+      const LeadsPage(),
+      Obx(() => _dashboardController.viewQuoteActive.value ? ViewQuotePage() : QuotesPage()),
+      const ProfilePage()
     ];
-    bottomBarItemAssets = <String>[
+    const bottomBarItemAssets = <String>[
       'assets/images/home.svg',
       'assets/images/leads.svg',
       'assets/images/quotes.svg',
       'assets/images/profile.svg',
     ];
 
-    _dashboardController = Get.find<DashboardController>();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Theme.of(context).primaryColor,
-          statusBarBrightness: Brightness.light,
-          systemNavigationBarColor: Theme.of(context).primaryColorDark,
-          systemNavigationBarIconBrightness: Brightness.dark
-        ),
+            statusBarColor: Theme.of(context).primaryColor,
+            statusBarBrightness: Brightness.light,
+            systemNavigationBarColor: Theme.of(context).primaryColorDark,
+            systemNavigationBarIconBrightness: Brightness.dark),
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         leadingWidth: 88,

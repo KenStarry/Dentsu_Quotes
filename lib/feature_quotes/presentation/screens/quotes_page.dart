@@ -2,6 +2,7 @@ import 'package:dentsu_quotes/feature_quotes/presentation/screens/view_quote_pag
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../feature_dashboard/presentation/controller/dashboard_controller.dart';
 import '../../../feature_home/presentation/components/new_leads_table_section.dart';
 import '../../../theme/colors.dart';
 
@@ -13,6 +14,15 @@ class QuotesPage extends StatefulWidget {
 }
 
 class _QuotesPageState extends State<QuotesPage> {
+  late final DashboardController _dashboardController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _dashboardController = Get.find<DashboardController>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,56 +39,59 @@ class _QuotesPageState extends State<QuotesPage> {
             //  title
             SliverToBoxAdapter(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Quotes',
-                        style: TextStyle(
-                            fontSize:
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Quotes',
+                    style: TextStyle(
+                        fontSize:
                             Theme.of(context).textTheme.titleMedium!.fontSize,
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).textTheme.titleLarge!.color)),
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).textTheme.titleLarge!.color)),
 
-                    //  new lead button
-                    Row(
-                      children: [
-                        FilledButton(
-                            onPressed: () {},
-                            style: FilledButton.styleFrom(
-                                surfaceTintColor: Theme.of(context).primaryColor,
-                                backgroundColor: Theme.of(context).primaryColor),
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.add_rounded,
-                                  color: textWhite700,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'New quote',
-                                  style: TextStyle(
-                                      fontSize: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge!
-                                          .fontSize,
-                                      fontWeight: FontWeight.w400,
-                                      color: textWhite900),
-                                )
-                              ],
-                            )),
-                        const SizedBox(width: 8),
-                        IconButton(
-                            onPressed: () {},
-                            icon:
+                //  new lead button
+                Row(
+                  children: [
+                    FilledButton(
+                        onPressed: () {},
+                        style: FilledButton.styleFrom(
+                            surfaceTintColor: Theme.of(context).primaryColor,
+                            backgroundColor: Theme.of(context).primaryColor),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.add_rounded,
+                              color: textWhite700,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'New quote',
+                              style: TextStyle(
+                                  fontSize: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .fontSize,
+                                  fontWeight: FontWeight.w400,
+                                  color: textWhite900),
+                            )
+                          ],
+                        )),
+                    const SizedBox(width: 8),
+                    IconButton(
+                        onPressed: () {},
+                        icon:
                             Icon(Icons.more_horiz_rounded, color: textBlack300))
-                      ],
-                    )
                   ],
-                )),
+                )
+              ],
+            )),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
             //  new leads section
-            NewLeadsTableSection(tableTitle: 'Quotes', onRowClicked: () {
-              Get.to(() => ViewQuotePage());
-            },)
+            NewLeadsTableSection(
+              tableTitle: 'Quotes',
+              onRowClicked: () {
+                _dashboardController.setViewQuoteActive(active: true);
+              },
+            )
           ],
         ),
       ),

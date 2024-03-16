@@ -72,7 +72,8 @@ class _ViewQuoteInformationState extends State<ViewQuoteInformation> {
                 header: entry.key,
                 controller:
                     controllers[information.keys.toList().indexOf(entry.key)],
-                hintText: entry.value))
+                hintText: entry.value,
+                readOnly: true))
             .toList(),
       ),
     );

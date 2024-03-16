@@ -5,12 +5,14 @@ class QuoteInfoTextField extends StatelessWidget {
   final String header;
   final TextEditingController controller;
   final String hintText;
+  final bool readOnly;
 
   const QuoteInfoTextField(
       {super.key,
       required this.header,
       required this.controller,
-      required this.hintText});
+      required this.hintText,
+      this.readOnly = false});
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +37,14 @@ class QuoteInfoTextField extends StatelessWidget {
 
           //  textfield
           TextFormField(
-            controller: controller,
+            readOnly: readOnly,
+            initialValue: hintText,
             style: TextStyle(
               fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-              fontWeight: Theme.of(context).textTheme.bodyLarge!.fontWeight,
-              color: Theme.of(context).textTheme.bodyLarge!.color,
+              fontWeight: Theme.of(context).textTheme.titleSmall!.fontWeight,
+              color: readOnly
+                  ? textBlack300.withOpacity(0.7)
+                  : Theme.of(context).textTheme.bodyLarge!.color,
             ),
             decoration: InputDecoration(
                 hintText: hintText,
@@ -48,10 +53,12 @@ class QuoteInfoTextField extends StatelessWidget {
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
+                    borderSide: BorderSide(
+                        color: Colors.grey.withOpacity(0.8), width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(12))),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey.withOpacity(0.5), width: 1),
+                    borderSide: BorderSide(
+                        color: Colors.grey.withOpacity(0.5), width: 1),
                     borderRadius: BorderRadius.all(Radius.circular(12)))),
           )
         ],

@@ -57,10 +57,12 @@ class _ViewQuoteSetupState extends State<ViewQuoteSetup> {
       child: Column(
         children: information.entries
             .map((entry) => QuoteInfoTextField(
-                header: entry.key,
-                controller:
-                    controllers[information.keys.toList().indexOf(entry.key)],
-                hintText: entry.value))
+                  header: entry.key,
+                  controller:
+                      controllers[information.keys.toList().indexOf(entry.key)],
+                  hintText: entry.value,
+                  readOnly: true
+                ))
             .toList(),
       ),
     );

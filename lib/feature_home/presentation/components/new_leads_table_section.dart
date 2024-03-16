@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 class NewLeadsTableSection extends StatefulWidget {
-  const NewLeadsTableSection({super.key});
+  final String? tableTitle;
+  const NewLeadsTableSection({super.key, this.tableTitle});
 
   @override
   State<NewLeadsTableSection> createState() => _NewLeadsTableSectionState();
@@ -59,7 +60,7 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                           color: textBlack100.withOpacity(0.5), width: 2))),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text('New Leads',
+                child: Text(widget.tableTitle ?? 'New Leads',
                     style: TextStyle(
                         fontSize:
                             Theme.of(context).textTheme.titleSmall!.fontSize,

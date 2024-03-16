@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../feature_dashboard/presentation/controller/dashboard_controller.dart';
+import '../components/view_quote_benefits.dart';
 
 class ViewQuotePage extends StatefulWidget {
   const ViewQuotePage({super.key});
@@ -70,8 +71,8 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
                               .textTheme
                               .bodyMedium!
                               .fontWeight),
-                      labelPadding: EdgeInsets.only(right: 35),
-                      tabs: [
+                      labelPadding: const EdgeInsets.only(right: 35),
+                      tabs: const [
                         Tab(text: 'Quote Information'),
                         Tab(text: 'Setup'),
                         Tab(text: 'Benefits'),
@@ -82,14 +83,14 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
 
               //  body
-              SliverToBoxAdapter(
-                child: Container(
+              const SliverToBoxAdapter(
+                child: SizedBox(
                   width: double.infinity,
                   height: 130 * 9,
                   child: TabBarView(children: [
                     ViewQuoteInformation(),
                     ViewQuoteSetup(),
-                    Text("Benefits"),
+                    ViewQuoteBenefits(),
                   ]),
                 ),
               )

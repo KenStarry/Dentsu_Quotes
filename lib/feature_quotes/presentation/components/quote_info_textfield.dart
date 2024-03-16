@@ -54,12 +54,12 @@ class QuoteInfoTextField extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 border: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Colors.grey.withOpacity(0.8), width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(12))),
+                        color: Colors.grey.withOpacity(0.5), width: 1),
+                    borderRadius: const BorderRadius.all(Radius.circular(12))),
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Colors.grey.withOpacity(0.5), width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(12)))),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)))),
           )
         ],
       ),

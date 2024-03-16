@@ -1,4 +1,6 @@
+import 'package:dentsu_quotes/feature_quotes/presentation/screens/view_quote_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../feature_home/presentation/components/new_leads_table_section.dart';
 import '../../../theme/colors.dart';
@@ -74,7 +76,9 @@ class _QuotesPageState extends State<QuotesPage> {
                 )),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
             //  new leads section
-            const NewLeadsTableSection(tableTitle: 'Quotes',)
+            NewLeadsTableSection(tableTitle: 'Quotes', onRowClicked: () {
+              Get.to(() => ViewQuotePage());
+            },)
           ],
         ),
       ),

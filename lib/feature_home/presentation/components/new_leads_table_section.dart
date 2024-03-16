@@ -6,7 +6,8 @@ import 'package:sliver_tools/sliver_tools.dart';
 
 class NewLeadsTableSection extends StatefulWidget {
   final String? tableTitle;
-  const NewLeadsTableSection({super.key, this.tableTitle});
+  final VoidCallback? onRowClicked;
+  const NewLeadsTableSection({super.key, this.tableTitle, this.onRowClicked});
 
   @override
   State<NewLeadsTableSection> createState() => _NewLeadsTableSectionState();
@@ -84,6 +85,7 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                     ? Theme.of(context).primaryColorDark
                                     : const Color(0xffFAF8F8),
                               ),
+                              onTap: widget.onRowClicked,
                               cells: [
                                 DataCell(Text('0${index + 1}')),
                                 DataCell(Text(customers[index])),

@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_quotes/presentation/components/view_quote_information.dart';
 import 'package:flutter/material.dart';
 
 class ViewQuotePage extends StatefulWidget {
@@ -35,6 +36,7 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
                           fontWeight: FontWeight.w600,
                           color:
                               Theme.of(context).textTheme.titleLarge!.color)),
+                  const SizedBox(height: 8),
                   TabBar(
                       isScrollable: true,
                       physics: const BouncingScrollPhysics(),
@@ -56,6 +58,21 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
                       ])
                 ],
               )),
+
+              const SliverToBoxAdapter(child: SizedBox(height: 32)),
+
+              //  body
+              SliverToBoxAdapter(
+                child: Container(
+                  width: double.infinity,
+                  height: 700,
+                  child: TabBarView(children: [
+                    ViewQuoteInformation(),
+                    Text("Setup"),
+                    Text("Benefits"),
+                  ]),
+                ),
+              )
             ],
           ),
         ),

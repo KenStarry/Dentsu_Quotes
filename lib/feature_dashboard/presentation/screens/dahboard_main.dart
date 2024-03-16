@@ -2,6 +2,7 @@ import 'package:dentsu_quotes/core/presentation/components/avatar.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/components/bottom_bar_item.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/screens/leads_page.dart';
+import 'package:dentsu_quotes/feature_leads/presentation/screens/view_lead_page.dart';
 import 'package:dentsu_quotes/feature_profile/presentation/screens/profile_page.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/screens/quotes_page.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/screens/view_quote_page.dart';
@@ -33,8 +34,12 @@ class _DashboardMainState extends State<DashboardMain> {
   Widget build(BuildContext context) {
     var screens = <Widget>[
       const HomePage(),
-      const LeadsPage(),
-      Obx(() => _dashboardController.viewQuoteActive.value ? ViewQuotePage() : QuotesPage()),
+      Obx(() => _dashboardController.viewLeadActive.value
+          ? const ViewLeadPage()
+          : const LeadsPage()),
+      Obx(() => _dashboardController.viewQuoteActive.value
+          ? const ViewQuotePage()
+          : const QuotesPage()),
       const ProfilePage()
     ];
     const bottomBarItemAssets = <String>[

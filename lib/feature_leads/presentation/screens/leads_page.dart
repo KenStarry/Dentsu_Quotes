@@ -1,6 +1,9 @@
 import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../../../feature_dashboard/presentation/controller/dashboard_controller.dart';
 import '../../../feature_home/presentation/components/new_leads_table_section.dart';
 
 class LeadsPage extends StatefulWidget {
@@ -11,6 +14,15 @@ class LeadsPage extends StatefulWidget {
 }
 
 class _LeadsPageState extends State<LeadsPage> {
+  late final DashboardController _dashboardController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _dashboardController = Get.find<DashboardController>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +54,10 @@ class _LeadsPageState extends State<LeadsPage> {
                     FilledButton(
                         onPressed: () {},
                         style: FilledButton.styleFrom(
-                            surfaceTintColor: Theme.of(context).primaryColorLight,
-                            backgroundColor: Theme.of(context).primaryColorLight),
+                            surfaceTintColor:
+                                Theme.of(context).primaryColorLight,
+                            backgroundColor:
+                                Theme.of(context).primaryColorLight),
                         child: Row(
                           children: [
                             const Icon(
@@ -74,7 +88,11 @@ class _LeadsPageState extends State<LeadsPage> {
             )),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
             //  new leads section
-            const NewLeadsTableSection()
+            NewLeadsTableSection(
+              onRowClicked: () {
+                _dashboardController.setViewLeadActive(active: true);
+              },
+            )
           ],
         ),
       ),

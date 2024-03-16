@@ -1,10 +1,8 @@
 import 'package:dentsu_quotes/di/controller_di.dart';
 import 'package:dentsu_quotes/di/di.dart';
-import 'package:dentsu_quotes/feature_auth/presentation/screens/login_page.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/screens/dahboard_main.dart';
 import 'package:dentsu_quotes/theme/my_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 void main() {

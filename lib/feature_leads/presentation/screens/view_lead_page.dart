@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_leads/presentation/components/lead_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -45,6 +46,9 @@ class _ViewLeadPageState extends State<ViewLeadPage> {
                     })),
 
             const SliverToBoxAdapter(child: SizedBox(height: 32)),
+
+            //  lead status
+            const LeadStatus()
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_benefit_card.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
   late final TextEditingController _inPatientCoverController;
   late final Map<String, dynamic> information;
   late final List<TextEditingController> controllers;
+  late final List<String> _benefits;
 
   @override
   void initState() {
@@ -26,6 +28,18 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
     information = <String, dynamic>{
       'Inpatient Cover Limit': 'KES 1,000,000',
     };
+
+    _benefits = <String>[
+      'Inpatient',
+      'No Co-payment',
+      'Dental',
+      'Optical',
+      'Maternity',
+      'Last Expense',
+      'Personal Accident',
+      'Enhanced Covid 19 Cover',
+      'Amref Evacuation'
+    ];
   }
 
   @override
@@ -39,12 +53,11 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
           Column(
             children: information.entries
                 .map((entry) => QuoteInfoTextField(
-                      header: entry.key,
-                      controller:
-                          controllers[information.keys.toList().indexOf(entry.key)],
-                      hintText: entry.value,
-                      readOnly: true
-                    ))
+                    header: entry.key,
+                    controller: controllers[
+                        information.keys.toList().indexOf(entry.key)],
+                    hintText: entry.value,
+                    readOnly: true))
                 .toList(),
           ),
 
@@ -53,18 +66,32 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.withOpacity(0.5), width: 1),
-              color: Theme.of(context).primaryColorDark
-            ),
+                borderRadius: BorderRadius.circular(12),
+                border:
+                    Border.all(color: Colors.grey.withOpacity(0.5), width: 1),
+                color: Theme.of(context).primaryColorDark),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Benefits', style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-                  fontWeight: FontWeight.w700,
-                  color: Theme.of(context).textTheme.titleSmall!.color
-                ),)
+                Text('Benefits',
+                    style: TextStyle(
+                        fontSize:
+                            Theme.of(context).textTheme.bodyLarge!.fontSize,
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).textTheme.titleSmall!.color)),
+
+                const SizedBox(height: 24),
+
+                //  benefits list
+                ListView.builder(
+                  itemBuilder: (context, index) => QuoteBenefitCard(
+                      title: _benefits[index],
+                      onChanged: (value) {},
+                      isSelected: true),
+                  itemCount: _benefits.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                )
               ],
             ),
           )

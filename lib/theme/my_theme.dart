@@ -11,6 +11,7 @@ class MyTheme {
       splashColor: Colors.transparent,
       iconTheme: const IconThemeData(color: textBlack300),
       radioTheme: RadioThemeData(fillColor: MaterialStateProperty.all(accent)),
+      useMaterial3: true,
       bottomSheetTheme: const BottomSheetThemeData(
           surfaceTintColor: bg,
           shadowColor: Colors.transparent,

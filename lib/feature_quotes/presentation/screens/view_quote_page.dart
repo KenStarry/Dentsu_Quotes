@@ -1,5 +1,10 @@
+import 'package:dentsu_quotes/core/presentation/components/custom_back_breadcrumb.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/view_quote_information.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../../feature_dashboard/presentation/controller/dashboard_controller.dart';
 
 class ViewQuotePage extends StatefulWidget {
   const ViewQuotePage({super.key});
@@ -9,6 +14,16 @@ class ViewQuotePage extends StatefulWidget {
 }
 
 class _ViewQuotePageState extends State<ViewQuotePage> {
+
+  late final DashboardController _dashboardController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _dashboardController = Get.find<DashboardController>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -29,6 +44,10 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  CustomBackBreadcrumb(backText: 'Back to all quotes', onBackPressed: () {
+                    _dashboardController.setViewQuoteActive(active: false);
+                  }),
+                  const SizedBox(height: 8),
                   Text('View Quote',
                       style: TextStyle(
                           fontSize:

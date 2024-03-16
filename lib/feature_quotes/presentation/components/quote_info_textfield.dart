@@ -27,7 +27,7 @@ class QuoteInfoTextField extends StatelessWidget {
             header,
             style: TextStyle(
                 fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
-                fontWeight: Theme.of(context).textTheme.bodyMedium!.fontWeight,
+                fontWeight: Theme.of(context).textTheme.titleSmall!.fontWeight,
                 color: Theme.of(context).textTheme.bodyMedium!.color),
           ),
 

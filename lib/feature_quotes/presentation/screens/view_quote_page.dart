@@ -1,5 +1,6 @@
 import 'package:dentsu_quotes/core/presentation/components/custom_back_breadcrumb.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/view_quote_information.dart';
+import 'package:dentsu_quotes/feature_quotes/presentation/components/view_quote_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -87,7 +88,7 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
                   height: 130 * 9,
                   child: TabBarView(children: [
                     ViewQuoteInformation(),
-                    Text("Setup"),
+                    ViewQuoteSetup(),
                     Text("Benefits"),
                   ]),
                 ),

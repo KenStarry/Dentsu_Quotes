@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_quotes/presentation/components/checkout_payment_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -16,7 +17,7 @@ class _QuoteBenefitCheckoutState extends State<QuoteBenefitCheckout> {
     super.initState();
 
     _paymentMethods = <String, dynamic>{
-      'M-PESA PayBill': 'assets/images/mpesa.svg',
+      'M-PESA PayBill': 'assets/images/mpesa.png',
       'Credit / Debit Card': 'assets/images/visa.svg',
     };
   }
@@ -81,7 +82,17 @@ class _QuoteBenefitCheckoutState extends State<QuoteBenefitCheckout> {
             ),
           ),
 
+          const SizedBox(height: 24),
+
           //  payment methods
+          Column(
+            children: _paymentMethods.entries
+                .map((entry) => CheckoutPaymentRow(
+                    title: entry.key,
+                    assetSvg: entry.value,
+                    onChanged: (value) {}))
+                .toList(),
+          )
         ],
       ),
     );

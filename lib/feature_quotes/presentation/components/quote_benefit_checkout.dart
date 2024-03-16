@@ -103,6 +103,7 @@ class _QuoteBenefitCheckoutState extends State<QuoteBenefitCheckout> {
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin: EdgeInsets.only(bottom: 24),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColorDark,
                   borderRadius: BorderRadius.circular(12),

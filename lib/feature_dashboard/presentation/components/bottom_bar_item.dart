@@ -28,7 +28,7 @@ class BottomBarItem extends StatelessWidget {
             height: 20,
             colorFilter: ColorFilter.mode(
                 isActive
-                    ? Theme.of(context).primaryColor
+                    ? Theme.of(context).primaryColorLight
                     : textBlack100,
                 BlendMode.srcIn),
           ),

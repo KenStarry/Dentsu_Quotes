@@ -29,7 +29,7 @@ class QuoteBenefitCard extends StatelessWidget {
                   activeColor: Theme.of(context).primaryColorDark,
                   inactiveTrackColor: const Color(0xff444444).withOpacity(0.4),
                   inactiveThumbColor: Theme.of(context).primaryColorDark,
-                  activeTrackColor: Theme.of(context).primaryColor,
+                  activeTrackColor: Theme.of(context).primaryColorLight,
                   trackOutlineColor: MaterialStateProperty.all(Colors.transparent),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   onChanged: onChanged),

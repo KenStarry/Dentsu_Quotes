@@ -64,6 +64,8 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
                       indicatorSize: TabBarIndicatorSize.label,
                       tabAlignment: TabAlignment.start,
                       padding: EdgeInsets.zero,
+                      indicatorColor: Theme.of(context).primaryColorLight,
+                      labelColor: Theme.of(context).primaryColorLight,
                       labelStyle: TextStyle(
                           fontSize:
                               Theme.of(context).textTheme.bodyMedium!.fontSize,
@@ -86,7 +88,7 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
               const SliverToBoxAdapter(
                 child: SizedBox(
                   width: double.infinity,
-                  height: 130 * 9,
+                  height: 135 * 9,
                   child: TabBarView(children: [
                     ViewQuoteInformation(),
                     ViewQuoteSetup(),

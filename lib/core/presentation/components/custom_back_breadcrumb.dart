@@ -28,7 +28,7 @@ class CustomBackBreadcrumb extends StatelessWidget {
               child: Row(
                 children: [
                   Icon(Icons.arrow_back_rounded,
-                      color: Theme.of(context).primaryColor),
+                      color: Theme.of(context).primaryColorLight),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Text(backText,
@@ -36,7 +36,7 @@ class CustomBackBreadcrumb extends StatelessWidget {
                             fontSize:
                                 Theme.of(context).textTheme.bodyLarge!.fontSize,
                             fontWeight: FontWeight.w400,
-                            color: Theme.of(context).primaryColor),
+                            color: Theme.of(context).primaryColorLight),
                         overflow: TextOverflow.ellipsis),
                   )
                 ],

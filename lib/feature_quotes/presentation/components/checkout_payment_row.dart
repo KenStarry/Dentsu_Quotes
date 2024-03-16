@@ -20,6 +20,7 @@ class CheckoutPaymentRow extends StatelessWidget {
           value: '',
           groupValue: '',
           onChanged: onChanged,
+          activeColor: Theme.of(context).primaryColorLight,
           visualDensity: VisualDensity(
               horizontal: VisualDensity.minimumDensity,
               vertical: VisualDensity.minimumDensity),

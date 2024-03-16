@@ -16,7 +16,7 @@ class ProfileCardDetailCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: alternativeStyle ? 0 : 12, vertical: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: alternativeStyle

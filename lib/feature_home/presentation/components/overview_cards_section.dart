@@ -32,7 +32,7 @@ class _OverviewCardsSectionState extends State<OverviewCardsSection> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TotalLeadsContentDetail(
-                  iconColor: accent,
+                  iconColor: accentLight,
                   detailText: ' Contacted ',
                   detailCount: '1.7k'),
               TotalLeadsContentDetail(
@@ -53,7 +53,7 @@ class _OverviewCardsSectionState extends State<OverviewCardsSection> {
           details: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              RequestsContentDetail(iconColor: accent, detailText: 'Accounts'),
+              RequestsContentDetail(iconColor: accentLight, detailText: 'Accounts'),
               RequestsContentDetail(iconColor: myGreen, detailText: 'Insurance'),
               RequestsContentDetail(iconColor: myBlue, detailText: 'Credit'),
             ],

@@ -11,7 +11,7 @@ class TopProductsContent extends StatelessWidget {
   Widget build(BuildContext context) {
     const List<Widget> progressItems = <Widget>[
       TopProductsProgressItem(
-          title: 'Mortgage', color: accent, count: '65,376', percent: 0.8),
+          title: 'Mortgage', color: accentLight, count: '65,376', percent: 0.8),
       TopProductsProgressItem(
           title: 'One Xtra Account',
           color: Color(0xff4339f2),

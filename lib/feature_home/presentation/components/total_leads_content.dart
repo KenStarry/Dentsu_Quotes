@@ -17,7 +17,7 @@ class TotalLeadsContent extends StatelessWidget {
           animation: true,
           percent: 0.75,
           circularStrokeCap: CircularStrokeCap.round,
-          progressColor: Theme.of(context).primaryColor,
+          progressColor: Theme.of(context).primaryColorLight,
           backgroundColor: const Color(0xffFFE5D3),
           lineWidth: 12,
           center: UnconstrainedBox(
@@ -26,7 +26,7 @@ class TotalLeadsContent extends StatelessWidget {
               height: 70,
               margin: const EdgeInsets.all(32),
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).primaryColorLight,
                 shape: BoxShape.circle,
               ),
               child: Center(

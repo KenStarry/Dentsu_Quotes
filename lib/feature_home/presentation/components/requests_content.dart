@@ -17,7 +17,7 @@ class _RequestsContentState extends State<RequestsContent> {
     super.initState();
 
     chartData = <ChartData>[
-      ChartData('Accounts', 50, color: accent),
+      ChartData('Accounts', 50, color: accentLight),
       ChartData('Insurance', 50, color: myGreen),
       ChartData('Credit', 50, color: myBlue),
     ];

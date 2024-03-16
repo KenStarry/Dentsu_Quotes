@@ -24,7 +24,7 @@ class PaginationItem extends StatelessWidget {
         height: 33,
         decoration: BoxDecoration(
           color: active
-              ? Theme.of(context).primaryColor
+              ? Theme.of(context).primaryColorLight
               : Theme.of(context).primaryColorDark,
           border: showBorder
               ? Border.all(color: textBlack100.withOpacity(0.3), width: 1)

@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_benefit_card.dart';
+import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_benefit_checkout.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -89,14 +90,19 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
                       title: _benefits[index],
                       onChanged: (value) {},
                       isSelected: true),
-                  separatorBuilder: (context, index) => Divider(height: 2, color: Colors.grey.withOpacity(0.4)),
+                  separatorBuilder: (context, index) => Divider(height: 2, thickness: 1, color: Colors.grey.withOpacity(0.3)),
                   itemCount: _benefits.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                 )
               ],
             ),
-          )
+          ),
+
+          const SizedBox(height: 24),
+
+          //  Premium checkout
+          QuoteBenefitCheckout()
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_leads/presentation/components/profile_card_detail_card.dart';
 import 'package:flutter/material.dart';
 
 class LeadProfileCard extends StatelessWidget {
@@ -45,9 +46,7 @@ class LeadProfileCard extends StatelessWidget {
                             fontSize: 18,
                             color:
                                 Theme.of(context).textTheme.titleSmall!.color)),
-
                     const SizedBox(height: 8),
-
                     Text('Nairobi, Kenya',
                         style: TextStyle(
                             fontWeight: Theme.of(context)
@@ -58,13 +57,27 @@ class LeadProfileCard extends StatelessWidget {
                                 .textTheme
                                 .bodyMedium!
                                 .fontSize,
-                            color:
-                            Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(0.4))),
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .color!
+                                .withOpacity(0.4))),
                   ],
                 )
               ],
-            )
+            ),
+
+            const SizedBox(height: 24),
+
             // details
+            const ProfileCardDetailCard(
+                title: 'Lead Created', date: '10 August 2022'),
+            const SizedBox(height: 16),
+            const ProfileCardDetailCard(
+                title: 'Last Contacted', date: '16 August 2022'),
+            const SizedBox(height: 16),
+            const ProfileCardDetailCard(
+                title: 'Next Appointment', date: '29 August 2022'),
           ],
         ),
       ),

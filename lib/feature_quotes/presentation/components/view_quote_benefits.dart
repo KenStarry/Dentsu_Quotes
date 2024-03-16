@@ -31,6 +31,7 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
 
     _benefits = <String>[
       'Inpatient',
+      'Outpatient',
       'No Co-payment',
       'Dental',
       'Optical',
@@ -83,11 +84,12 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
                 const SizedBox(height: 24),
 
                 //  benefits list
-                ListView.builder(
+                ListView.separated(
                   itemBuilder: (context, index) => QuoteBenefitCard(
                       title: _benefits[index],
                       onChanged: (value) {},
                       isSelected: true),
+                  separatorBuilder: (context, index) => Divider(height: 2, color: Colors.grey.withOpacity(0.4)),
                   itemCount: _benefits.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

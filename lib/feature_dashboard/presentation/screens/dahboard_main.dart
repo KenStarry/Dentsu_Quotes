@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/core/presentation/components/avatar.dart';
+import 'package:dentsu_quotes/core/presentation/controller/core_controller.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/components/bottom_bar_item.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/screens/leads_page.dart';
@@ -21,12 +22,14 @@ class DashboardMain extends StatefulWidget {
 }
 
 class _DashboardMainState extends State<DashboardMain> {
+  late final CoreController _coreController;
   late final DashboardController _dashboardController;
 
   @override
   void initState() {
     super.initState();
 
+    _coreController = Get.find<CoreController>();
     _dashboardController = Get.find<DashboardController>();
   }
 
@@ -81,11 +84,16 @@ class _DashboardMainState extends State<DashboardMain> {
                   //  live status checker
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: Container(
-                      width: 8,
-                      height: 8,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.green),
+                    child: Obx(
+                      () => Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _coreController.hasInternet.value
+                                ? Colors.greenAccent
+                                : Colors.redAccent),
+                      ),
                     ),
                   )
                 ],

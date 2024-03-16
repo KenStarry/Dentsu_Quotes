@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_actions.dart';
+import 'package:dentsu_quotes/feature_leads/presentation/components/lead_profile_card.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,7 +57,9 @@ class _ViewLeadPageState extends State<ViewLeadPage> {
              LeadActions(
               onCancelLead: () {},
               onNext: () {},
-            )
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 32)),
+            LeadProfileCard()
           ],
         ),
       ),

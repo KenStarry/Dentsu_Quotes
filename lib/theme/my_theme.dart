@@ -6,6 +6,7 @@ class MyTheme {
   /// Light Theme
   ThemeData get lightTheme => ThemeData(
       primaryColor: accent,
+      primaryColorLight: accentLight,
       scaffoldBackgroundColor: bg,
       primaryColorDark: bgAlt,
       splashColor: Colors.transparent,

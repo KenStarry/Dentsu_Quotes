@@ -29,7 +29,8 @@ class _QuoteBenefitCheckoutState extends State<QuoteBenefitCheckout> {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Theme.of(context).primaryColor, width: 3),
+          border:
+              Border.all(color: Theme.of(context).primaryColorLight, width: 3),
           color: Theme.of(context).primaryColorDark),
       child: Column(
         children: [
@@ -92,6 +93,33 @@ class _QuoteBenefitCheckoutState extends State<QuoteBenefitCheckout> {
                     assetSvg: entry.value,
                     onChanged: (value) {}))
                 .toList(),
+          ),
+
+          const SizedBox(height: 32),
+
+          GestureDetector(
+            onTap: () {},
+            child: UnconstrainedBox(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColorDark,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                      color: Theme.of(context).primaryColorLight, width: 1),
+                ),
+                child: Text(
+                  'Buy Now',
+                  style: TextStyle(
+                      fontSize:
+                          Theme.of(context).textTheme.bodyMedium!.fontSize,
+                      fontWeight:
+                          Theme.of(context).textTheme.bodyMedium!.fontWeight,
+                      color: Theme.of(context).primaryColorLight),
+                ),
+              ),
+            ),
           )
         ],
       ),

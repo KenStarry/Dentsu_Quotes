@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const accent = Color(0xff4A2860);
+const accentLight = Color(0xff863AAC);
 const bg = Color(0xffF2F2F2);
 const bgAlt = Color(0xffffffff);
 

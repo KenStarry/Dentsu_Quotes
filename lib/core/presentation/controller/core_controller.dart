@@ -1,0 +1,26 @@
+import 'package:get/get.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+
+import '../../../di/di.dart';
+import '../../domain/use_cases/core_use_cases.dart';
+
+class CoreController extends GetxController {
+  final useCase = locator.get<CoreUseCases>();
+
+  final hasInternet = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    //  listen to an active internet connection
+    listenToInternetStatus(onStatusChanged: (internetStatus) {
+      hasInternet.value = internetStatus == InternetConnectionStatus.connected;
+    });
+  }
+
+  void listenToInternetStatus(
+          {required Function(InternetConnectionStatus status)
+              onStatusChanged}) =>
+      useCase.listenToInternetStatus.call(onStatusChanged: onStatusChanged);
+}

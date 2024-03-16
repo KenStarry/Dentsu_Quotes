@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 class ProfileCardDetailCard extends StatelessWidget {
   final String title;
   final String date;
+  final bool alternativeStyle;
 
   const ProfileCardDetailCard(
-      {super.key, required this.title, required this.date});
+      {super.key,
+      required this.title,
+      required this.date,
+      this.alternativeStyle = false});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,9 @@ class ProfileCardDetailCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.withOpacity(0.5), width: 1)),
+          border: alternativeStyle
+              ? null
+              : Border.all(color: Colors.grey.withOpacity(0.5), width: 1)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +30,7 @@ class ProfileCardDetailCard extends StatelessWidget {
               style: TextStyle(
                   fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
                   fontWeight: FontWeight.w400,
-                  color: textBlack200)),
+                  color: alternativeStyle ? textBlack500 : textBlack200)),
           const SizedBox(height: 8),
           Text(
             date,

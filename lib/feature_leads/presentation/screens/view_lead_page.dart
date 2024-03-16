@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_actions.dart';
+import 'package:dentsu_quotes/feature_leads/presentation/components/lead_extra_details.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_profile_card.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_status.dart';
 import 'package:flutter/material.dart';
@@ -27,40 +28,50 @@ class _ViewLeadPageState extends State<ViewLeadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            const SliverToBoxAdapter(child: SizedBox(height: 24)),
-            //  title
-            SliverToBoxAdapter(
-                child: CustomBackBreadcrumb(
-                    backText: 'Back to all leads',
-                    currentPositionText: 'LD-20210121-41760202',
-                    onBackPressed: () {
-                      _dashboardController.setViewLeadActive(active: false);
-                    })),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              const SliverToBoxAdapter(child: SizedBox(height: 24)),
+              //  title
+              SliverToBoxAdapter(
+                  child: CustomBackBreadcrumb(
+                      backText: 'Back to all leads',
+                      currentPositionText: 'LD-20210121-41760202',
+                      onBackPressed: () {
+                        _dashboardController.setViewLeadActive(active: false);
+                      })),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 32)),
+              const SliverToBoxAdapter(child: SizedBox(height: 32)),
 
-            //  lead status
-            const LeadStatus(),
+              //  lead status
+              const LeadStatus(),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 32)),
+              const SliverToBoxAdapter(child: SizedBox(height: 32)),
 
-             LeadActions(
-              onCancelLead: () {},
-              onNext: () {},
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 32)),
-            LeadProfileCard()
-          ],
+               LeadActions(
+                onCancelLead: () {},
+                onNext: () {},
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 32)),
+              const LeadProfileCard(),
+
+              const SliverToBoxAdapter(child: SizedBox(height: 32)),
+
+              //  extra details section
+              const LeadExtraDetailsSection(),
+
+              const SliverToBoxAdapter(child: SizedBox(height: 48)),
+            ],
+          ),
         ),
       ),
     );

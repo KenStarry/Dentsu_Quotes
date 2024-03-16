@@ -42,8 +42,8 @@ class _LeadsPageState extends State<LeadsPage> {
                     FilledButton(
                         onPressed: () {},
                         style: FilledButton.styleFrom(
-                            surfaceTintColor: Theme.of(context).primaryColor,
-                            backgroundColor: Theme.of(context).primaryColor),
+                            surfaceTintColor: Theme.of(context).primaryColorLight,
+                            backgroundColor: Theme.of(context).primaryColorLight),
                         child: Row(
                           children: [
                             const Icon(

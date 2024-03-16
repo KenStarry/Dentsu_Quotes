@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class QuoteBenefitCheckout extends StatelessWidget {
+class QuoteBenefitCheckout extends StatefulWidget {
   const QuoteBenefitCheckout({super.key});
+
+  @override
+  State<QuoteBenefitCheckout> createState() => _QuoteBenefitCheckoutState();
+}
+
+class _QuoteBenefitCheckoutState extends State<QuoteBenefitCheckout> {
+  late final Map<String, dynamic> _paymentMethods;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _paymentMethods = <String, dynamic>{
+      'M-PESA PayBill': 'assets/images/mpesa.svg',
+      'Credit / Debit Card': 'assets/images/visa.svg',
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +79,9 @@ class QuoteBenefitCheckout extends StatelessWidget {
                         color: Theme.of(context).textTheme.titleMedium!.color)),
               ],
             ),
-          )
+          ),
+
+          //  payment methods
         ],
       ),
     );

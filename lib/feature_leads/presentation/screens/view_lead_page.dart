@@ -57,7 +57,7 @@ class _ViewLeadPageState extends State<ViewLeadPage> {
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
 
-               LeadActions(
+              LeadActions(
                 onCancelLead: () {},
                 onNext: () {},
               ),

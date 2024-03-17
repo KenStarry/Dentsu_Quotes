@@ -22,7 +22,7 @@ class LeadProfileCard extends StatelessWidget {
                   width: 60,
                   height: 60,
                   decoration:
-                      BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+                      BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).primaryColorDark),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(120),
                     child: Image.asset(

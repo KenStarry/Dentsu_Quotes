@@ -5,6 +5,8 @@ import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../theme/colors.dart';
+
 class ViewQuoteBenefits extends StatefulWidget {
   final List<TextEditingController> controllers;
   final bool isNewQuote;
@@ -105,26 +107,33 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
                 ListView.separated(
                   itemBuilder: (context, index) => Obx(
                     () {
-                      final newQuoteContainsBenefit = _coreController.newQuote.value.benefits
+                      final newQuoteContainsBenefit = _coreController
+                          .newQuote.value.benefits
                           .contains(_benefits[index]);
                       return QuoteBenefitCard(
-                        title: _benefits[index],
-                        onChanged: widget.isNewQuote ? (value) {
-                          final List<String> currentBenefits =
-                              [..._coreController.newQuote.value.benefits];
+                          title: _benefits[index],
+                          onChanged: widget.isNewQuote
+                              ? (value) {
+                                  final List<String> currentBenefits = [
+                                    ..._coreController.newQuote.value.benefits
+                                  ];
 
-                          //  toggle current benefits
-                          currentBenefits.contains(_benefits[index])
-                              ? currentBenefits.removeWhere(
-                                  (benefit) => benefit == _benefits[index])
-                              : currentBenefits.add(_benefits[index]);
+                                  //  toggle current benefits
+                                  currentBenefits.contains(_benefits[index])
+                                      ? currentBenefits.removeWhere((benefit) =>
+                                          benefit == _benefits[index])
+                                      : currentBenefits.add(_benefits[index]);
 
-                          final newQuote = _coreController.newQuote.value
-                              .copyWith(benefits: currentBenefits);
-                          _coreController.updateQuoteValue(
-                              updatedQuote: newQuote);
-                        } : null,
-                        isSelected: widget.isNewQuote ? newQuoteContainsBenefit : index == 0);
+                                  final newQuote = _coreController
+                                      .newQuote.value
+                                      .copyWith(benefits: currentBenefits);
+                                  _coreController.updateQuoteValue(
+                                      updatedQuote: newQuote);
+                                }
+                              : null,
+                          isSelected: widget.isNewQuote
+                              ? newQuoteContainsBenefit
+                              : index == 0);
                     },
                   ),
                   separatorBuilder: (context, index) => Divider(
@@ -142,7 +151,76 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
           const SizedBox(height: 24),
 
           //  Premium checkout
-          QuoteBenefitCheckout()
+          widget.isNewQuote
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    //  cancel lead
+                    OutlinedButton(
+                        onPressed: () {},
+                        style: OutlinedButton.styleFrom(
+                            backgroundColor: Theme.of(context).primaryColorDark,
+                            surfaceTintColor:
+                                Theme.of(context).primaryColorDark,
+                            side: BorderSide(
+                                color: Theme.of(context).primaryColorLight,
+                                width: 1)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.close_rounded,
+                                color: Theme.of(context).primaryColorLight),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Discard',
+                              style: TextStyle(
+                                  fontSize: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .fontSize,
+                                  fontWeight: FontWeight.w400,
+                                  color: Theme.of(context).primaryColorLight),
+                            )
+                          ],
+                        )),
+
+                    const SizedBox(width: 24),
+
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          //  update user row with new quote in DB
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                              right: 8, top: 8, bottom: 8, left: 16),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColorLight,
+                              borderRadius: BorderRadius.circular(100)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.done_rounded,
+                                  color: textWhite900),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Save Quote',
+                                style: TextStyle(
+                                    fontSize: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .fontSize,
+                                    fontWeight: FontWeight.w400,
+                                    color: textWhite900),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : const QuoteBenefitCheckout()
         ],
       ),
     );

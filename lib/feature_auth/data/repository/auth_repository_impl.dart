@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../di/di.dart';
@@ -20,9 +21,20 @@ class AuthRepositoryImpl extends AuthRepository {
 
   /// Sign In
   @override
-  Future<void> signIn({required String email, required String password}) async {
+  Future<void> signIn(
+      {required String email,
+      required String password,
+      required bool keepLoggedIn}) async {
     try {
-      await supabase.auth.signInWithPassword(email: email, password: password);
+      final response = await supabase.auth
+          .signInWithPassword(email: email, password: password);
+
+      if (response.user != null) {
+        final sharedPrefs = await SharedPreferences.getInstance();
+        await sharedPrefs.setBool('keep_logged_in', keepLoggedIn);
+
+        print("LOGGED IN SUCCESSFULLY!");
+      }
     } catch (error) {
       throw Exception(error);
     }

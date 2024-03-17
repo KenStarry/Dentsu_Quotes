@@ -1,8 +1,14 @@
 import 'dart:async';
 
+import 'package:dentsu_quotes/feature_auth/domain/model/my_user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class AuthRepository {
+
+  /// Get User Data
+  Future<void> getUserDataFromDatabase(
+      {required String uid, required Function(MyUser?) onGetUserData});
+
   /// User Sign Up
   Future<void> signUp({required String email, required String password});
 

@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/feature_auth/presentation/components/login_text_field_section.dart';
+import 'package:dentsu_quotes/feature_auth/presentation/controller/auth_controller.dart';
 import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +14,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late final AuthController _authController;
   late final TextEditingController _usernameController;
   late final TextEditingController _passwordController;
   bool keepMeLoggedIn = false;
@@ -21,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
 
+    _authController = Get.find<AuthController>();
     _usernameController = TextEditingController();
     _passwordController = TextEditingController();
   }
@@ -97,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: 'Enter your email or Username'),
                       const SizedBox(height: 16),
                       LoginTextFieldSection(
-                        controller: _usernameController,
+                        controller: _passwordController,
                         sectionTitle: 'Password',
                         hintText: 'Enter your Password',
                         isObscured: true,
@@ -144,9 +147,12 @@ class _LoginPageState extends State<LoginPage> {
 
                   //  login button
                   FilledButton(
-                      onPressed: () {
+                      onPressed: () async {
                         //  login
-
+                        await _authController.signIn(
+                            email: _usernameController.text,
+                            password: _passwordController.text,
+                            keepLoggedIn: keepMeLoggedIn);
                       },
                       style: FilledButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColorDark,

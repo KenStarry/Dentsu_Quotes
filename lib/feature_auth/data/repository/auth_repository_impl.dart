@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dentsu_quotes/feature_auth/domain/model/my_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -8,6 +9,23 @@ import '../../domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   final supabase = locator.get<SupabaseClient>();
+
+  @override
+  Future<void> getUserDataFromDatabase(
+      {required String uid,
+      required Function(MyUser? user) onGetUserData}) async {
+    try {
+      final userData = await supabase
+          .from('users')
+          .select()
+          .eq('id', supabase.auth.currentUser?.id ?? '')
+          .single();
+
+      onGetUserData(MyUser.fromJson(userData));
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
 
   /// Sign Up
   @override

@@ -1,5 +1,6 @@
 import 'package:dentsu_quotes/core/presentation/components/avatar.dart';
 import 'package:dentsu_quotes/core/presentation/controller/core_controller.dart';
+import 'package:dentsu_quotes/feature_auth/presentation/controller/auth_controller.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/components/bottom_bar_item.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/screens/leads_page.dart';
@@ -23,6 +24,7 @@ class DashboardMain extends StatefulWidget {
 
 class _DashboardMainState extends State<DashboardMain> {
   late final CoreController _coreController;
+  late final AuthController _authController;
   late final DashboardController _dashboardController;
 
   @override
@@ -30,7 +32,16 @@ class _DashboardMainState extends State<DashboardMain> {
     super.initState();
 
     _coreController = Get.find<CoreController>();
+    _authController = Get.find<AuthController>();
     _dashboardController = Get.find<DashboardController>();
+
+    _authController.getUserDataFromDatabase(
+        uid: '',
+        onGetUserData: (user) {
+          _authController.setUser(user: user);
+
+          print(user.toString());
+        });
   }
 
   @override

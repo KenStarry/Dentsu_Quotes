@@ -8,9 +8,11 @@ import 'package:dentsu_quotes/feature_dashboard/presentation/screens/dahboard_ma
 import 'package:dentsu_quotes/theme/my_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(url: Api.url, anonKey: Api.anonKey);
 
   invokeControllers();
@@ -26,12 +28,14 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
   late final CoreController _coreController;
   late final AuthController _authController;
 
   @override
   void initState() {
+    //  monitor lifecycle changes
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
 
     _coreController = Get.find<CoreController>();
@@ -39,14 +43,35 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.paused) {
+      final prefs = await SharedPreferences.getInstance();
+      final keepLoggedIn = prefs.getBool('keep_logged_in');
+
+      if (!keepLoggedIn!) {
+        //  sign out the user
+        await _authController.signOut();
+      }
+    }
+  }
+
+  @override
+  void dispose() async {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      home: _authController.currentSession.value != null
-          ? const DashboardMain()
-          : const LoginPage(),
-      debugShowCheckedModeBanner: false,
-      theme: MyTheme().lightTheme,
-      darkTheme: MyTheme().lightTheme,
+    return Obx(
+      () => GetMaterialApp(
+        home: _authController.currentSession.value != null
+            ? const DashboardMain()
+            : const LoginPage(),
+        debugShowCheckedModeBanner: false,
+        theme: MyTheme().lightTheme,
+        darkTheme: MyTheme().lightTheme,
+      ),
     );
   }
 }

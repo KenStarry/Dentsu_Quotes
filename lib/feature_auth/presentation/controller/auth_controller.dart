@@ -14,8 +14,7 @@ class AuthController extends GetxController {
   final currentEvent = AuthChangeEvent.signedOut.obs;
   final currentSession = Rxn<Session>();
 
-  //  current screen
-  final isLogin = false.obs;
+  final user = Rxn<MyUser>();
 
   @override
   void onInit() {
@@ -34,10 +33,10 @@ class AuthController extends GetxController {
     super.onClose();
   }
 
-  void setIsLogin({required bool isLogin}) => this.isLogin.value = isLogin;
+  void setUser({required MyUser? user}) => this.user.value = user;
 
   /// Get User Data from DB
-  Future<void> getUserDataFromDatabase(
+  void getUserDataFromDatabase(
           {required String uid,
           required Function(MyUser?) onGetUserData}) async =>
       await authUseCase.getUserDataFromDB

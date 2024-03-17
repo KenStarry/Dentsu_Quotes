@@ -50,8 +50,6 @@ class AuthRepositoryImpl extends AuthRepository {
       if (response.user != null) {
         final sharedPrefs = await SharedPreferences.getInstance();
         await sharedPrefs.setBool('keep_logged_in', keepLoggedIn);
-
-        print("LOGGED IN SUCCESSFULLY!");
       }
     } catch (error) {
       throw Exception(error);

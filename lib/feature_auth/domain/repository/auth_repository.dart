@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:dentsu_quotes/feature_auth/domain/model/my_user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/domain/model/response_state.dart';
+
 abstract class AuthRepository {
   /// Get User Data
   Future<void> getUserDataFromDatabase(
@@ -10,6 +12,12 @@ abstract class AuthRepository {
 
   /// Listen to User Data
   void listenToUserDataonDB({required Function(MyUser? user) onGetUserData});
+
+  /// Update User Data
+  Future<void> updateUserDataOnDB(
+      {required Map<String, dynamic> data,
+        String? uid,
+        required Function(ResponseState response) onResponse});
 
   /// User Sign Up
   Future<void> signUp({required String email, required String password});

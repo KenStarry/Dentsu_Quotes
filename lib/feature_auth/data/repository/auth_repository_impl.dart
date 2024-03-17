@@ -4,6 +4,7 @@ import 'package:dentsu_quotes/feature_auth/domain/model/my_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/domain/model/response_state.dart';
 import '../../../di/di.dart';
 import '../../domain/repository/auth_repository.dart';
 
@@ -40,6 +41,23 @@ class AuthRepositoryImpl extends AuthRepository {
 
           onGetUserData(MyUser.fromJson(userDataJson));
         });
+  }
+
+  @override
+  Future<void> updateUserDataOnDB(
+      {required Map<String, dynamic> data,
+      String? uid,
+      required Function(ResponseState response) onResponse}) async {
+    try {
+      final currentUserId = supabase.auth.currentUser!.id;
+
+      await supabase
+          .from('users')
+          .update(data)
+          .match({'id': uid ?? currentUserId});
+    } catch (error) {
+      throw Exception(error);
+    }
   }
 
   /// Sign Up

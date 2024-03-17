@@ -33,6 +33,5 @@ class CoreController extends GetxController {
 
   void updateQuoteValue({required Quote updatedQuote}) {
     newQuote.value = updatedQuote;
-    newQuote.refresh();
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../../core/presentation/controller/core_controller.dart';
 import '../../../feature_dashboard/presentation/controller/dashboard_controller.dart';
 import '../components/view_quote_benefits.dart';
 
@@ -36,6 +37,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
   late final TextEditingController _spouseAgeController;
 
   late final DashboardController _dashboardController;
+  late final CoreController _coreController;
   late final TabController _tabController;
 
   @override
@@ -61,7 +63,63 @@ class _ViewQuotePageState extends State<ViewQuotePage>
     _spouseAgeController = TextEditingController();
 
     _dashboardController = Get.find<DashboardController>();
+    _coreController = Get.find<CoreController>();
     _tabController = TabController(length: 3, vsync: this);
+
+    addControllerListeners();
+  }
+
+  void addControllerListeners() {
+    _firstNameController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(firstName: _firstNameController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _middleNameController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(middleName: _middleNameController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _lastNameController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(lastName: _lastNameController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _leadSourceController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(originatingLeadSource: _leadSourceController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _quoteIdController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(quoteId: _quoteIdController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _businessUnitController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(owningBusinessUnit: _businessUnitController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _leadIdController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(leadId: _leadIdController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _sourceController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(source: _sourceController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _capturingUserController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(capturingUser: _capturingUserController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _ageBracketController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(ageBracket: _ageBracketController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
   }
 
   @override

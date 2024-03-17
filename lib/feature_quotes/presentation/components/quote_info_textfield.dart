@@ -47,6 +47,10 @@ class QuoteInfoTextField extends StatelessWidget {
                   ignoring: readOnly,
                   child: DropdownButtonFormField(
                       disabledHint: Text(hintText),
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: readOnly ? textBlack100 : textBlack700,
+                      ),
                       items: dropdownItems!
                           .map((item) =>
                               DropdownMenuItem(value: item, child: Text(item)))
@@ -90,9 +94,7 @@ class QuoteInfoTextField extends StatelessWidget {
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(12)))),
                       onChanged: (newValue) {
-                        if (controller != null) {
-                          controller!.text = newValue ?? '';
-                        }
+                        controller!.text = newValue ?? '';
                       }),
                 )
               : TextFormField(

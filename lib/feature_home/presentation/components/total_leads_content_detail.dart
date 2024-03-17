@@ -22,6 +22,8 @@ class TotalLeadsContentDetail extends StatelessWidget {
           decoration: BoxDecoration(shape: BoxShape.circle, color: iconColor),
         ),
 
+        const SizedBox(width: 4),
+
         //  details
         Text.rich(TextSpan(children: [
           TextSpan(
@@ -32,7 +34,7 @@ class TotalLeadsContentDetail extends StatelessWidget {
                   fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
                   fontWeight:
                       Theme.of(context).textTheme.titleSmall!.fontWeight,
-                  color: Theme.of(context).textTheme.bodySmall!.color)),
+                  color: Theme.of(context).textTheme.bodyMedium!.color)),
         ]))
       ],
     );

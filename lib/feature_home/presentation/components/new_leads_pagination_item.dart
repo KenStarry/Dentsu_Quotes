@@ -4,12 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NewLeadsPaginationItem extends StatelessWidget {
-
+  final int numberOfPages;
+  final int activeIndex;
   final VoidCallback? onPrev;
   final VoidCallback? onNext;
   final Function(int numIndex)? onNumberIndexClicked;
 
-  const NewLeadsPaginationItem({super.key, this.onPrev, this.onNext, this.onNumberIndexClicked});
+  const NewLeadsPaginationItem(
+      {super.key,
+      this.numberOfPages = 5,
+      this.activeIndex = 0,
+      this.onPrev,
+      this.onNext,
+      this.onNumberIndexClicked});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,8 @@ class NewLeadsPaginationItem extends StatelessWidget {
         children: [
           //  prev
           PaginationItem(
-              center: Icon(Icons.chevron_left_rounded, color: textBlack700),
+              center:
+                  const Icon(Icons.chevron_left_rounded, color: textBlack700),
               onTap: onPrev),
 
           const SizedBox(width: 12),
@@ -41,7 +49,7 @@ class NewLeadsPaginationItem extends StatelessWidget {
             ),
             child: Row(
               children: List.generate(
-                  5,
+                  numberOfPages,
                   (index) => PaginationItem(
                         center: Text('${index + 1}',
                             style: TextStyle(
@@ -53,14 +61,14 @@ class NewLeadsPaginationItem extends StatelessWidget {
                                     .textTheme
                                     .titleSmall!
                                     .fontWeight,
-                                color: index == 0
+                                color: activeIndex == index
                                     ? textWhite900
                                     : Theme.of(context)
                                         .textTheme
                                         .bodyMedium!
                                         .color)),
                         showBorder: false,
-                        active: index == 0,
+                        active: activeIndex == index,
                         onTap: () => onNumberIndexClicked!(index),
                       )),
             ),
@@ -70,7 +78,8 @@ class NewLeadsPaginationItem extends StatelessWidget {
 
           //  next
           PaginationItem(
-              center: Icon(Icons.chevron_right_rounded, color: textBlack700),
+              center:
+                  const Icon(Icons.chevron_right_rounded, color: textBlack700),
               onTap: onNext),
         ],
       ),

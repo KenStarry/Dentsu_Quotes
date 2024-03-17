@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/core/domain/model/quote.dart';
 import 'package:dentsu_quotes/core/presentation/components/custom_back_breadcrumb.dart';
 import 'package:dentsu_quotes/feature_auth/presentation/controller/auth_controller.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/view_quote_information.dart';
@@ -245,15 +246,39 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                               _coverChildrenController,
                               _spouseAgeController
                             ]),
-                        ViewQuoteBenefits(controllers: <TextEditingController>[
-                          _inPatientCoverController
-                        ], isNewQuote: widget.isNewQuote,
-                        onSave: (){
+                        ViewQuoteBenefits(
+                          controllers: <TextEditingController>[
+                            _inPatientCoverController
+                          ],
+                          isNewQuote: widget.isNewQuote,
+                          onSave: () async {
+                            //  save the new quote
+                            final myNewQuote = _coreController.newQuote.value;
 
-                          //  save the new quote
-                          final myNewQuote = _coreController.newQuote.value;
-                        },
-                        onDiscard: () {},),
+                            final updatedQuoteWithId = myNewQuote.copyWith(
+                                quoteId: DateTime.timestamp().toString());
+
+                            //  get current quotes
+                            final List<Quote> currentQuotes =
+                                _authController.user.value != null
+                                    ? [..._authController.user.value!.quotes]
+                                    : <Quote>[];
+
+                            if (!currentQuotes
+                                .map((quote) => quote.quoteId)
+                                .contains(updatedQuoteWithId.quoteId)) {
+                              currentQuotes.add(updatedQuoteWithId);
+                            }
+
+                            //  update the data in the DB
+                            await _authController.updateUserDataOnDB(
+                                data: {'quotes': currentQuotes},
+                                onResponse: (response) {
+                                  print("-----------RESPONSE : ${response}");
+                                });
+                          },
+                          onDiscard: () {},
+                        ),
                       ]),
                 ),
               )

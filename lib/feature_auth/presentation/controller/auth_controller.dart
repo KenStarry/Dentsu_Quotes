@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/domain/model/response_state.dart';
 import '../../../di/di.dart';
 import '../../domain/model/my_user.dart';
 import '../../domain/use_cases/auth_use_cases.dart';
@@ -44,6 +45,13 @@ class AuthController extends GetxController {
 
   void listenToUserDataonDB({required Function(MyUser? user) onGetUserData}) =>
       authUseCase.listenToUserDataOnDB.call(onGetUserData: onGetUserData);
+
+  Future<void> updateUserDataOnDB(
+          {required Map<String, dynamic> data,
+          String? uid,
+          required Function(ResponseState response) onResponse}) async =>
+      await authUseCase.updateUserDataOnDB
+          .call(data: data, onResponse: onResponse);
 
   /// Sign Up
   Future<void> signUp(

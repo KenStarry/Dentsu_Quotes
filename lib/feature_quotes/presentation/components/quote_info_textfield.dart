@@ -7,6 +7,8 @@ class QuoteInfoTextField extends StatelessWidget {
   final String hintText;
   final String? initialValue;
   final bool readOnly;
+  final bool isDropdown;
+  final List<String>? dropdownItems;
 
   const QuoteInfoTextField(
       {super.key,
@@ -14,7 +16,9 @@ class QuoteInfoTextField extends StatelessWidget {
       required this.controller,
       required this.hintText,
       this.initialValue,
-      this.readOnly = false});
+      this.readOnly = false,
+      this.isDropdown = false,
+      this.dropdownItems});
 
   @override
   Widget build(BuildContext context) {
@@ -38,32 +42,85 @@ class QuoteInfoTextField extends StatelessWidget {
           const SizedBox(height: 16),
 
           //  textfield
-          TextFormField(
-            readOnly: readOnly,
-            controller: controller,
-            initialValue: initialValue,
-            style: TextStyle(
-              fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-              fontWeight: Theme.of(context).textTheme.titleSmall!.fontWeight,
-              color: readOnly
-                  ? textBlack300.withOpacity(0.7)
-                  : Theme.of(context).textTheme.bodyLarge!.color,
-            ),
-            decoration: InputDecoration(
-                hintText: hintText,
-                filled: true,
-                fillColor: Theme.of(context).primaryColorDark,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.grey.withOpacity(0.5), width: 1),
-                    borderRadius: const BorderRadius.all(Radius.circular(12))),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.grey.withOpacity(0.5), width: 1),
-                    borderRadius: const BorderRadius.all(Radius.circular(12)))),
-          )
+          dropdownItems != null
+              ? IgnorePointer(
+                  ignoring: readOnly,
+                  child: DropdownButtonFormField(
+                      disabledHint: Text(hintText),
+                      items: dropdownItems!
+                          .map((item) =>
+                              DropdownMenuItem(value: item, child: Text(item)))
+                          .toList(),
+                      value: null,
+                      style: TextStyle(
+                        fontSize:
+                            Theme.of(context).textTheme.bodyLarge!.fontSize,
+                        fontWeight:
+                            Theme.of(context).textTheme.titleSmall!.fontWeight,
+                        color: readOnly
+                            ? textBlack300.withOpacity(0.7)
+                            : Theme.of(context).textTheme.bodyLarge!.color,
+                      ),
+                      decoration: InputDecoration(
+                          hintText: hintText,
+                          hintStyle: TextStyle(
+                            fontSize:
+                                Theme.of(context).textTheme.bodyLarge!.fontSize,
+                            fontWeight: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .fontWeight,
+                            color: readOnly
+                                ? textBlack300.withOpacity(0.7)
+                                : Theme.of(context).textTheme.bodyLarge!.color,
+                          ),
+                          filled: true,
+                          fillColor: Theme.of(context).primaryColorDark,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 16),
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12)))),
+                      onChanged: (newValue) {}),
+                )
+              : TextFormField(
+                  readOnly: readOnly,
+                  controller: controller,
+                  initialValue: initialValue,
+                  style: TextStyle(
+                    fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
+                    fontWeight:
+                        Theme.of(context).textTheme.titleSmall!.fontWeight,
+                    color: readOnly
+                        ? textBlack300.withOpacity(0.7)
+                        : Theme.of(context).textTheme.bodyLarge!.color,
+                  ),
+                  decoration: InputDecoration(
+                      hintText: hintText,
+                      filled: true,
+                      fillColor: Theme.of(context).primaryColorDark,
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 16),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.5), width: 1),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(12))),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.5), width: 1),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(12)))),
+                )
         ],
       ),
     );

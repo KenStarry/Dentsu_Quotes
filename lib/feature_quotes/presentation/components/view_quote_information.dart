@@ -49,6 +49,8 @@ class _ViewQuoteInformationState extends State<ViewQuoteInformation> {
                     : widget.controllers[information.keys.toList().indexOf(entry.key)],
                 hintText: entry.value,
                 initialValue: widget.isNewQuote ? null : entry.value,
+                isDropdown: entry.key == 'Source',
+                dropdownItems: entry.key == 'Source' ? ['Agent Portal', 'Other'] : null,
                 readOnly: !widget.isNewQuote))
             .toList(),
       ),

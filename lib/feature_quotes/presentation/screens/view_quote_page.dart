@@ -9,19 +9,40 @@ import '../../../feature_dashboard/presentation/controller/dashboard_controller.
 import '../components/view_quote_benefits.dart';
 
 class ViewQuotePage extends StatefulWidget {
-  const ViewQuotePage({super.key});
+  final bool isNewQuote;
+
+  const ViewQuotePage({super.key, this.isNewQuote = false});
 
   @override
   State<ViewQuotePage> createState() => _ViewQuotePageState();
 }
 
 class _ViewQuotePageState extends State<ViewQuotePage> {
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _middleNameController;
+  late final TextEditingController _lastNameController;
+  late final TextEditingController _leadSourceController;
+  late final TextEditingController _quoteIdController;
+  late final TextEditingController _businessUnitController;
+  late final TextEditingController _leadIdController;
+  late final TextEditingController _sourceController;
+  late final TextEditingController _capturingUserController;
 
   late final DashboardController _dashboardController;
 
   @override
   void initState() {
     super.initState();
+
+    _firstNameController = TextEditingController();
+    _middleNameController = TextEditingController();
+    _lastNameController = TextEditingController();
+    _leadSourceController = TextEditingController();
+    _quoteIdController = TextEditingController();
+    _businessUnitController = TextEditingController();
+    _leadIdController = TextEditingController();
+    _sourceController = TextEditingController();
+    _capturingUserController = TextEditingController();
 
     _dashboardController = Get.find<DashboardController>();
   }
@@ -46,11 +67,13 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomBackBreadcrumb(backText: 'Back to all quotes', onBackPressed: () {
-                    _dashboardController.setViewQuoteActive(active: false);
-                  }),
+                  CustomBackBreadcrumb(
+                      backText: 'Back to all quotes',
+                      onBackPressed: () {
+                        _dashboardController.setViewQuoteActive(active: false);
+                      }),
                   const SizedBox(height: 8),
-                  Text('View Quote',
+                  Text(widget.isNewQuote ? 'New Quote' : 'View Quote',
                       style: TextStyle(
                           fontSize:
                               Theme.of(context).textTheme.titleMedium!.fontSize,
@@ -85,14 +108,25 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
 
               //  body
-              const SliverToBoxAdapter(
+              SliverToBoxAdapter(
                 child: SizedBox(
                   width: double.infinity,
                   height: 135 * 9,
                   child: TabBarView(children: [
-                    ViewQuoteInformation(),
-                    ViewQuoteSetup(),
-                    ViewQuoteBenefits(),
+                    ViewQuoteInformation(controllers: <TextEditingController>[
+                      _firstNameController,
+                      _middleNameController,
+                      _lastNameController,
+                      _leadSourceController,
+                      _quoteIdController,
+                      _businessUnitController,
+                      _leadIdController,
+                      _sourceController,
+                      _capturingUserController
+                    ], isNewQuote: widget.isNewQuote),
+
+                    ViewQuoteSetup(isNewQuote: widget.isNewQuote),
+                    ViewQuoteBenefits(isNewQuote: widget.isNewQuote),
                   ]),
                 ),
               )

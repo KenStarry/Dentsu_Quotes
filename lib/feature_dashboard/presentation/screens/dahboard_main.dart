@@ -41,7 +41,9 @@ class _DashboardMainState extends State<DashboardMain> {
           ? const ViewLeadPage()
           : const LeadsPage()),
       Obx(() => _dashboardController.viewQuoteActive.value
-          ? const ViewQuotePage()
+          ? ViewQuotePage(
+              isNewQuote: _dashboardController.newQuoteActive.value,
+            )
           : const QuotesPage()),
       const ProfilePage()
     ];

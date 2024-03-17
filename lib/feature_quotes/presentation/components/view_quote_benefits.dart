@@ -4,7 +4,10 @@ import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_
 import 'package:flutter/material.dart';
 
 class ViewQuoteBenefits extends StatefulWidget {
-  const ViewQuoteBenefits({super.key});
+
+  final bool isNewQuote;
+
+  const ViewQuoteBenefits({super.key, required this.isNewQuote});
 
   @override
   State<ViewQuoteBenefits> createState() => _ViewQuoteBenefitsState();

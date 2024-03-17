@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class QuoteInfoTextField extends StatelessWidget {
   final String header;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String hintText;
+  final String? initialValue;
   final bool readOnly;
 
   const QuoteInfoTextField(
@@ -12,6 +13,7 @@ class QuoteInfoTextField extends StatelessWidget {
       required this.header,
       required this.controller,
       required this.hintText,
+      this.initialValue,
       this.readOnly = false});
 
   @override
@@ -38,7 +40,8 @@ class QuoteInfoTextField extends StatelessWidget {
           //  textfield
           TextFormField(
             readOnly: readOnly,
-            initialValue: hintText,
+            controller: controller,
+            initialValue: initialValue,
             style: TextStyle(
               fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
               fontWeight: Theme.of(context).textTheme.titleSmall!.fontWeight,

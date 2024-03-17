@@ -52,7 +52,11 @@ class _QuotesPageState extends State<QuotesPage> {
                 Row(
                   children: [
                     FilledButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          //  new quote
+                          _dashboardController.setViewQuoteActive(
+                              active: true, isNewQuote: true);
+                        },
                         style: FilledButton.styleFrom(
                             surfaceTintColor:
                                 Theme.of(context).primaryColorLight,

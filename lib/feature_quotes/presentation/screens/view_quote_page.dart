@@ -1,5 +1,7 @@
 import 'package:dentsu_quotes/core/domain/model/quote.dart';
+import 'package:dentsu_quotes/core/domain/model/response_state.dart';
 import 'package:dentsu_quotes/core/presentation/components/custom_back_breadcrumb.dart';
+import 'package:dentsu_quotes/core/presentation/components/show_snackbar.dart';
 import 'package:dentsu_quotes/feature_auth/presentation/controller/auth_controller.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/view_quote_information.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/view_quote_setup.dart';
@@ -274,7 +276,25 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                             await _authController.updateUserDataOnDB(
                                 data: {'quotes': currentQuotes},
                                 onResponse: (response) {
-                                  print("-----------RESPONSE : ${response}");
+                                  switch (response) {
+                                    case ResponseState.success:
+                                      showSnackbar(
+                                          title: 'Success!',
+                                          message: 'Quote Saved successfully!',
+                                          iconData: Icons.done_rounded);
+
+                                      //  navigate back to view quotes page
+
+                                      break;
+                                    case ResponseState.loading:
+                                      break;
+                                    case ResponseState.failure:
+                                      showSnackbar(
+                                          title: 'Error!',
+                                          message: 'Oops. Something went wrong',
+                                          iconData: Icons.error_rounded);
+                                      break;
+                                  }
                                 });
                           },
                           onDiscard: () {},

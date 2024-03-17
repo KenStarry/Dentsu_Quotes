@@ -49,14 +49,18 @@ class AuthRepositoryImpl extends AuthRepository {
       String? uid,
       required Function(ResponseState response) onResponse}) async {
     try {
+      onResponse(ResponseState.loading);
+
       final currentUserId = supabase.auth.currentUser!.id;
 
-      await supabase
+      final response = await supabase
           .from('users')
           .update(data)
-          .match({'id': uid ?? currentUserId});
+          .match({'id': uid ?? currentUserId}).then((value) {
+        onResponse(ResponseState.success);
+      });
     } catch (error) {
-      throw Exception(error);
+      onResponse(ResponseState.failure);
     }
   }
 

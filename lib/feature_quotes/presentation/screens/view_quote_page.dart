@@ -120,6 +120,31 @@ class _ViewQuotePageState extends State<ViewQuotePage>
           .copyWith(ageBracket: _ageBracketController.text);
       _coreController.updateQuoteValue(updatedQuote: newQuote);
     });
+    _inPatientCoverController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(inPatientCoverLimit: _inPatientCoverController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _spouseCoveredController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(spouseCovered: _spouseCoveredController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _childrenCountController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(howManyChildren: int.parse(_childrenCountController.text));
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _coverChildrenController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(coverChildren: _coverChildrenController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
+    _spouseAgeController.addListener(() {
+      final newQuote = _coreController.newQuote.value
+          .copyWith(spouseAgeBracket: _spouseAgeController.text);
+      _coreController.updateQuoteValue(updatedQuote: newQuote);
+    });
   }
 
   @override

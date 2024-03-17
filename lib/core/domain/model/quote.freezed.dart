@@ -43,7 +43,7 @@ mixin _$Quote {
   @JsonKey(name: 'in_patient_cover_limit')
   String get inPatientCoverLimit => throw _privateConstructorUsedError;
   @JsonKey(name: 'spouse_covered')
-  bool get spouseCovered => throw _privateConstructorUsedError;
+  String get spouseCovered => throw _privateConstructorUsedError;
   @JsonKey(name: 'how_many_children')
   int get howManyChildren => throw _privateConstructorUsedError;
   @JsonKey(name: 'cover_children')
@@ -75,7 +75,7 @@ abstract class $QuoteCopyWith<$Res> {
       @JsonKey(name: 'capturing_user') String capturingUser,
       @JsonKey(name: 'age_bracket') String ageBracket,
       @JsonKey(name: 'in_patient_cover_limit') String inPatientCoverLimit,
-      @JsonKey(name: 'spouse_covered') bool spouseCovered,
+      @JsonKey(name: 'spouse_covered') String spouseCovered,
       @JsonKey(name: 'how_many_children') int howManyChildren,
       @JsonKey(name: 'cover_children') String coverChildren,
       @JsonKey(name: 'spouse_age_bracket') String spouseAgeBracket,
@@ -160,7 +160,7 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
       spouseCovered: null == spouseCovered
           ? _value.spouseCovered
           : spouseCovered // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as String,
       howManyChildren: null == howManyChildren
           ? _value.howManyChildren
           : howManyChildren // ignore: cast_nullable_to_non_nullable
@@ -200,7 +200,7 @@ abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
       @JsonKey(name: 'capturing_user') String capturingUser,
       @JsonKey(name: 'age_bracket') String ageBracket,
       @JsonKey(name: 'in_patient_cover_limit') String inPatientCoverLimit,
-      @JsonKey(name: 'spouse_covered') bool spouseCovered,
+      @JsonKey(name: 'spouse_covered') String spouseCovered,
       @JsonKey(name: 'how_many_children') int howManyChildren,
       @JsonKey(name: 'cover_children') String coverChildren,
       @JsonKey(name: 'spouse_age_bracket') String spouseAgeBracket,
@@ -283,7 +283,7 @@ class __$$QuoteImplCopyWithImpl<$Res>
       spouseCovered: null == spouseCovered
           ? _value.spouseCovered
           : spouseCovered // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as String,
       howManyChildren: null == howManyChildren
           ? _value.howManyChildren
           : howManyChildren // ignore: cast_nullable_to_non_nullable
@@ -320,7 +320,7 @@ class _$QuoteImpl implements _Quote {
       @JsonKey(name: 'capturing_user') this.capturingUser = '',
       @JsonKey(name: 'age_bracket') this.ageBracket = '',
       @JsonKey(name: 'in_patient_cover_limit') this.inPatientCoverLimit = '',
-      @JsonKey(name: 'spouse_covered') this.spouseCovered = false,
+      @JsonKey(name: 'spouse_covered') this.spouseCovered = '',
       @JsonKey(name: 'how_many_children') this.howManyChildren = 0,
       @JsonKey(name: 'cover_children') this.coverChildren = '',
       @JsonKey(name: 'spouse_age_bracket') this.spouseAgeBracket = '',
@@ -366,7 +366,7 @@ class _$QuoteImpl implements _Quote {
   final String inPatientCoverLimit;
   @override
   @JsonKey(name: 'spouse_covered')
-  final bool spouseCovered;
+  final String spouseCovered;
   @override
   @JsonKey(name: 'how_many_children')
   final int howManyChildren;
@@ -474,7 +474,7 @@ abstract class _Quote implements Quote {
       @JsonKey(name: 'capturing_user') final String capturingUser,
       @JsonKey(name: 'age_bracket') final String ageBracket,
       @JsonKey(name: 'in_patient_cover_limit') final String inPatientCoverLimit,
-      @JsonKey(name: 'spouse_covered') final bool spouseCovered,
+      @JsonKey(name: 'spouse_covered') final String spouseCovered,
       @JsonKey(name: 'how_many_children') final int howManyChildren,
       @JsonKey(name: 'cover_children') final String coverChildren,
       @JsonKey(name: 'spouse_age_bracket') final String spouseAgeBracket,
@@ -517,7 +517,7 @@ abstract class _Quote implements Quote {
   String get inPatientCoverLimit;
   @override
   @JsonKey(name: 'spouse_covered')
-  bool get spouseCovered;
+  String get spouseCovered;
   @override
   @JsonKey(name: 'how_many_children')
   int get howManyChildren;

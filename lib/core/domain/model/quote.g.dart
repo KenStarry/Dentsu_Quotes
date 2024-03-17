@@ -18,7 +18,7 @@ _$QuoteImpl _$$QuoteImplFromJson(Map<String, dynamic> json) => _$QuoteImpl(
       capturingUser: json['capturing_user'] as String? ?? '',
       ageBracket: json['age_bracket'] as String? ?? '',
       inPatientCoverLimit: json['in_patient_cover_limit'] as String? ?? '',
-      spouseCovered: json['spouse_covered'] as bool? ?? false,
+      spouseCovered: json['spouse_covered'] as String? ?? '',
       howManyChildren: json['how_many_children'] as int? ?? 0,
       coverChildren: json['cover_children'] as String? ?? '',
       spouseAgeBracket: json['spouse_age_bracket'] as String? ?? '',

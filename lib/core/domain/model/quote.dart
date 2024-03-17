@@ -25,7 +25,7 @@ class Quote with _$Quote {
     @JsonKey(name: 'in_patient_cover_limit')
     @Default('')
     String inPatientCoverLimit,
-    @JsonKey(name: 'spouse_covered') @Default(false) bool spouseCovered,
+    @JsonKey(name: 'spouse_covered') @Default('') String spouseCovered,
     @JsonKey(name: 'how_many_children') @Default(0) int howManyChildren,
     @JsonKey(name: 'cover_children') @Default('') String coverChildren,
     @JsonKey(name: 'spouse_age_bracket') @Default('') String spouseAgeBracket,

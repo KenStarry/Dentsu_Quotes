@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/core/data/api/api.dart';
 import 'package:dentsu_quotes/core/presentation/controller/core_controller.dart';
 import 'package:dentsu_quotes/di/controller_di.dart';
 import 'package:dentsu_quotes/di/di.dart';
@@ -5,8 +6,11 @@ import 'package:dentsu_quotes/feature_dashboard/presentation/screens/dahboard_ma
 import 'package:dentsu_quotes/theme/my_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  await Supabase.initialize(url: Api.url, anonKey: Api.anonKey);
+
   invokeControllers();
   invokeDI();
 

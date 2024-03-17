@@ -42,16 +42,21 @@ class _ViewQuoteInformationState extends State<ViewQuoteInformation> {
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: information.entries
-            .map((entry) => QuoteInfoTextField(
-                header: entry.key,
-                controller: !widget.isNewQuote
-                    ? null
-                    : widget.controllers[information.keys.toList().indexOf(entry.key)],
-                hintText: entry.value,
-                initialValue: widget.isNewQuote ? null : entry.value,
-                isDropdown: entry.key == 'Source',
-                dropdownItems: entry.key == 'Source' ? ['Agent Portal', 'Other'] : null,
-                readOnly: !widget.isNewQuote))
+            .map((entry) => widget.isNewQuote && entry.key == 'Quote ID'
+                ? const SizedBox.shrink()
+                : QuoteInfoTextField(
+                    header: entry.key,
+                    controller: !widget.isNewQuote
+                        ? null
+                        : widget.controllers[
+                            information.keys.toList().indexOf(entry.key)],
+                    hintText: entry.value,
+                    initialValue: widget.isNewQuote ? null : entry.value,
+                    isDropdown: entry.key == 'Source',
+                    dropdownItems: entry.key == 'Source'
+                        ? ['Agent Portal', 'Other']
+                        : null,
+                    readOnly: !widget.isNewQuote))
             .toList(),
       ),
     );

@@ -10,9 +10,15 @@ import '../../../theme/colors.dart';
 class ViewQuoteBenefits extends StatefulWidget {
   final List<TextEditingController> controllers;
   final bool isNewQuote;
+  final VoidCallback onSave;
+  final VoidCallback onDiscard;
 
   const ViewQuoteBenefits(
-      {super.key, required this.controllers, required this.isNewQuote});
+      {super.key,
+      required this.controllers,
+      required this.isNewQuote,
+      required this.onSave,
+      required this.onDiscard});
 
   @override
   State<ViewQuoteBenefits> createState() => _ViewQuoteBenefitsState();
@@ -157,7 +163,7 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
                   children: [
                     //  cancel lead
                     OutlinedButton(
-                        onPressed: () {},
+                        onPressed: widget.onSave,
                         style: OutlinedButton.styleFrom(
                             backgroundColor: Theme.of(context).primaryColorDark,
                             surfaceTintColor:
@@ -188,9 +194,7 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
 
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          //  update user row with new quote in DB
-                        },
+                        onTap: widget.onSave,
                         child: Container(
                           padding: const EdgeInsets.only(
                               right: 8, top: 8, bottom: 8, left: 16),

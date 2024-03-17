@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/core/presentation/components/custom_back_breadcrumb.dart';
+import 'package:dentsu_quotes/feature_auth/presentation/controller/auth_controller.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/view_quote_information.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/view_quote_setup.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
 
   late final DashboardController _dashboardController;
   late final CoreController _coreController;
+  late final AuthController _authController;
   late final TabController _tabController;
 
   @override
@@ -64,6 +66,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
 
     _dashboardController = Get.find<DashboardController>();
     _coreController = Get.find<CoreController>();
+    _authController = Get.find<AuthController>();
     _tabController = TabController(length: 3, vsync: this);
 
     addControllerListeners();
@@ -244,7 +247,13 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                             ]),
                         ViewQuoteBenefits(controllers: <TextEditingController>[
                           _inPatientCoverController
-                        ], isNewQuote: widget.isNewQuote),
+                        ], isNewQuote: widget.isNewQuote,
+                        onSave: (){
+
+                          //  save the new quote
+                          final myNewQuote = _coreController.newQuote.value;
+                        },
+                        onDiscard: () {},),
                       ]),
                 ),
               )

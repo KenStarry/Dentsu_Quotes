@@ -6,7 +6,9 @@ class ViewQuoteSetup extends StatefulWidget {
   final bool isNewQuote;
 
   const ViewQuoteSetup(
-      {super.key, required this.controllers, required this.isNewQuote});
+      {super.key,
+      required this.controllers,
+      required this.isNewQuote});
 
   @override
   State<ViewQuoteSetup> createState() => _ViewQuoteSetupState();

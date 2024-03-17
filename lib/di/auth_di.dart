@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/feature_auth/domain/use_cases/get_user_data_from_db.dart';
 import 'package:get_it/get_it.dart';
 
 import '../feature_auth/data/repository/auth_repository_impl.dart';
@@ -15,6 +16,7 @@ void authDI({required GetIt locator}) {
 
   /// Use Cases
   locator.registerLazySingleton<AuthUseCases>(() => AuthUseCases(
+      getUserDataFromDB: GetUserDataFromDB(),
       signUp: SignUp(),
       signIn: SignIn(),
       signOut: SignOut(),

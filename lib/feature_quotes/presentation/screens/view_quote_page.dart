@@ -284,7 +284,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                                           iconData: Icons.done_rounded);
 
                                       //  navigate back to view quotes page
-
+                                      _dashboardController.setViewQuoteActive(active: false);
                                       break;
                                     case ResponseState.loading:
                                       break;
@@ -297,7 +297,9 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                                   }
                                 });
                           },
-                          onDiscard: () {},
+                          onDiscard: () {
+                            _dashboardController.setViewQuoteActive(active: false);
+                          },
                         ),
                       ]),
                 ),

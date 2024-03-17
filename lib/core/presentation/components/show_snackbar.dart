@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +12,7 @@ void showSnackbar(
       titleText: Text(
         title,
         style: TextStyle(
-            fontWeight: Theme.of(Get.context!).textTheme.bodyMedium?.fontWeight,
+            fontWeight: Theme.of(Get.context!).textTheme.titleSmall?.fontWeight,
             fontSize: Theme.of(Get.context!).textTheme.bodyMedium?.fontSize,
             color: Colors.white,
             overflow: TextOverflow.ellipsis),
@@ -20,8 +21,8 @@ void showSnackbar(
       messageText: Text(
         message,
         style: TextStyle(
-            fontWeight: Theme.of(Get.context!).textTheme.bodySmall?.fontWeight,
-            fontSize: Theme.of(Get.context!).textTheme.bodySmall?.fontSize,
+            fontWeight: Theme.of(Get.context!).textTheme.bodyMedium?.fontWeight,
+            fontSize: Theme.of(Get.context!).textTheme.bodyMedium?.fontSize,
             color: Colors.white,
             overflow: TextOverflow.ellipsis),
         maxLines: 2,
@@ -29,11 +30,12 @@ void showSnackbar(
       icon: Icon(
         iconData,
         size: 24,
-        color: iconColor ?? Theme.of(Get.context!).primaryColor,
+        color: textWhite900,
       ),
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(16),
       duration: const Duration(seconds: 2),
+      snackPosition: SnackPosition.BOTTOM,
       shouldIconPulse: false,
       borderRadius: 16,
       isDismissible: true,

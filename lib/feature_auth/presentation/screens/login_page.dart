@@ -145,14 +145,15 @@ class _LoginPageState extends State<LoginPage> {
                   //  login button
                   FilledButton(
                       onPressed: () {
-                        // Get.to(() => )
+                        //  login
+
                       },
                       style: FilledButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColorDark,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 24, vertical: 15),
                           surfaceTintColor: Theme.of(context).primaryColorDark,
-                          minimumSize: Size.fromHeight(32)),
+                          minimumSize: const Size.fromHeight(32)),
                       child: Text('Log In',
                           style: TextStyle(
                               fontSize: Theme.of(context)

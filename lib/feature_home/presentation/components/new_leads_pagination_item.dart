@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NewLeadsPaginationItem extends StatelessWidget {
-  const NewLeadsPaginationItem({super.key});
+
+  final VoidCallback? onPrev;
+  final VoidCallback? onNext;
+  final Function(int numIndex)? onNumberIndexClicked;
+
+  const NewLeadsPaginationItem({super.key, this.onPrev, this.onNext, this.onNumberIndexClicked});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class NewLeadsPaginationItem extends StatelessWidget {
           //  prev
           PaginationItem(
               center: Icon(Icons.chevron_left_rounded, color: textBlack700),
-              onTap: () {}),
+              onTap: onPrev),
 
           const SizedBox(width: 12),
 
@@ -56,7 +61,7 @@ class NewLeadsPaginationItem extends StatelessWidget {
                                         .color)),
                         showBorder: false,
                         active: index == 0,
-                        onTap: () {},
+                        onTap: () => onNumberIndexClicked!(index),
                       )),
             ),
           ),
@@ -66,7 +71,7 @@ class NewLeadsPaginationItem extends StatelessWidget {
           //  next
           PaginationItem(
               center: Icon(Icons.chevron_right_rounded, color: textBlack700),
-              onTap: () {}),
+              onTap: onNext),
         ],
       ),
     );

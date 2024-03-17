@@ -17,9 +17,9 @@ class _RequestsContentState extends State<RequestsContent> {
     super.initState();
 
     chartData = <ChartData>[
-      ChartData('Accounts', 50, color: accentLight),
-      ChartData('Insurance', 50, color: myGreen),
       ChartData('Credit', 50, color: myBlue),
+      ChartData('Insurance', 50, color: myGreen),
+      ChartData('Accounts', 50, color: accentLight),
     ];
   }
 
@@ -29,16 +29,19 @@ class _RequestsContentState extends State<RequestsContent> {
       width: double.infinity,
       height: double.infinity,
       color: Colors.transparent,
-      child: SfCircularChart(
-        series: <CircularSeries>[
-          PieSeries<ChartData, String>(
-            dataSource: chartData,
-            pointColorMapper: (chartData, _) => chartData.color,
-            xValueMapper: (chartData, _) => chartData.x,
-            yValueMapper: (chartData, _) => chartData.y,
-            animationDuration: 1000,
-          )
-        ],
+      child: Transform.rotate(
+        angle: 50,
+        child: SfCircularChart(
+          series: <CircularSeries>[
+            PieSeries<ChartData, String>(
+              dataSource: chartData,
+              pointColorMapper: (chartData, _) => chartData.color,
+              xValueMapper: (chartData, _) => chartData.x,
+              yValueMapper: (chartData, _) => chartData.y,
+              animationDuration: 1000,
+            )
+          ],
+        ),
       ),
     );
   }

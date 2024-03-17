@@ -2,43 +2,22 @@ import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_
 import 'package:flutter/material.dart';
 
 class ViewQuoteSetup extends StatefulWidget {
+  final List<TextEditingController> controllers;
   final bool isNewQuote;
 
-  const ViewQuoteSetup({super.key, required this.isNewQuote});
+  const ViewQuoteSetup(
+      {super.key, required this.controllers, required this.isNewQuote});
 
   @override
   State<ViewQuoteSetup> createState() => _ViewQuoteSetupState();
 }
 
 class _ViewQuoteSetupState extends State<ViewQuoteSetup> {
-  late final TextEditingController _ageBracketController;
-  late final TextEditingController _inPatientCoverController;
-  late final TextEditingController _spouseCoveredController;
-  late final TextEditingController _childrenCountController;
-  late final TextEditingController _coverChildrenController;
-  late final TextEditingController _spouseAgeController;
   late final Map<String, dynamic> information;
-  late final List<TextEditingController> controllers;
 
   @override
   void initState() {
     super.initState();
-
-    _ageBracketController = TextEditingController();
-    _inPatientCoverController = TextEditingController();
-    _spouseCoveredController = TextEditingController();
-    _childrenCountController = TextEditingController();
-    _coverChildrenController = TextEditingController();
-    _spouseAgeController = TextEditingController();
-
-    controllers = <TextEditingController>[
-      _ageBracketController,
-      _inPatientCoverController,
-      _spouseCoveredController,
-      _childrenCountController,
-      _coverChildrenController,
-      _spouseAgeController
-    ];
 
     information = <String, dynamic>{
       'Age Bracket':
@@ -66,7 +45,8 @@ class _ViewQuoteSetupState extends State<ViewQuoteSetup> {
                 header: entry.key,
                 controller: !widget.isNewQuote
                     ? null
-                    : controllers[information.keys.toList().indexOf(entry.key)],
+                    : widget.controllers[
+                        information.keys.toList().indexOf(entry.key)],
                 hintText: entry.value,
                 initialValue: widget.isNewQuote ? null : entry.value,
                 isDropdown: true,

@@ -28,6 +28,12 @@ class _ViewQuotePageState extends State<ViewQuotePage>
   late final TextEditingController _leadIdController;
   late final TextEditingController _sourceController;
   late final TextEditingController _capturingUserController;
+  late final TextEditingController _ageBracketController;
+  late final TextEditingController _inPatientCoverController;
+  late final TextEditingController _spouseCoveredController;
+  late final TextEditingController _childrenCountController;
+  late final TextEditingController _coverChildrenController;
+  late final TextEditingController _spouseAgeController;
 
   late final DashboardController _dashboardController;
   late final TabController _tabController;
@@ -45,6 +51,14 @@ class _ViewQuotePageState extends State<ViewQuotePage>
     _leadIdController = TextEditingController();
     _sourceController = TextEditingController();
     _capturingUserController = TextEditingController();
+
+    //  Setup Section
+    _ageBracketController = TextEditingController();
+    _inPatientCoverController = TextEditingController();
+    _spouseCoveredController = TextEditingController();
+    _childrenCountController = TextEditingController();
+    _coverChildrenController = TextEditingController();
+    _spouseAgeController = TextEditingController();
 
     _dashboardController = Get.find<DashboardController>();
     _tabController = TabController(length: 3, vsync: this);
@@ -135,7 +149,16 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                               _capturingUserController
                             ],
                             isNewQuote: widget.isNewQuote),
-                        ViewQuoteSetup(isNewQuote: widget.isNewQuote),
+                        ViewQuoteSetup(
+                            isNewQuote: widget.isNewQuote,
+                            controllers: <TextEditingController>[
+                              _ageBracketController,
+                              _inPatientCoverController,
+                              _spouseCoveredController,
+                              _childrenCountController,
+                              _coverChildrenController,
+                              _spouseAgeController
+                            ]),
                         ViewQuoteBenefits(isNewQuote: widget.isNewQuote),
                       ]),
                 ),

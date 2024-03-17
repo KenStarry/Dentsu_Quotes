@@ -4,16 +4,21 @@ import 'package:dentsu_quotes/feature_auth/domain/model/my_user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class AuthRepository {
-
   /// Get User Data
   Future<void> getUserDataFromDatabase(
       {required String uid, required Function(MyUser?) onGetUserData});
+
+  /// Listen to User Data
+  void listenToUserDataonDB({required Function(MyUser? user) onGetUserData});
 
   /// User Sign Up
   Future<void> signUp({required String email, required String password});
 
   /// Sign In
-  Future<void> signIn({required String email, required String password, required bool keepLoggedIn});
+  Future<void> signIn(
+      {required String email,
+      required String password,
+      required bool keepLoggedIn});
 
   /// Sign Out
   Future<void> signOut();

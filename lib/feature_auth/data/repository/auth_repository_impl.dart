@@ -27,6 +27,21 @@ class AuthRepositoryImpl extends AuthRepository {
     }
   }
 
+  @override
+  void listenToUserDataonDB({required Function(MyUser? user) onGetUserData}) {
+    supabase
+        .from('users')
+        .stream(primaryKey: ['id'])
+        .eq('id', supabase.auth.currentUser?.id ?? '')
+        .limit(1)
+        .listen((data) {
+          //  get the first element
+          final userDataJson = data[0];
+
+          onGetUserData(MyUser.fromJson(userDataJson));
+        });
+  }
+
   /// Sign Up
   @override
   Future<void> signUp({required String email, required String password}) async {

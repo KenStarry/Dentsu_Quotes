@@ -42,6 +42,9 @@ class AuthController extends GetxController {
       await authUseCase.getUserDataFromDB
           .call(uid: uid, onGetUserData: onGetUserData);
 
+  void listenToUserDataonDB({required Function(MyUser? user) onGetUserData}) =>
+      authUseCase.listenToUserDataOnDB.call(onGetUserData: onGetUserData);
+
   /// Sign Up
   Future<void> signUp(
           {required String email, required String password}) async =>

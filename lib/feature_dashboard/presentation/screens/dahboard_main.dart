@@ -35,13 +35,9 @@ class _DashboardMainState extends State<DashboardMain> {
     _authController = Get.find<AuthController>();
     _dashboardController = Get.find<DashboardController>();
 
-    _authController.getUserDataFromDatabase(
-        uid: '',
-        onGetUserData: (user) {
-          _authController.setUser(user: user);
-
-          print(user.toString());
-        });
+    _authController.listenToUserDataonDB(onGetUserData: (user) {
+      _authController.setUser(user: user);
+    });
   }
 
   @override

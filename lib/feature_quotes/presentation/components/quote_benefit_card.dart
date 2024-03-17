@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class QuoteBenefitCard extends StatelessWidget {
   final String title;
   final bool isSelected;
-  final Function(bool value) onChanged;
+  final Function(bool value)? onChanged;
 
   const QuoteBenefitCard(
       {super.key,
@@ -31,7 +31,6 @@ class QuoteBenefitCard extends StatelessWidget {
                   inactiveThumbColor: Theme.of(context).primaryColorDark,
                   activeTrackColor: Theme.of(context).primaryColorLight,
                   trackOutlineColor: MaterialStateProperty.all(Colors.transparent),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   onChanged: onChanged),
             ),
           )

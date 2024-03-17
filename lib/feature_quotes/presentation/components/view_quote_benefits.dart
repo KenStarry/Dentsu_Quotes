@@ -1,7 +1,9 @@
+import 'package:dentsu_quotes/core/presentation/controller/core_controller.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_benefit_card.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_benefit_checkout.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ViewQuoteBenefits extends StatefulWidget {
   final List<TextEditingController> controllers;
@@ -15,6 +17,7 @@ class ViewQuoteBenefits extends StatefulWidget {
 }
 
 class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
+  late final CoreController _coreController;
   late final Map<String, dynamic> information;
   late final List<String> _benefits;
 
@@ -22,6 +25,7 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
   void initState() {
     super.initState();
 
+    _coreController = Get.find<CoreController>();
     information = <String, dynamic>{
       'Inpatient Cover Limit':
           widget.isNewQuote && widget.controllers[0].text.isEmpty
@@ -58,7 +62,7 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
                     controller: !widget.isNewQuote
                         ? null
                         : widget.controllers[
-                        information.keys.toList().indexOf(entry.key)],
+                            information.keys.toList().indexOf(entry.key)],
                     hintText: entry.value,
                     initialValue: widget.isNewQuote ? null : entry.value,
                     isDropdown: true,
@@ -99,10 +103,30 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
 
                 //  benefits list
                 ListView.separated(
-                  itemBuilder: (context, index) => QuoteBenefitCard(
-                      title: _benefits[index],
-                      onChanged: (value) {},
-                      isSelected: true),
+                  itemBuilder: (context, index) => Obx(
+                    () {
+                      final newQuoteContainsBenefit = _coreController.newQuote.value.benefits
+                          .contains(_benefits[index]);
+                      return QuoteBenefitCard(
+                        title: _benefits[index],
+                        onChanged: widget.isNewQuote ? (value) {
+                          final List<String> currentBenefits =
+                              [..._coreController.newQuote.value.benefits];
+
+                          //  toggle current benefits
+                          currentBenefits.contains(_benefits[index])
+                              ? currentBenefits.removeWhere(
+                                  (benefit) => benefit == _benefits[index])
+                              : currentBenefits.add(_benefits[index]);
+
+                          final newQuote = _coreController.newQuote.value
+                              .copyWith(benefits: currentBenefits);
+                          _coreController.updateQuoteValue(
+                              updatedQuote: newQuote);
+                        } : null,
+                        isSelected: widget.isNewQuote ? newQuoteContainsBenefit : index == 0);
+                    },
+                  ),
                   separatorBuilder: (context, index) => Divider(
                       height: 2,
                       thickness: 1,

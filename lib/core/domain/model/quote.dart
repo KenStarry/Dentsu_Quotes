@@ -4,7 +4,7 @@ part 'quote.freezed.dart';
 
 part 'quote.g.dart';
 
-@freezed
+@Freezed(makeCollectionsUnmodifiable: false)
 class Quote with _$Quote {
   @JsonSerializable(explicitToJson: true)
   const factory Quote({

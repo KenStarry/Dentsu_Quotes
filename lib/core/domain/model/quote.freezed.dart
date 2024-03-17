@@ -297,7 +297,7 @@ class __$$QuoteImplCopyWithImpl<$Res>
           : spouseAgeBracket // ignore: cast_nullable_to_non_nullable
               as String,
       benefits: null == benefits
-          ? _value._benefits
+          ? _value.benefits
           : benefits // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -324,9 +324,7 @@ class _$QuoteImpl implements _Quote {
       @JsonKey(name: 'how_many_children') this.howManyChildren = 0,
       @JsonKey(name: 'cover_children') this.coverChildren = '',
       @JsonKey(name: 'spouse_age_bracket') this.spouseAgeBracket = '',
-      @JsonKey(name: 'benefits')
-      final List<String> benefits = const <String>[]})
-      : _benefits = benefits;
+      @JsonKey(name: 'benefits') this.benefits = const <String>[]});
 
   factory _$QuoteImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuoteImplFromJson(json);
@@ -376,14 +374,9 @@ class _$QuoteImpl implements _Quote {
   @override
   @JsonKey(name: 'spouse_age_bracket')
   final String spouseAgeBracket;
-  final List<String> _benefits;
   @override
   @JsonKey(name: 'benefits')
-  List<String> get benefits {
-    if (_benefits is EqualUnmodifiableListView) return _benefits;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_benefits);
-  }
+  final List<String> benefits;
 
   @override
   String toString() {
@@ -422,7 +415,7 @@ class _$QuoteImpl implements _Quote {
                 other.coverChildren == coverChildren) &&
             (identical(other.spouseAgeBracket, spouseAgeBracket) ||
                 other.spouseAgeBracket == spouseAgeBracket) &&
-            const DeepCollectionEquality().equals(other._benefits, _benefits));
+            const DeepCollectionEquality().equals(other.benefits, benefits));
   }
 
   @JsonKey(ignore: true)
@@ -444,7 +437,7 @@ class _$QuoteImpl implements _Quote {
       howManyChildren,
       coverChildren,
       spouseAgeBracket,
-      const DeepCollectionEquality().hash(_benefits));
+      const DeepCollectionEquality().hash(benefits));
 
   @JsonKey(ignore: true)
   @override

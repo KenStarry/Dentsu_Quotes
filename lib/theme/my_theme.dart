@@ -13,6 +13,11 @@ class MyTheme {
       iconTheme: const IconThemeData(color: textBlack300),
       radioTheme: RadioThemeData(fillColor: MaterialStateProperty.all(accent)),
       useMaterial3: true,
+      cardTheme: CardTheme(
+        color: bgAlt,
+        surfaceTintColor: bgAlt,
+        elevation: 0
+      ),
       bottomSheetTheme: const BottomSheetThemeData(
           surfaceTintColor: bg,
           shadowColor: Colors.transparent,

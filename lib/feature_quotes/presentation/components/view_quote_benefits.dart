@@ -4,33 +4,29 @@ import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_
 import 'package:flutter/material.dart';
 
 class ViewQuoteBenefits extends StatefulWidget {
-
+  final List<TextEditingController> controllers;
   final bool isNewQuote;
 
-  const ViewQuoteBenefits({super.key, required this.isNewQuote});
+  const ViewQuoteBenefits(
+      {super.key, required this.controllers, required this.isNewQuote});
 
   @override
   State<ViewQuoteBenefits> createState() => _ViewQuoteBenefitsState();
 }
 
 class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
-  late final TextEditingController _inPatientCoverController;
   late final Map<String, dynamic> information;
-  late final List<TextEditingController> controllers;
   late final List<String> _benefits;
 
   @override
   void initState() {
     super.initState();
 
-    _inPatientCoverController = TextEditingController();
-
-    controllers = <TextEditingController>[
-      _inPatientCoverController,
-    ];
-
     information = <String, dynamic>{
-      'Inpatient Cover Limit': 'KES 1,000,000',
+      'Inpatient Cover Limit':
+          widget.isNewQuote && widget.controllers[0].text.isEmpty
+              ? 'Inpatient Cover Limit'
+              : 'KES 1,000,000',
     };
 
     _benefits = <String>[
@@ -59,10 +55,24 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
             children: information.entries
                 .map((entry) => QuoteInfoTextField(
                     header: entry.key,
-                    controller: controllers[
+                    controller: !widget.isNewQuote
+                        ? null
+                        : widget.controllers[
                         information.keys.toList().indexOf(entry.key)],
                     hintText: entry.value,
-                    readOnly: true))
+                    initialValue: widget.isNewQuote ? null : entry.value,
+                    isDropdown: true,
+                    dropdownItems: entry.key == 'Inpatient Cover Limit'
+                        ? [
+                            'KES 10,000',
+                            'KES 30,000',
+                            'KES 50,000',
+                            'KES 100,000',
+                            'KES 500,000',
+                            'Above KES 500,000'
+                          ]
+                        : null,
+                    readOnly: !widget.isNewQuote))
                 .toList(),
           ),
 
@@ -93,7 +103,10 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
                       title: _benefits[index],
                       onChanged: (value) {},
                       isSelected: true),
-                  separatorBuilder: (context, index) => Divider(height: 2, thickness: 1, color: Colors.grey.withOpacity(0.3)),
+                  separatorBuilder: (context, index) => Divider(
+                      height: 2,
+                      thickness: 1,
+                      color: Colors.grey.withOpacity(0.3)),
                   itemCount: _benefits.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

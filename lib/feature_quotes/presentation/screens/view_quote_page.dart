@@ -159,7 +159,9 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                               _coverChildrenController,
                               _spouseAgeController
                             ]),
-                        ViewQuoteBenefits(isNewQuote: widget.isNewQuote),
+                        ViewQuoteBenefits(controllers: <TextEditingController>[
+                          _inPatientCoverController
+                        ], isNewQuote: widget.isNewQuote),
                       ]),
                 ),
               )

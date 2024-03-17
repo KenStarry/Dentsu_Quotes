@@ -89,7 +89,11 @@ class QuoteInfoTextField extends StatelessWidget {
                                   width: 1),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(12)))),
-                      onChanged: (newValue) {}),
+                      onChanged: (newValue) {
+                        if (controller != null) {
+                          controller!.text = newValue ?? '';
+                        }
+                      }),
                 )
               : TextFormField(
                   readOnly: readOnly,

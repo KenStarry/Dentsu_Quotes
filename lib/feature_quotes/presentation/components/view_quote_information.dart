@@ -1,12 +1,17 @@
+import 'package:dentsu_quotes/core/domain/model/quote.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_textfield.dart';
 import 'package:flutter/material.dart';
 
 class ViewQuoteInformation extends StatefulWidget {
+  final Quote quote;
   final List<TextEditingController> controllers;
   final bool isNewQuote;
 
   const ViewQuoteInformation(
-      {super.key, required this.controllers, required this.isNewQuote});
+      {super.key,
+      required this.quote,
+      required this.controllers,
+      required this.isNewQuote});
 
   @override
   State<ViewQuoteInformation> createState() => _ViewQuoteInformationState();
@@ -20,17 +25,23 @@ class _ViewQuoteInformationState extends State<ViewQuoteInformation> {
     super.initState();
 
     information = <String, dynamic>{
-      'First Name': widget.isNewQuote ? 'Enter First Name' : 'Stacey',
-      'Middle Name': widget.isNewQuote ? 'Enter Middle Name' : 'Nyawira',
-      'Last Name': widget.isNewQuote ? 'Enter Last Name' : 'Waruguru',
-      'Originating Lead Source':
-          widget.isNewQuote ? 'Originating Lead Source' : 'Sales Agent',
-      'Quote ID': widget.isNewQuote ? 'Quote ID' : 'QUO-02091-V2C8D9',
-      'Owning Business Unit':
-          widget.isNewQuote ? 'Owning Business Unit' : 'Kenya',
-      'Lead ID': widget.isNewQuote ? "Quote's Lead Id" : 0.toString(),
-      'Source': widget.isNewQuote ? 'Quote Source' : 'Agent portal',
-      'Capturing User': widget.isNewQuote ? 'Capturing User' : 'Jeremy Kibor'
+      'First Name':
+          widget.isNewQuote ? 'Enter First Name' : widget.quote.firstName,
+      'Middle Name':
+          widget.isNewQuote ? 'Enter Middle Name' : widget.quote.middleName,
+      'Last Name':
+          widget.isNewQuote ? 'Enter Last Name' : widget.quote.lastName,
+      'Originating Lead Source': widget.isNewQuote
+          ? 'Originating Lead Source'
+          : widget.quote.originatingLeadSource,
+      'Quote ID': widget.isNewQuote ? 'Quote ID' : widget.quote.quoteId,
+      'Owning Business Unit': widget.isNewQuote
+          ? 'Owning Business Unit'
+          : widget.quote.owningBusinessUnit,
+      'Lead ID': widget.isNewQuote ? "Quote's Lead Id" : widget.quote.leadId,
+      'Source': widget.isNewQuote ? 'Quote Source' : widget.quote.source,
+      'Capturing User':
+          widget.isNewQuote ? 'Capturing User' : widget.quote.capturingUser
     };
   }
 

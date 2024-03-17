@@ -64,16 +64,15 @@ class QuoteInfoTextField extends StatelessWidget {
                       decoration: InputDecoration(
                           hintText: hintText,
                           hintStyle: TextStyle(
-                            fontSize:
-                                Theme.of(context).textTheme.bodyLarge!.fontSize,
-                            fontWeight: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .fontWeight,
-                            color: readOnly
-                                ? textBlack300.withOpacity(0.7)
-                                : Theme.of(context).textTheme.bodyLarge!.color,
-                          ),
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .fontSize,
+                              fontWeight: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .fontWeight,
+                              color: textBlack300.withOpacity(0.7)),
                           filled: true,
                           fillColor: Theme.of(context).primaryColorDark,
                           contentPadding: const EdgeInsets.symmetric(

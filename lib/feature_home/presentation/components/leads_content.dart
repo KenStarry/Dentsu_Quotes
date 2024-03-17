@@ -24,9 +24,14 @@ class _LeadsContentState extends State<LeadsContent> {
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TotalLeadsContentDetail(iconColor: accentLight, detailCount: '', detailText: 'Accounts'),
-              TotalLeadsContentDetail(iconColor: myBlue, detailCount: '', detailText: 'Credit'),
-              TotalLeadsContentDetail(iconColor: myGreen, detailCount: '', detailText: 'Insurance'),
+              TotalLeadsContentDetail(
+                  iconColor: accentLight,
+                  detailCount: '',
+                  detailText: 'Accounts'),
+              TotalLeadsContentDetail(
+                  iconColor: myBlue, detailCount: '', detailText: 'Credit'),
+              TotalLeadsContentDetail(
+                  iconColor: myGreen, detailCount: '', detailText: 'Insurance'),
             ],
           ),
           const SizedBox(height: 16),
@@ -43,10 +48,12 @@ class _LeadsContentState extends State<LeadsContent> {
                       color: accentLight,
                       spots: const [
                         FlSpot(0, 0),
-                        FlSpot(5, 15),
-                        FlSpot(8, 25),
-                        FlSpot(17, 13),
-                        FlSpot(22, 45)
+                        FlSpot(10, 15),
+                        FlSpot(12, 25),
+                        FlSpot(20, 29),
+                        FlSpot(23, 23),
+                        FlSpot(26, 32),
+                        FlSpot(30, 40),
                       ]),
                   LineChartBarData(
                       show: true,
@@ -55,10 +62,13 @@ class _LeadsContentState extends State<LeadsContent> {
                       color: myBlue,
                       spots: const [
                         FlSpot(0, 0),
-                        FlSpot(5, 23),
-                        FlSpot(16, 8),
-                        FlSpot(20, 33),
-                        FlSpot(30, 20)
+                        FlSpot(5, 10),
+                        FlSpot(7, 8),
+                        FlSpot(12, 15),
+                        FlSpot(15, 22),
+                        FlSpot(22, 19),
+                        FlSpot(27, 21),
+                        FlSpot(30, 23),
                       ]),
                   LineChartBarData(
                       show: true,
@@ -67,10 +77,15 @@ class _LeadsContentState extends State<LeadsContent> {
                       color: myGreen,
                       spots: const [
                         FlSpot(0, 0),
-                        FlSpot(3, 9),
-                        FlSpot(7, 16),
-                        FlSpot(17, 32),
-                        FlSpot(24, 40)
+                        FlSpot(3, 3),
+                        FlSpot(7, 2),
+                        FlSpot(10, 7),
+                        FlSpot(12, 4),
+                        FlSpot(16, 18),
+                        FlSpot(22, 15),
+                        FlSpot(26, 28),
+                        FlSpot(28, 25),
+                        FlSpot(30, 35),
                       ]),
                 ])),
           ),

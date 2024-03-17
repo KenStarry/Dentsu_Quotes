@@ -85,7 +85,7 @@ class _QuotesPageState extends State<QuotesPage> {
                     IconButton(
                         onPressed: () {},
                         icon:
-                            Icon(Icons.more_horiz_rounded, color: textBlack300))
+                            const Icon(Icons.more_horiz_rounded, color: textBlack300))
                   ],
                 )
               ],

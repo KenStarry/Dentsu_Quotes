@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dentsu_quotes/feature_quotes/presentation/model/quotes_data.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -16,6 +17,7 @@ class AuthController extends GetxController {
   final currentSession = Rxn<Session>();
 
   final user = Rxn<MyUser>();
+  final quotesData = Rxn<QuotesData>();
 
   @override
   void onInit() {
@@ -33,6 +35,8 @@ class AuthController extends GetxController {
     _subscription.cancel();
     super.onClose();
   }
+
+  void setQuotesData({required QuotesData quotesData}) => this.quotesData.value = quotesData;
 
   void setUser({required MyUser? user}) => this.user.value = user;
 

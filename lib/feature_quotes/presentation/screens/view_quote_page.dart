@@ -17,7 +17,8 @@ class ViewQuotePage extends StatefulWidget {
   State<ViewQuotePage> createState() => _ViewQuotePageState();
 }
 
-class _ViewQuotePageState extends State<ViewQuotePage> {
+class _ViewQuotePageState extends State<ViewQuotePage>
+    with SingleTickerProviderStateMixin {
   late final TextEditingController _firstNameController;
   late final TextEditingController _middleNameController;
   late final TextEditingController _lastNameController;
@@ -29,6 +30,7 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
   late final TextEditingController _capturingUserController;
 
   late final DashboardController _dashboardController;
+  late final TabController _tabController;
 
   @override
   void initState() {
@@ -45,6 +47,7 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
     _capturingUserController = TextEditingController();
 
     _dashboardController = Get.find<DashboardController>();
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -124,7 +127,6 @@ class _ViewQuotePageState extends State<ViewQuotePage> {
                       _sourceController,
                       _capturingUserController
                     ], isNewQuote: widget.isNewQuote),
-
                     ViewQuoteSetup(isNewQuote: widget.isNewQuote),
                     ViewQuoteBenefits(isNewQuote: widget.isNewQuote),
                   ]),

@@ -9,6 +9,7 @@ class DashboardController extends GetxController {
   final viewQuoteIndex = 0.obs;
   final newQuoteActive = false.obs;
   final viewLeadActive = false.obs;
+  final viewLeadIndex = 0.obs;
 
   final zoomController = ZoomDrawerController();
 
@@ -26,6 +27,8 @@ class DashboardController extends GetxController {
     this.viewQuoteIndex.value = viewQuoteIndex;
   }
 
-  void setViewLeadActive({required bool active}) =>
-      viewLeadActive.value = active;
+  void setViewLeadActive({required bool active, int index = 0}) {
+    viewLeadActive.value = active;
+    viewLeadIndex.value = index;
+  }
 }

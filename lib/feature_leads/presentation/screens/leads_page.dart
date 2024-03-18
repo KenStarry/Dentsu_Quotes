@@ -88,11 +88,7 @@ class _LeadsPageState extends State<LeadsPage> {
             )),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
             //  new leads section
-            NewLeadsTableSection(
-              onRowClicked: () {
-                _dashboardController.setViewLeadActive(active: true);
-              },
-            )
+            const NewLeadsTableSection()
           ],
         ),
       ),

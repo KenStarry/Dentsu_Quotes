@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/core/domain/model/lead.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_actions.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_extra_details.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_profile_card.dart';
@@ -10,7 +11,8 @@ import '../../../core/presentation/components/custom_back_breadcrumb.dart';
 import '../../../feature_dashboard/presentation/controller/dashboard_controller.dart';
 
 class ViewLeadPage extends StatefulWidget {
-  const ViewLeadPage({super.key});
+  final Lead lead;
+  const ViewLeadPage({super.key, required this.lead});
 
   @override
   State<ViewLeadPage> createState() => _ViewLeadPageState();

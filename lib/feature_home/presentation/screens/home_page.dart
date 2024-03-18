@@ -1,6 +1,8 @@
+import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/new_leads_table_section.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/overview_cards_section.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +12,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  late final DashboardController _dashboardController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _dashboardController = Get.find<DashboardController>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -6,9 +6,10 @@ import '../../../feature_dashboard/presentation/controller/dashboard_controller.
 
 class TableDataSource extends DataTableSource {
   final List<Map<String, dynamic>> data;
+  final Function(bool selected, int index) onSelectChanged;
   final DashboardController dashboardController;
 
-  TableDataSource({required this.data, required this.dashboardController});
+  TableDataSource({required this.data, required this.dashboardController, required this.onSelectChanged});
 
   @override
   DataRow? getRow(int index) => DataRow(
@@ -17,9 +18,7 @@ class TableDataSource extends DataTableSource {
                   Theme.of(Get.context!).primaryColorDark)
               : MaterialStateProperty.all(const Color(0xffFAF8F8)),
           onSelectChanged: (selected) {
-            if (selected == true) {
-              dashboardController.setViewQuoteActive(active: true, viewQuoteIndex: index);
-            }
+            onSelectChanged(selected!, index);
           },
           cells: [
             DataCell(Text(data[index]['id'].toString())),

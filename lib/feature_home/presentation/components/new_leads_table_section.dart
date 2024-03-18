@@ -3,6 +3,7 @@ import 'package:dentsu_quotes/core/domain/model/quote.dart';
 import 'package:dentsu_quotes/core/presentation/components/my_lottie.dart';
 import 'package:dentsu_quotes/feature_auth/presentation/controller/auth_controller.dart';
 import 'package:dentsu_quotes/feature_home/presentation/components/new_leads_pagination_item.dart';
+import 'package:dentsu_quotes/feature_leads/presentation/screens/view_lead_page.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/model/quotes_data.dart';
 import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,8 @@ import '../../../feature_dashboard/presentation/controller/dashboard_controller.
 
 class NewLeadsTableSection extends StatefulWidget {
   final String? tableTitle;
-  final VoidCallback? onRowClicked;
 
-  const NewLeadsTableSection({super.key, this.tableTitle, this.onRowClicked});
+  const NewLeadsTableSection({super.key, this.tableTitle});
 
   @override
   State<NewLeadsTableSection> createState() => _NewLeadsTableSectionState();
@@ -66,6 +66,12 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                           '${quote.firstName} ${quote.middleName} ${quote.lastName}'
                     })
                 .toList(),
+            onSelectChanged: (selected, index) {
+              if (selected == true) {
+                _dashboardController.setViewQuoteActive(
+                    active: true, viewQuoteIndex: index);
+              }
+            },
             dashboardController: _dashboardController));
 
     _authController.setLeadsData(
@@ -76,6 +82,10 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                       'customerName': lead.fullName
                     })
                 .toList(),
+            onSelectChanged: (selected, index) {
+              _dashboardController.setViewLeadActive(
+                  active: true, index: index);
+            },
             dashboardController: _dashboardController));
   }
 
@@ -210,6 +220,8 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                                   .quotesData.value ??
                                               TableDataSource(
                                                   data: [],
+                                                  onSelectChanged:
+                                                      (selected, index) {},
                                                   dashboardController:
                                                       _dashboardController),
                                           columnSpacing: 0,
@@ -312,6 +324,8 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                               _authController.leadsData.value ??
                                                   TableDataSource(
                                                       data: [],
+                                                      onSelectChanged:
+                                                          (selected, index) {},
                                                       dashboardController:
                                                           _dashboardController),
                                           columnSpacing: 0,

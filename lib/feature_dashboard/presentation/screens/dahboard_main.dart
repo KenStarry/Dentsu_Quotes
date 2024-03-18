@@ -45,9 +45,17 @@ class _DashboardMainState extends State<DashboardMain> {
   @override
   Widget build(BuildContext context) {
     var screens = <Widget>[
-      const HomePage(),
       Obx(() => _dashboardController.viewLeadActive.value
-          ? const ViewLeadPage()
+          ? ViewLeadPage(
+              lead: _authController
+                  .user.value!.leads[_dashboardController.viewLeadIndex.value],
+            )
+          : const HomePage()),
+      Obx(() => _dashboardController.viewLeadActive.value
+          ? ViewLeadPage(
+              lead: _authController
+                  .user.value!.leads[_dashboardController.viewLeadIndex.value],
+            )
           : const LeadsPage()),
       Obx(() => _dashboardController.viewQuoteActive.value
           ? ViewQuotePage(

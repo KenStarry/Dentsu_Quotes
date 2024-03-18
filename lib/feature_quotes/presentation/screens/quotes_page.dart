@@ -84,20 +84,15 @@ class _QuotesPageState extends State<QuotesPage> {
                     const SizedBox(width: 8),
                     IconButton(
                         onPressed: () {},
-                        icon:
-                            const Icon(Icons.more_horiz_rounded, color: textBlack300))
+                        icon: const Icon(Icons.more_horiz_rounded,
+                            color: textBlack300))
                   ],
                 )
               ],
             )),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
             //  new leads section
-            NewLeadsTableSection(
-              tableTitle: 'Quotes',
-              onRowClicked: () {
-                _dashboardController.setViewQuoteActive(active: true);
-              },
-            )
+            const NewLeadsTableSection(tableTitle: 'Quotes')
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/core/presentation/components/avatar.dart';
+import 'package:dentsu_quotes/core/presentation/controller/core_controller.dart';
 import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,12 +17,14 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   late final AuthController _authController;
+  late final CoreController _coreController;
 
   @override
   void initState() {
     super.initState();
 
     _authController = Get.find<AuthController>();
+    _coreController = Get.find<CoreController>();
   }
 
   @override
@@ -64,10 +67,37 @@ class _MenuScreenState extends State<MenuScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //  profile pic
-              Obx(() => Avatar(
-                  avatarUrl: _authController.user.value?.avatarUrl ?? '',
-                  size: const Size(100, 100))),
+              SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Stack(
+                    children: [
+                      Align(
+                          alignment: Alignment.center,
+                          child: Obx(() => Avatar(
+                              avatarUrl:
+                              _authController.user.value?.avatarUrl ?? '',
+                              size: const Size(100, 100)))),
+
+                      //  live status checker
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Obx(
+                              () => Container(
+                            width: 10,
+                            height: 10,
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: _coreController.hasInternet.value
+                                    ? Colors.greenAccent
+                                    : Colors.redAccent,
+                            border: Border.all(color: Theme.of(context).primaryColor, width: 4, strokeAlign: BorderSide.strokeAlignOutside)),
+                          ),
+                        ),
+                      )
+                    ],
+                  )),
               const SizedBox(height: 24),
               //  navigation
               Container(

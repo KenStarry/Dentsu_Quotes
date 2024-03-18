@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
@@ -8,9 +10,17 @@ class DashboardController extends GetxController {
   final newQuoteActive = false.obs;
   final viewLeadActive = false.obs;
 
+  final zoomController = ZoomDrawerController();
+
+  void toggleDrawer() async {
+    zoomController.toggle?.call();
+    update();
+  }
+
   void setActiveTabIndex({required int index}) => activeTabIndex.value = index;
 
-  void setViewQuoteActive({required bool active, bool isNewQuote = false, int viewQuoteIndex = 0}) {
+  void setViewQuoteActive(
+      {required bool active, bool isNewQuote = false, int viewQuoteIndex = 0}) {
     viewQuoteActive.value = active;
     newQuoteActive.value = isNewQuote;
     this.viewQuoteIndex.value = viewQuoteIndex;

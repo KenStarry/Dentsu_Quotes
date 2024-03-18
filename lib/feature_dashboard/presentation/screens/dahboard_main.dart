@@ -28,7 +28,6 @@ class _DashboardMainState extends State<DashboardMain> {
   late final CoreController _coreController;
   late final AuthController _authController;
   late final DashboardController _dashboardController;
-  late final ZoomDrawerController _zoomDrawerController;
 
   @override
   void initState() {
@@ -37,7 +36,6 @@ class _DashboardMainState extends State<DashboardMain> {
     _coreController = Get.find<CoreController>();
     _authController = Get.find<AuthController>();
     _dashboardController = Get.find<DashboardController>();
-    _zoomDrawerController = ZoomDrawerController();
 
     _authController.listenToUserDataonDB(onGetUserData: (user) {
       _authController.setUser(user: user);
@@ -66,7 +64,7 @@ class _DashboardMainState extends State<DashboardMain> {
     ];
 
     return ZoomDrawer(
-        controller: _zoomDrawerController,
+        controller: _dashboardController.zoomController,
         style: DrawerStyle.defaultStyle,
         menuBackgroundColor: Theme.of(context).primaryColor,
         mainScreenScale: 0.2,
@@ -132,7 +130,7 @@ class _DashboardMainState extends State<DashboardMain> {
               IconButton(
                   onPressed: () {
                     //  open zoom drawer
-                    _zoomDrawerController.toggle?.call();
+                    _dashboardController.toggleDrawer();
                   },
                   icon: SvgPicture.asset(
                     'assets/images/menu.svg',

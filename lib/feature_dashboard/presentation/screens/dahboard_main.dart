@@ -5,6 +5,7 @@ import 'package:dentsu_quotes/feature_dashboard/presentation/components/bottom_b
 import 'package:dentsu_quotes/feature_dashboard/presentation/components/menu_screen.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/screens/no_internet_screen.dart';
+import 'package:dentsu_quotes/feature_dashboard/presentation/screens/search_screen.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/screens/leads_page.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/screens/view_lead_page.dart';
 import 'package:dentsu_quotes/feature_profile/presentation/screens/profile_page.dart';
@@ -119,25 +120,29 @@ class _DashboardMainState extends State<DashboardMain> {
                         readOnly: false,
                         controller: _searchController,
                         style: TextStyle(
-                          fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-                          fontWeight:
-                          Theme.of(context).textTheme.titleSmall!.fontWeight,
+                          fontSize:
+                              Theme.of(context).textTheme.bodyLarge!.fontSize,
+                          fontWeight: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .fontWeight,
                           color: Theme.of(context).textTheme.bodyLarge!.color,
                         ),
                         decoration: InputDecoration(
                             hintText: 'Search...',
                             filled: true,
-                            fillColor: Theme.of(context).scaffoldBackgroundColor,
+                            fillColor:
+                                Theme.of(context).scaffoldBackgroundColor,
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 16),
                             border: const OutlineInputBorder(
                                 borderSide: BorderSide.none,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(100))),
+                                    BorderRadius.all(Radius.circular(100))),
                             enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide.none,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(100)))),
+                                    BorderRadius.all(Radius.circular(100)))),
                       ),
                     ),
                   ),
@@ -246,13 +251,15 @@ class _DashboardMainState extends State<DashboardMain> {
                   )
                 : null,
             body: _coreController.hasInternet.value
-                ? Obx(
-                    () => IndexedStack(
-                      index: _dashboardController.activeTabIndex.value,
-                      children: screens,
-                    ),
-                  )
-                : NoInternetScreen(),
+                ? _dashboardController.searchModeEnabled.value
+                    ? const SearchScreen()
+                    : Obx(
+                        () => IndexedStack(
+                          index: _dashboardController.activeTabIndex.value,
+                          children: screens,
+                        ),
+                      )
+                : const NoInternetScreen(),
           ),
         ));
   }

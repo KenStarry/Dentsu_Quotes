@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dentsu_quotes/core/presentation/controller/core_controller.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/model/quotes_data.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -11,6 +12,7 @@ import '../../domain/use_cases/auth_use_cases.dart';
 
 class AuthController extends GetxController {
   final authUseCase = locator.get<AuthUseCases>();
+  final _coreController = Get.find<CoreController>();
 
   late final StreamSubscription<AuthState> _subscription;
   final currentEvent = AuthChangeEvent.signedOut.obs;
@@ -28,6 +30,14 @@ class AuthController extends GetxController {
     _subscription = authSubscription(onAuthStateChanged: (authState) {
       currentEvent.value = authState.event;
       currentSession.value = authState.session;
+    });
+
+    ever(_coreController.hasInternet, (connected) {
+      if (connected) {
+        listenToUserDataonDB(onGetUserData: (user) {
+          setUser(user: user);
+        });
+      }
     });
   }
 

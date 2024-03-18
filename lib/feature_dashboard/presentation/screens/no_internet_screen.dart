@@ -23,7 +23,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
             children: [
               Text('Oops...', style: Theme.of(context).textTheme.titleLarge,),
               const SizedBox(height: 24),
-              MyLottie(lottie: 'assets/images/json/no_wifi.json', width: 300, height: 300),
+              const MyLottie(lottie: 'assets/images/json/no_wifi.json', width: 300, height: 300),
               const SizedBox(height: 24),
               Text('No Internet', style: Theme.of(context).textTheme.bodyLarge,)
             ],

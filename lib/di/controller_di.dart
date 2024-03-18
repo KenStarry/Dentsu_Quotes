@@ -4,7 +4,7 @@ import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboar
 import 'package:get/get.dart';
 
 void invokeControllers() {
-  Get.lazyPut(() => AuthController(), fenix: true);
   Get.lazyPut(() => CoreController(), fenix: true);
+  Get.lazyPut(() => AuthController(), fenix: true);
   Get.lazyPut(() => DashboardController(), fenix: true);
 }

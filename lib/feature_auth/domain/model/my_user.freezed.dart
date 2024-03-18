@@ -32,6 +32,8 @@ mixin _$MyUser {
   String get avatarUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'quotes')
   List<Quote> get quotes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'leads')
+  List<Lead> get leads => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +51,8 @@ abstract class $MyUserCopyWith<$Res> {
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'username') String userName,
       @JsonKey(name: 'avatar_url') String avatarUrl,
-      @JsonKey(name: 'quotes') List<Quote> quotes});
+      @JsonKey(name: 'quotes') List<Quote> quotes,
+      @JsonKey(name: 'leads') List<Lead> leads});
 }
 
 /// @nodoc
@@ -71,6 +74,7 @@ class _$MyUserCopyWithImpl<$Res, $Val extends MyUser>
     Object? userName = null,
     Object? avatarUrl = null,
     Object? quotes = null,
+    Object? leads = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -97,6 +101,10 @@ class _$MyUserCopyWithImpl<$Res, $Val extends MyUser>
           ? _value.quotes
           : quotes // ignore: cast_nullable_to_non_nullable
               as List<Quote>,
+      leads: null == leads
+          ? _value.leads
+          : leads // ignore: cast_nullable_to_non_nullable
+              as List<Lead>,
     ) as $Val);
   }
 }
@@ -114,7 +122,8 @@ abstract class _$$MyUserImplCopyWith<$Res> implements $MyUserCopyWith<$Res> {
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'username') String userName,
       @JsonKey(name: 'avatar_url') String avatarUrl,
-      @JsonKey(name: 'quotes') List<Quote> quotes});
+      @JsonKey(name: 'quotes') List<Quote> quotes,
+      @JsonKey(name: 'leads') List<Lead> leads});
 }
 
 /// @nodoc
@@ -134,6 +143,7 @@ class __$$MyUserImplCopyWithImpl<$Res>
     Object? userName = null,
     Object? avatarUrl = null,
     Object? quotes = null,
+    Object? leads = null,
   }) {
     return _then(_$MyUserImpl(
       userId: null == userId
@@ -160,6 +170,10 @@ class __$$MyUserImplCopyWithImpl<$Res>
           ? _value.quotes
           : quotes // ignore: cast_nullable_to_non_nullable
               as List<Quote>,
+      leads: null == leads
+          ? _value.leads
+          : leads // ignore: cast_nullable_to_non_nullable
+              as List<Lead>,
     ));
   }
 }
@@ -174,7 +188,8 @@ class _$MyUserImpl implements _MyUser {
       @JsonKey(name: 'created_at') this.createdAt = '',
       @JsonKey(name: 'username') this.userName = '',
       @JsonKey(name: 'avatar_url') this.avatarUrl = '',
-      @JsonKey(name: 'quotes') this.quotes = const <Quote>[]});
+      @JsonKey(name: 'quotes') this.quotes = const <Quote>[],
+      @JsonKey(name: 'leads') this.leads = const <Lead>[]});
 
   factory _$MyUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$MyUserImplFromJson(json);
@@ -197,10 +212,13 @@ class _$MyUserImpl implements _MyUser {
   @override
   @JsonKey(name: 'quotes')
   final List<Quote> quotes;
+  @override
+  @JsonKey(name: 'leads')
+  final List<Lead> leads;
 
   @override
   String toString() {
-    return 'MyUser(userId: $userId, email: $email, createdAt: $createdAt, userName: $userName, avatarUrl: $avatarUrl, quotes: $quotes)';
+    return 'MyUser(userId: $userId, email: $email, createdAt: $createdAt, userName: $userName, avatarUrl: $avatarUrl, quotes: $quotes, leads: $leads)';
   }
 
   @override
@@ -216,13 +234,21 @@ class _$MyUserImpl implements _MyUser {
                 other.userName == userName) &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
-            const DeepCollectionEquality().equals(other.quotes, quotes));
+            const DeepCollectionEquality().equals(other.quotes, quotes) &&
+            const DeepCollectionEquality().equals(other.leads, leads));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, email, createdAt,
-      userName, avatarUrl, const DeepCollectionEquality().hash(quotes));
+  int get hashCode => Object.hash(
+      runtimeType,
+      userId,
+      email,
+      createdAt,
+      userName,
+      avatarUrl,
+      const DeepCollectionEquality().hash(quotes),
+      const DeepCollectionEquality().hash(leads));
 
   @JsonKey(ignore: true)
   @override
@@ -245,7 +271,8 @@ abstract class _MyUser implements MyUser {
       @JsonKey(name: 'created_at') final String createdAt,
       @JsonKey(name: 'username') final String userName,
       @JsonKey(name: 'avatar_url') final String avatarUrl,
-      @JsonKey(name: 'quotes') final List<Quote> quotes}) = _$MyUserImpl;
+      @JsonKey(name: 'quotes') final List<Quote> quotes,
+      @JsonKey(name: 'leads') final List<Lead> leads}) = _$MyUserImpl;
 
   factory _MyUser.fromJson(Map<String, dynamic> json) = _$MyUserImpl.fromJson;
 
@@ -267,6 +294,9 @@ abstract class _MyUser implements MyUser {
   @override
   @JsonKey(name: 'quotes')
   List<Quote> get quotes;
+  @override
+  @JsonKey(name: 'leads')
+  List<Lead> get leads;
   @override
   @JsonKey(ignore: true)
   _$$MyUserImplCopyWith<_$MyUserImpl> get copyWith =>

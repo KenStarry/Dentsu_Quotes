@@ -1,6 +1,8 @@
 import 'package:dentsu_quotes/core/domain/model/quote.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/domain/model/lead.dart';
+
 part 'my_user.freezed.dart';
 
 part 'my_user.g.dart';
@@ -15,6 +17,7 @@ class MyUser with _$MyUser {
     @JsonKey(name: 'username') @Default('') String userName,
     @JsonKey(name: 'avatar_url') @Default('') String avatarUrl,
     @JsonKey(name: 'quotes') @Default(<Quote>[]) List<Quote> quotes,
+    @JsonKey(name: 'leads') @Default(<Lead>[]) List<Lead> leads,
   }) = _MyUser;
 
   factory MyUser.fromJson(Map<String, dynamic> json) => _$MyUserFromJson(json);

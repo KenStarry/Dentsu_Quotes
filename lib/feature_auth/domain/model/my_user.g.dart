@@ -16,6 +16,10 @@ _$MyUserImpl _$$MyUserImplFromJson(Map<String, dynamic> json) => _$MyUserImpl(
               ?.map((e) => Quote.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <Quote>[],
+      leads: (json['leads'] as List<dynamic>?)
+              ?.map((e) => Lead.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Lead>[],
     );
 
 Map<String, dynamic> _$$MyUserImplToJson(_$MyUserImpl instance) =>
@@ -26,4 +30,5 @@ Map<String, dynamic> _$$MyUserImplToJson(_$MyUserImpl instance) =>
       'username': instance.userName,
       'avatar_url': instance.avatarUrl,
       'quotes': instance.quotes.map((e) => e.toJson()).toList(),
+      'leads': instance.leads.map((e) => e.toJson()).toList(),
     };

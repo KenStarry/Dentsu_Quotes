@@ -20,10 +20,6 @@ class CoreController extends GetxController {
     listenToInternetStatus(onStatusChanged: (internetStatus) {
       hasInternet.value = internetStatus == InternetConnectionStatus.connected;
     });
-
-    ever(newQuote, (quote) {
-      print('--------------------${quote.toString()}');
-    });
   }
 
   void listenToInternetStatus(

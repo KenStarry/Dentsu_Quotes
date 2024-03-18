@@ -4,6 +4,7 @@ import 'package:dentsu_quotes/feature_auth/presentation/controller/auth_controll
 import 'package:dentsu_quotes/feature_dashboard/presentation/components/bottom_bar_item.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/components/menu_screen.dart';
 import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
+import 'package:dentsu_quotes/feature_dashboard/presentation/screens/no_internet_screen.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/screens/leads_page.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/screens/view_lead_page.dart';
 import 'package:dentsu_quotes/feature_profile/presentation/screens/profile_page.dart';
@@ -81,111 +82,118 @@ class _DashboardMainState extends State<DashboardMain> {
         showShadow: true,
         borderRadius: 24,
         menuScreen: const MenuScreen(),
-        mainScreen: Scaffold(
-          appBar: AppBar(
-            systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarColor: Theme.of(context).primaryColor,
-                statusBarBrightness: Brightness.light,
-                systemNavigationBarColor: Theme.of(context).primaryColorDark,
-                systemNavigationBarIconBrightness: Brightness.dark),
-            backgroundColor: Theme.of(context).primaryColor,
-            elevation: 0,
-            leadingWidth: 88,
-            toolbarHeight: 70,
-            leading: UnconstrainedBox(
-              child: SvgPicture.asset(
-                'assets/images/logo.svg',
-                width: 35,
-                height: 35,
+        mainScreen: Obx(
+          () => Scaffold(
+            appBar: AppBar(
+              systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Theme.of(context).primaryColor,
+                  statusBarBrightness: Brightness.light,
+                  systemNavigationBarColor: Theme.of(context).primaryColorDark,
+                  systemNavigationBarIconBrightness: Brightness.dark),
+              backgroundColor: Theme.of(context).primaryColor,
+              elevation: 0,
+              leadingWidth: 88,
+              toolbarHeight: 70,
+              leading: UnconstrainedBox(
+                child: SvgPicture.asset(
+                  'assets/images/logo.svg',
+                  width: 35,
+                  height: 35,
+                ),
               ),
-            ),
-            actions: [
-              //  profile picture
-              SizedBox(
-                  width: 30,
-                  height: 30,
-                  child: Stack(
-                    children: [
-                      Align(
-                          alignment: Alignment.center,
-                          child: Obx(() => Avatar(
-                              avatarUrl:
-                                  _authController.user.value?.avatarUrl ?? '',
-                              size: const Size(30, 30)))),
+              actions: [
+                //  profile picture
+                SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: Stack(
+                      children: [
+                        Align(
+                            alignment: Alignment.center,
+                            child: Obx(() => Avatar(
+                                avatarUrl:
+                                    _authController.user.value?.avatarUrl ?? '',
+                                size: const Size(30, 30)))),
 
-                      //  live status checker
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Obx(
-                          () => Container(
-                            width: 8,
-                            height: 8,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: _coreController.hasInternet.value
-                                    ? Colors.greenAccent
-                                    : Colors.redAccent),
+                        //  live status checker
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Obx(
+                            () => Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: _coreController.hasInternet.value
+                                      ? Colors.greenAccent
+                                      : Colors.redAccent),
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  )),
-              const SizedBox(width: 8),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.search_rounded,
-                      color: Theme.of(context).primaryColorDark)),
-              IconButton(
-                  onPressed: () {
-                    //  open zoom drawer
-                    _dashboardController.toggleDrawer();
-                  },
-                  icon: SvgPicture.asset(
-                    'assets/images/menu.svg',
-                    width: 24,
-                    height: 24,
-                    colorFilter: ColorFilter.mode(
-                        Theme.of(context).primaryColorDark, BlendMode.srcIn),
-                  )),
-            ],
-          ),
-          bottomNavigationBar: BottomAppBar(
-            color: Colors.transparent,
-            surfaceTintColor: Colors.transparent,
-            height: 70,
-            padding: EdgeInsets.zero,
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColorDark,
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20))),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: bottomBarItemAssets
-                    .map((asset) => Obx(
-                          () => BottomBarItem(
-                              asset: asset,
-                              isActive:
-                                  _dashboardController.activeTabIndex.value ==
-                                      bottomBarItemAssets.indexOf(asset),
-                              onTap: () {
-                                _dashboardController.setActiveTabIndex(
-                                    index: bottomBarItemAssets.indexOf(asset));
-                              }),
-                        ))
-                    .toList(),
-              ),
+                        )
+                      ],
+                    )),
+                const SizedBox(width: 8),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.search_rounded,
+                        color: Theme.of(context).primaryColorDark)),
+                IconButton(
+                    onPressed: () {
+                      //  open zoom drawer
+                      _dashboardController.toggleDrawer();
+                    },
+                    icon: SvgPicture.asset(
+                      'assets/images/menu.svg',
+                      width: 24,
+                      height: 24,
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).primaryColorDark, BlendMode.srcIn),
+                    )),
+              ],
             ),
-          ),
-          body: Obx(
-            () => IndexedStack(
-              index: _dashboardController.activeTabIndex.value,
-              children: screens,
-            ),
+            bottomNavigationBar: _coreController.hasInternet.value
+                ? BottomAppBar(
+                    color: Colors.transparent,
+                    surfaceTintColor: Colors.transparent,
+                    height: 70,
+                    padding: EdgeInsets.zero,
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColorDark,
+                          borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              topLeft: Radius.circular(20))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: bottomBarItemAssets
+                            .map((asset) => Obx(
+                                  () => BottomBarItem(
+                                      asset: asset,
+                                      isActive: _dashboardController
+                                              .activeTabIndex.value ==
+                                          bottomBarItemAssets.indexOf(asset),
+                                      onTap: () {
+                                        _dashboardController.setActiveTabIndex(
+                                            index: bottomBarItemAssets
+                                                .indexOf(asset));
+                                      }),
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                  )
+                : null,
+            body: _coreController.hasInternet.value
+                ? Obx(
+                    () => IndexedStack(
+                      index: _dashboardController.activeTabIndex.value,
+                      children: screens,
+                    ),
+                  )
+                : NoInternetScreen(),
           ),
         ));
   }

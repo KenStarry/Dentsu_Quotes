@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/feature_profile/presentation/components/profile_card.dart';
+import 'package:dentsu_quotes/feature_profile/presentation/components/profile_details.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -20,7 +21,10 @@ class _ProfilePageState extends State<ProfilePage> {
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
-            const ProfileCard()
+            const ProfileCard(),
+
+            //  profile details
+            const ProfileDetails()
           ],
         ),
       ),

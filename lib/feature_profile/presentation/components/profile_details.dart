@@ -8,14 +8,14 @@ import '../../../core/presentation/controller/core_controller.dart';
 import '../../../feature_auth/presentation/controller/auth_controller.dart';
 import '../../../feature_dashboard/presentation/controller/dashboard_controller.dart';
 
-class ProfileCard extends StatefulWidget {
-  const ProfileCard({super.key});
+class ProfileDetails extends StatefulWidget {
+  const ProfileDetails({super.key});
 
   @override
-  State<ProfileCard> createState() => _ProfileCardState();
+  State<ProfileDetails> createState() => _ProfileDetailsState();
 }
 
-class _ProfileCardState extends State<ProfileCard> {
+class _ProfileDetailsState extends State<ProfileDetails> {
   late final CoreController _coreController;
   late final AuthController _authController;
   late final DashboardController _dashboardController;
@@ -34,27 +34,26 @@ class _ProfileCardState extends State<ProfileCard> {
     return SliverToBoxAdapter(
       child: Container(
         width: double.infinity,
-        height: 150,
-        decoration: BoxDecoration(color: Colors.transparent),
-        child: Stack(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        decoration:
+            BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //  background purple clipper
-            ClipPath(
-              clipper: OvalBottomBorderClipper(),
-              child: Container(
-                width: double.infinity,
-                height: 100,
-                color: Theme.of(context).primaryColor,
-              ),
+            //  user name
+            Obx(
+              () => Text(_authController.user.value?.userName ?? '',
+                  style: Theme.of(context).textTheme.titleLarge),
             ),
 
-            //  avatar
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: Obx(() => Avatar(
-                      avatarUrl: _authController.user.value?.avatarUrl ?? '',
-                      size: const Size(100, 100),
-                    )))
+            const SizedBox(height: 8),
+
+            //  email
+            Obx(
+              () => Text(_authController.user.value?.email ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium),
+            ),
           ],
         ),
       ),

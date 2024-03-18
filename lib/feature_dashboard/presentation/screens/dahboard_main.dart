@@ -102,53 +102,85 @@ class _DashboardMainState extends State<DashboardMain> {
                 ),
               ),
               actions: [
+                Obx(
+                  () => AnimatedContainer(
+                    duration: const Duration(milliseconds: 350),
+                    width:
+                        _dashboardController.searchModeEnabled.value ? 200 : 0,
+                    height: double.infinity,
+                    margin: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                  ),
+                ),
                 //  profile picture
-                SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Stack(
-                      children: [
-                        Align(
-                            alignment: Alignment.center,
-                            child: Obx(() => Avatar(
-                                avatarUrl:
-                                    _authController.user.value?.avatarUrl ?? '',
-                                size: const Size(30, 30)))),
+                Obx(
+                  () => Visibility(
+                    visible: !_dashboardController.searchModeEnabled.value,
+                    child: SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: Stack(
+                          children: [
+                            Align(
+                                alignment: Alignment.center,
+                                child: Obx(() => Avatar(
+                                    avatarUrl:
+                                        _authController.user.value?.avatarUrl ??
+                                            '',
+                                    size: const Size(30, 30)))),
 
-                        //  live status checker
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Obx(
-                            () => Container(
-                              width: 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _coreController.hasInternet.value
-                                      ? Colors.greenAccent
-                                      : Colors.redAccent),
-                            ),
-                          ),
-                        )
-                      ],
-                    )),
+                            //  live status checker
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Obx(
+                                () => Container(
+                                  width: 8,
+                                  height: 8,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: _coreController.hasInternet.value
+                                          ? Colors.greenAccent
+                                          : Colors.redAccent),
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                  ),
+                ),
                 const SizedBox(width: 8),
                 IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.search_rounded,
-                        color: Theme.of(context).primaryColorDark)),
-                IconButton(
                     onPressed: () {
-                      //  open zoom drawer
-                      _dashboardController.toggleDrawer();
+                      _dashboardController.toggleSearchModeEnabled();
                     },
-                    icon: SvgPicture.asset(
-                      'assets/images/menu.svg',
-                      width: 24,
-                      height: 24,
-                      colorFilter: ColorFilter.mode(
-                          Theme.of(context).primaryColorDark, BlendMode.srcIn),
+                    icon: Obx(
+                      () => Icon(
+                          _dashboardController.searchModeEnabled.value
+                              ? Icons.close_rounded
+                              : Icons.search_rounded,
+                          color: Theme.of(context).primaryColorDark),
                     )),
+                Obx(
+                  () => Visibility(
+                    visible: !_dashboardController.searchModeEnabled.value,
+                    child: IconButton(
+                        onPressed: () {
+                          //  open zoom drawer
+                          _dashboardController.toggleDrawer();
+                        },
+                        icon: SvgPicture.asset(
+                          'assets/images/menu.svg',
+                          width: 24,
+                          height: 24,
+                          colorFilter: ColorFilter.mode(
+                              Theme.of(context).primaryColorDark,
+                              BlendMode.srcIn),
+                        )),
+                  ),
+                ),
               ],
             ),
             bottomNavigationBar: _coreController.hasInternet.value

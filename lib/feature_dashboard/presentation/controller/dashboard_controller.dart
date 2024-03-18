@@ -11,11 +11,17 @@ class DashboardController extends GetxController {
   final viewLeadActive = false.obs;
   final viewLeadIndex = 0.obs;
 
+  final searchModeEnabled = false.obs;
+
   final zoomController = ZoomDrawerController();
 
   void toggleDrawer() async {
     zoomController.toggle?.call();
     update();
+  }
+
+  void toggleSearchModeEnabled() {
+    searchModeEnabled.value = !searchModeEnabled.value;
   }
 
   void setActiveTabIndex({required int index}) => activeTabIndex.value = index;

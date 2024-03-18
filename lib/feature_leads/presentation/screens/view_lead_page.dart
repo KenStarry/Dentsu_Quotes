@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/core/domain/model/lead.dart';
+import 'package:dentsu_quotes/feature_auth/presentation/controller/auth_controller.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_actions.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_extra_details.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/lead_profile_card.dart';
@@ -20,12 +21,14 @@ class ViewLeadPage extends StatefulWidget {
 
 class _ViewLeadPageState extends State<ViewLeadPage> {
   late final DashboardController _dashboardController;
+  late final AuthController _authController;
 
   @override
   void initState() {
     super.initState();
 
     _dashboardController = Get.find<DashboardController>();
+    _authController = Get.find<AuthController>();
   }
 
   @override
@@ -61,7 +64,12 @@ class _ViewLeadPageState extends State<ViewLeadPage> {
 
               LeadActions(
                 onCancelLead: () {},
-                onNext: () {},
+                onNext: () {
+                  //  populate the next lead
+                  if (_dashboardController.viewLeadIndex.value < _authController.user.value!.leads.length - 1) {
+                    _dashboardController.setViewLeadActive(active: true, index: _dashboardController.viewLeadIndex.value + 1);
+                  }
+                },
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
               const LeadProfileCard(),

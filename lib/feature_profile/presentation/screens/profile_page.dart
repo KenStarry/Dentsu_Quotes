@@ -44,7 +44,20 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
 
-            Expanded(child: Text('Hello')),
+            Expanded(
+                child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Colors.red,
+              child: Row(
+                children: [
+                  //  leads
+
+                  //  quotes
+                  //  Products
+                ],
+              ),
+            )),
 
             //  logout
             GestureDetector(
@@ -54,7 +67,8 @@ class _ProfilePageState extends State<ProfilePage> {
               child: UnconstrainedBox(
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 24),
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   decoration: BoxDecoration(
                       color: Theme.of(context).primaryColorLight,
                       borderRadius: BorderRadius.circular(24)),
@@ -65,8 +79,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(width: 12),
                       Text('Logout',
                           style: TextStyle(
-                              fontSize:
-                                  Theme.of(context).textTheme.bodyLarge!.fontSize,
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .fontSize,
                               fontWeight: Theme.of(context)
                                   .textTheme
                                   .titleSmall!

@@ -23,21 +23,10 @@ class NewLeadsTableSection extends StatefulWidget {
 }
 
 class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
-  final List<String> customers = [
-    'Joseph Kimeu Walter',
-    'Kani Odili',
-    'Sanaa Anikulapo-Kuti',
-    'Imara Akintola',
-    'Mtupeni Ibori',
-    'Khary Fagbure',
-    'Jabali Nnamani',
-    'Kalere Biobaku',
-    'Shomari Jaja'
-  ];
-
   late final DashboardController _dashboardController;
   late final AuthController _authController;
-  late final PaginatorController _paginatorController;
+  late final PaginatorController _quotesPaginatorController;
+  late final PaginatorController _leadsPaginatorController;
 
   @override
   void initState() {
@@ -45,9 +34,16 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
 
     _dashboardController = Get.find<DashboardController>();
     _authController = Get.find<AuthController>();
-    _paginatorController = PaginatorController();
+    _quotesPaginatorController = PaginatorController();
+    _leadsPaginatorController = PaginatorController();
 
-    _paginatorController.addListener(() {
+    _quotesPaginatorController.addListener(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {});
+      });
+    });
+
+    _leadsPaginatorController.addListener(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         setState(() {});
       });
@@ -103,7 +99,7 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                       _authController.user.value!.quotes.isEmpty) &&
                   widget.tableTitle != null
               ? 450
-              : 800,
+              : 840,
           decoration: BoxDecoration(
               color: Theme.of(context).primaryColorDark,
               borderRadius: BorderRadius.circular(12)),
@@ -207,7 +203,8 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                   Expanded(
                                     child: Obx(
                                       () => PaginatedDataTable2(
-                                          controller: _paginatorController,
+                                          controller:
+                                              _quotesPaginatorController,
                                           columns: newLeadsColumns,
                                           source: _authController
                                                   .quotesData.value ??
@@ -242,7 +239,7 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                            'Showing ${_paginatorController.isAttached ? _paginatorController.currentRowIndex + 1 : 1} to ${_paginatorController.isAttached ? (_paginatorController.rowsPerPage + _paginatorController.currentRowIndex) : 0} of ${_paginatorController.isAttached ? _paginatorController.rowCount : 0}',
+                                            'Showing ${_quotesPaginatorController.isAttached ? _quotesPaginatorController.currentRowIndex + 1 : 1} to ${_quotesPaginatorController.isAttached ? (_quotesPaginatorController.rowsPerPage + _quotesPaginatorController.currentRowIndex) : 0} of ${_quotesPaginatorController.isAttached ? _quotesPaginatorController.rowCount : 0}',
                                             style: TextStyle(
                                                 fontSize: Theme.of(context)
                                                     .textTheme
@@ -254,43 +251,43 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                         const SizedBox(height: 8),
 
                                         //  pagination element
-                                        _paginatorController.isAttached
+                                        _quotesPaginatorController.isAttached
                                             ? NewLeadsPaginationItem(
                                                 activeIndex:
-                                                    _paginatorController
+                                                    _quotesPaginatorController
                                                         .currentRowIndex,
-                                                numberOfPages: _paginatorController
+                                                numberOfPages: _quotesPaginatorController
                                                                 .rowCount %
-                                                            _paginatorController
+                                                            _quotesPaginatorController
                                                                 .rowsPerPage !=
                                                         0
-                                                    ? (_paginatorController
+                                                    ? (_quotesPaginatorController
                                                                 .rowCount ~/
-                                                            _paginatorController
+                                                            _quotesPaginatorController
                                                                 .rowsPerPage) +
                                                         1
-                                                    : (_paginatorController
+                                                    : (_quotesPaginatorController
                                                             .rowCount ~/
-                                                        _paginatorController
+                                                        _quotesPaginatorController
                                                             .rowsPerPage),
                                                 onPrev: () {
-                                                  if (_paginatorController
+                                                  if (_quotesPaginatorController
                                                       .isAttached) {
-                                                    _paginatorController
+                                                    _quotesPaginatorController
                                                         .goToPreviousPage();
                                                   }
                                                 },
                                                 onNext: () {
-                                                  if (_paginatorController
+                                                  if (_quotesPaginatorController
                                                       .isAttached) {
-                                                    _paginatorController
+                                                    _quotesPaginatorController
                                                         .goToNextPage();
                                                   }
                                                 },
                                                 onNumberIndexClicked: (index) {
-                                                  if (_paginatorController
+                                                  if (_quotesPaginatorController
                                                       .isAttached) {
-                                                    _paginatorController
+                                                    _quotesPaginatorController
                                                         .goToPageWithRow(
                                                             index * 9);
                                                   }
@@ -307,30 +304,23 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                               child: Column(
                                 children: [
                                   Expanded(
-                                    child: DataTable2(
-                                        dataRowHeight: 55,
-                                        columnSpacing: 0,
-                                        bottomMargin: 0,
-                                        columns: newLeadsColumns,
-                                        rows: List<DataRow2>.generate(
-                                            customers.length,
-                                            (index) => DataRow2(
-                                                    decoration: BoxDecoration(
-                                                      border: null,
-                                                      color: (index + 1) % 2 ==
-                                                              0
-                                                          ? Theme.of(context)
-                                                              .primaryColorDark
-                                                          : const Color(
-                                                              0xffFAF8F8),
-                                                    ),
-                                                    onTap: widget.onRowClicked,
-                                                    cells: [
-                                                      DataCell(Text(
-                                                          '0${index + 1}')),
-                                                      DataCell(Text(
-                                                          customers[index])),
-                                                    ]))),
+                                    child: Obx(
+                                      () => PaginatedDataTable2(
+                                          controller: _leadsPaginatorController,
+                                          columns: newLeadsColumns,
+                                          source:
+                                              _authController.leadsData.value ??
+                                                  TableDataSource(
+                                                      data: [],
+                                                      dashboardController:
+                                                          _dashboardController),
+                                          columnSpacing: 0,
+                                          border: null,
+                                          dividerThickness: 0,
+                                          showCheckboxColumn: false,
+                                          dataRowHeight: 55,
+                                          hidePaginator: true),
+                                    ),
                                   ),
                                   Container(
                                     width: double.infinity,
@@ -350,7 +340,8 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text('Showing 1 to 10 of 200',
+                                        Text(
+                                            'Showing ${_leadsPaginatorController.isAttached ? _leadsPaginatorController.currentRowIndex + 1 : 1} to ${_leadsPaginatorController.isAttached ? (_leadsPaginatorController.rowsPerPage + _leadsPaginatorController.currentRowIndex) : 0} of ${_leadsPaginatorController.isAttached ? _leadsPaginatorController.rowCount : 0}',
                                             style: TextStyle(
                                                 fontSize: Theme.of(context)
                                                     .textTheme
@@ -362,7 +353,49 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                         const SizedBox(height: 8),
 
                                         //  pagination element
-                                        NewLeadsPaginationItem()
+                                        _leadsPaginatorController.isAttached
+                                            ? NewLeadsPaginationItem(
+                                                activeIndex:
+                                                    _leadsPaginatorController
+                                                        .currentRowIndex,
+                                                numberOfPages: _leadsPaginatorController
+                                                                .rowCount %
+                                                            _leadsPaginatorController
+                                                                .rowsPerPage !=
+                                                        0
+                                                    ? (_leadsPaginatorController
+                                                                .rowCount ~/
+                                                            _leadsPaginatorController
+                                                                .rowsPerPage) +
+                                                        1
+                                                    : (_leadsPaginatorController
+                                                            .rowCount ~/
+                                                        _leadsPaginatorController
+                                                            .rowsPerPage),
+                                                onPrev: () {
+                                                  if (_leadsPaginatorController
+                                                      .isAttached) {
+                                                    _leadsPaginatorController
+                                                        .goToPreviousPage();
+                                                  }
+                                                },
+                                                onNext: () {
+                                                  if (_leadsPaginatorController
+                                                      .isAttached) {
+                                                    _leadsPaginatorController
+                                                        .goToNextPage();
+                                                  }
+                                                },
+                                                onNumberIndexClicked: (index) {
+                                                  if (_leadsPaginatorController
+                                                      .isAttached) {
+                                                    _leadsPaginatorController
+                                                        .goToPageWithRow(
+                                                            index * 9);
+                                                  }
+                                                },
+                                              )
+                                            : const SizedBox.shrink()
                                       ],
                                     ),
                                   ),

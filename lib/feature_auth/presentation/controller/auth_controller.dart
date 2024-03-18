@@ -17,6 +17,7 @@ class AuthController extends GetxController {
   late final StreamSubscription<AuthState> _subscription;
   final currentEvent = AuthChangeEvent.signedOut.obs;
   final currentSession = Rxn<Session>();
+  final isLoginLoading = false.obs;
 
   final user = Rxn<MyUser>();
   final quotesData = Rxn<TableDataSource>();
@@ -46,6 +47,9 @@ class AuthController extends GetxController {
     _subscription.cancel();
     super.onClose();
   }
+
+  void setIsLoginLoading({required bool isLoading}) =>
+      isLoginLoading.value = isLoading;
 
   void setQuotesData({required TableDataSource quotesData}) =>
       this.quotesData.value = quotesData;
@@ -81,9 +85,13 @@ class AuthController extends GetxController {
   Future<void> signIn(
           {required String email,
           required String password,
-          required bool keepLoggedIn}) async =>
-      await authUseCase.signIn
-          .call(email: email, password: password, keepLoggedIn: keepLoggedIn);
+          required bool keepLoggedIn,
+          required Function(ResponseState response) onResponse}) async =>
+      await authUseCase.signIn.call(
+          email: email,
+          password: password,
+          keepLoggedIn: keepLoggedIn,
+          onResponse: onResponse);
 
   /// Sign Out
   Future<void> signOut() async => await authUseCase.signOut();

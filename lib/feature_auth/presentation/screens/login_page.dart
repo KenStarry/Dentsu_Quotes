@@ -1,3 +1,4 @@
+import 'package:dentsu_quotes/core/domain/model/response_state.dart';
 import 'package:dentsu_quotes/feature_auth/presentation/components/login_text_field_section.dart';
 import 'package:dentsu_quotes/feature_auth/presentation/controller/auth_controller.dart';
 import 'package:dentsu_quotes/theme/colors.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../../../core/presentation/components/show_snackbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -146,31 +149,64 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 50),
 
                   //  login button
-                  FilledButton(
-                      onPressed: () async {
-                        //  login
-                        await _authController.signIn(
-                            email: _usernameController.text,
-                            password: _passwordController.text,
-                            keepLoggedIn: keepMeLoggedIn);
-                      },
-                      style: FilledButton.styleFrom(
-                          backgroundColor: Theme.of(context).primaryColorDark,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 15),
-                          surfaceTintColor: Theme.of(context).primaryColorDark,
-                          minimumSize: const Size.fromHeight(32)),
-                      child: Text('Log In',
-                          style: TextStyle(
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .fontSize,
-                              fontWeight: FontWeight.w700,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .color)))
+                  Obx(
+                    () => _authController.isLoginLoading.value
+                        ? CircularProgressIndicator(
+                            color: Theme.of(context).primaryColorDark,
+                          )
+                        : FilledButton(
+                            onPressed: () async {
+                              //  login
+                              await _authController.signIn(
+                                  email: _usernameController.text,
+                                  password: _passwordController.text,
+                                  keepLoggedIn: keepMeLoggedIn,
+                                  onResponse: (response) {
+                                    switch (response) {
+                                      case ResponseState.loading:
+                                        _authController.setIsLoginLoading(
+                                            isLoading: true);
+                                        break;
+                                      case ResponseState.failure:
+                                        _authController.setIsLoginLoading(
+                                            isLoading: false);
+                                        showSnackbar(
+                                            title: 'Error!',
+                                            message:
+                                                'Something went wrong. Please Check your email or password and try again.',
+                                            iconData: Icons.done_rounded);
+                                        break;
+                                      case ResponseState.success:
+                                        _authController.setIsLoginLoading(
+                                            isLoading: false);
+                                        showSnackbar(
+                                            title: 'Success!',
+                                            message: 'Logged in successfully!',
+                                            iconData: Icons.done_rounded);
+                                        break;
+                                    }
+                                  });
+                            },
+                            style: FilledButton.styleFrom(
+                                backgroundColor:
+                                    Theme.of(context).primaryColorDark,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 24, vertical: 15),
+                                surfaceTintColor:
+                                    Theme.of(context).primaryColorDark,
+                                minimumSize: const Size.fromHeight(32)),
+                            child: Text('Log In',
+                                style: TextStyle(
+                                    fontSize: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .fontSize,
+                                    fontWeight: FontWeight.w700,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .color))),
+                  )
                 ],
               ),
             ),

@@ -79,17 +79,22 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<void> signIn(
       {required String email,
       required String password,
-      required bool keepLoggedIn}) async {
+      required bool keepLoggedIn,
+      required Function(ResponseState response) onResponse}) async {
     try {
+      onResponse(ResponseState.loading);
       final response = await supabase.auth
-          .signInWithPassword(email: email, password: password);
+          .signInWithPassword(email: email, password: password)
+          .then((value) {
+        onResponse(ResponseState.success);
+      });
 
       if (response.user != null) {
         final sharedPrefs = await SharedPreferences.getInstance();
         await sharedPrefs.setBool('keep_logged_in', keepLoggedIn);
       }
     } catch (error) {
-      throw Exception(error);
+      onResponse(ResponseState.failure);
     }
   }
 

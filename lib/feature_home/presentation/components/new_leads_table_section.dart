@@ -94,7 +94,7 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
     final List<DataColumn2> newLeadsColumns = <DataColumn2>[
       DataColumn2(
           label: Text('#', style: Theme.of(context).textTheme.bodyLarge),
-          size: ColumnSize.S),
+          size: ColumnSize.M),
       DataColumn2(
           label: Text('Customer Name',
               style: Theme.of(context).textTheme.bodyLarge),
@@ -228,7 +228,9 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                           border: null,
                                           dividerThickness: 0,
                                           showCheckboxColumn: false,
-                                          dataRowHeight: 50,
+                                          horizontalMargin: 30,
+                                          dataRowHeight: 55,
+                                          lmRatio: 3.0,
                                           hidePaginator: true),
                                     ),
                                   ),
@@ -332,7 +334,9 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                           border: null,
                                           dividerThickness: 0,
                                           showCheckboxColumn: false,
+                                          horizontalMargin: 30,
                                           dataRowHeight: 55,
+                                          lmRatio: 3.0,
                                           hidePaginator: true),
                                     ),
                                   ),

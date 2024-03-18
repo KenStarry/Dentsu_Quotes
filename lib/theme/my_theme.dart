@@ -16,7 +16,8 @@ class MyTheme {
       cardTheme: const CardTheme(
         color: bgAlt,
         surfaceTintColor: bgAlt,
-        elevation: 0
+        elevation: 0,
+        margin: EdgeInsets.zero
       ),
       bottomSheetTheme: const BottomSheetThemeData(
           surfaceTintColor: bg,

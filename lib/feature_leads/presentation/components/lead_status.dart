@@ -2,7 +2,9 @@ import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class LeadStatus extends StatelessWidget {
-  const LeadStatus({super.key});
+  final bool contacted;
+
+  const LeadStatus({super.key, required this.contacted});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +27,19 @@ class LeadStatus extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(right: 24, top: 8, bottom: 8, left: 8),
+              padding:
+                  const EdgeInsets.only(right: 24, top: 8, bottom: 8, left: 8),
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [myGreen, Theme.of(context).primaryColorLight]),
+                  color: contacted ? null : Theme.of(context).primaryColorDark,
+                  gradient: contacted
+                      ? LinearGradient(colors: [
+                          myGreen,
+                          Theme.of(context).primaryColorLight
+                        ])
+                      : null,
+                  border: contacted
+                      ? null
+                      : Border.all(color: Theme.of(context).primaryColorLight),
                   borderRadius: BorderRadius.circular(100)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -37,20 +48,23 @@ class LeadStatus extends StatelessWidget {
                     width: 20,
                     height: 20,
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).primaryColorLight
-                    ),
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).primaryColorLight),
                     child: Center(
-                      child: Icon(Icons.done_rounded, color: textWhite900, size: 16,),
+                      child: Icon(
+                        contacted ? Icons.done_rounded : Icons.close_rounded,
+                        color: textWhite900,
+                        size: 16,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Text('Contacted',
+                  Text(contacted ? 'Contacted' : 'Not Contacted',
                       style: TextStyle(
                         fontSize:
                             Theme.of(context).textTheme.bodyMedium!.fontSize,
                         fontWeight: FontWeight.w400,
-                        color: textWhite900,
+                        color: contacted ? textWhite900 : Theme.of(context).primaryColorLight,
                       ))
                 ],
               ),

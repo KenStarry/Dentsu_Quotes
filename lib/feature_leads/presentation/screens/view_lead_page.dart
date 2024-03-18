@@ -47,7 +47,7 @@ class _ViewLeadPageState extends State<ViewLeadPage> {
               SliverToBoxAdapter(
                   child: CustomBackBreadcrumb(
                       backText: 'Back to all leads',
-                      currentPositionText: 'LD-20210121-41760202',
+                      currentPositionText: 'Lead - ${widget.lead.id}',
                       onBackPressed: () {
                         _dashboardController.setViewLeadActive(active: false);
                       })),
@@ -55,7 +55,7 @@ class _ViewLeadPageState extends State<ViewLeadPage> {
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
 
               //  lead status
-              const LeadStatus(),
+              LeadStatus(contacted: widget.lead.leadStatus == 'Contacted',),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
 

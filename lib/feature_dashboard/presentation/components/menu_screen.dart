@@ -1,5 +1,6 @@
 import 'package:dentsu_quotes/core/presentation/components/avatar.dart';
 import 'package:dentsu_quotes/core/presentation/controller/core_controller.dart';
+import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
 import 'package:dentsu_quotes/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,6 +19,7 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   late final AuthController _authController;
   late final CoreController _coreController;
+  late final DashboardController _dashboardController;
 
   @override
   void initState() {
@@ -25,6 +27,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
     _authController = Get.find<AuthController>();
     _coreController = Get.find<CoreController>();
+    _dashboardController = Get.find<DashboardController>();
   }
 
   @override
@@ -67,37 +70,45 @@ class _MenuScreenState extends State<MenuScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Stack(
-                    children: [
-                      Align(
-                          alignment: Alignment.center,
-                          child: Obx(() => Avatar(
-                              avatarUrl:
-                              _authController.user.value?.avatarUrl ?? '',
-                              size: const Size(100, 100)))),
+              GestureDetector(
+                onTap: (){
+                  _dashboardController.setActiveTabIndex(
+                      index: 3);
+                  //  toggle drawer
+                  _dashboardController.toggleDrawer();
+                },
+                child: SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Stack(
+                      children: [
+                        Align(
+                            alignment: Alignment.center,
+                            child: Obx(() => Avatar(
+                                avatarUrl:
+                                _authController.user.value?.avatarUrl ?? '',
+                                size: const Size(100, 100)))),
 
-                      //  live status checker
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Obx(
-                              () => Container(
-                            width: 10,
-                            height: 10,
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: _coreController.hasInternet.value
-                                    ? Colors.greenAccent
-                                    : Colors.redAccent,
-                            border: Border.all(color: Theme.of(context).primaryColor, width: 4, strokeAlign: BorderSide.strokeAlignOutside)),
+                        //  live status checker
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Obx(
+                                () => Container(
+                              width: 10,
+                              height: 10,
+                              margin: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: _coreController.hasInternet.value
+                                      ? Colors.greenAccent
+                                      : Colors.redAccent,
+                              border: Border.all(color: Theme.of(context).primaryColor, width: 4, strokeAlign: BorderSide.strokeAlignOutside)),
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  )),
+                        )
+                      ],
+                    )),
+              ),
               const SizedBox(height: 24),
               //  navigation
               Container(
@@ -111,7 +122,13 @@ class _MenuScreenState extends State<MenuScreen> {
                   children: [
                     //  Leads
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        //  navigate to leads
+                        _dashboardController.setActiveTabIndex(
+                            index: 1);
+                        //  toggle drawer
+                        _dashboardController.toggleDrawer();
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         decoration: BoxDecoration(color: Colors.transparent),
@@ -147,7 +164,12 @@ class _MenuScreenState extends State<MenuScreen> {
 
                     //  Quotes
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        _dashboardController.setActiveTabIndex(
+                            index: 2);
+                        //  toggle drawer
+                        _dashboardController.toggleDrawer();
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         decoration:

@@ -75,7 +75,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
 
     if (!widget.isNewQuote) {
       activeQuote = _authController
-          .user.value!.quotes[_dashboardController.viewQuoteIndex.value - 1];
+          .user.value!.quotes[_dashboardController.viewQuoteIndex.value];
     }
 
     if (widget.isNewQuote) {

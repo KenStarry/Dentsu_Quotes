@@ -29,6 +29,7 @@ class _DashboardMainState extends State<DashboardMain> {
   late final CoreController _coreController;
   late final AuthController _authController;
   late final DashboardController _dashboardController;
+  late final TextEditingController _searchController;
 
   @override
   void initState() {
@@ -37,6 +38,7 @@ class _DashboardMainState extends State<DashboardMain> {
     _coreController = Get.find<CoreController>();
     _authController = Get.find<AuthController>();
     _dashboardController = Get.find<DashboardController>();
+    _searchController = TextEditingController();
 
     _authController.listenToUserDataonDB(onGetUserData: (user) {
       _authController.setUser(user: user);
@@ -107,11 +109,36 @@ class _DashboardMainState extends State<DashboardMain> {
                     duration: const Duration(milliseconds: 350),
                     width:
                         _dashboardController.searchModeEnabled.value ? 200 : 0,
-                    height: double.infinity,
                     margin: const EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
                       color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                    child: Center(
+                      child: TextFormField(
+                        readOnly: false,
+                        controller: _searchController,
+                        style: TextStyle(
+                          fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
+                          fontWeight:
+                          Theme.of(context).textTheme.titleSmall!.fontWeight,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
+                        ),
+                        decoration: InputDecoration(
+                            hintText: 'Search...',
+                            filled: true,
+                            fillColor: Theme.of(context).scaffoldBackgroundColor,
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
+                            border: const OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(100))),
+                            enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(100)))),
+                      ),
                     ),
                   ),
                 ),

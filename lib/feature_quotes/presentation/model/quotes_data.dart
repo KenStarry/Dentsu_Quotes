@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import '../../../core/domain/model/quote.dart';
 import '../../../feature_dashboard/presentation/controller/dashboard_controller.dart';
 
-class QuotesData extends DataTableSource {
+class TableDataSource extends DataTableSource {
   final List<Map<String, dynamic>> data;
   final DashboardController dashboardController;
 
-  QuotesData({required this.data, required this.dashboardController});
+  TableDataSource({required this.data, required this.dashboardController});
 
   @override
   DataRow? getRow(int index) => DataRow(

@@ -17,7 +17,8 @@ class AuthController extends GetxController {
   final currentSession = Rxn<Session>();
 
   final user = Rxn<MyUser>();
-  final quotesData = Rxn<QuotesData>();
+  final quotesData = Rxn<TableDataSource>();
+  final leadsData = Rxn<TableDataSource>();
 
   @override
   void onInit() {
@@ -36,7 +37,11 @@ class AuthController extends GetxController {
     super.onClose();
   }
 
-  void setQuotesData({required QuotesData quotesData}) => this.quotesData.value = quotesData;
+  void setQuotesData({required TableDataSource quotesData}) =>
+      this.quotesData.value = quotesData;
+
+  void setLeadsData({required TableDataSource leadsData}) =>
+      this.leadsData.value = leadsData;
 
   void setUser({required MyUser? user}) => this.user.value = user;
 

@@ -62,12 +62,22 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
 
   void initializeQuotesDataSource() {
     _authController.setQuotesData(
-        quotesData: QuotesData(
+        quotesData: TableDataSource(
             data: _authController.user.value!.quotes
                 .map((quote) => {
                       'id': _authController.user.value!.quotes.indexOf(quote),
                       'customerName':
                           '${quote.firstName} ${quote.middleName} ${quote.lastName}'
+                    })
+                .toList(),
+            dashboardController: _dashboardController));
+
+    _authController.setLeadsData(
+        leadsData: TableDataSource(
+            data: _authController.user.value!.leads
+                .map((lead) => {
+                      'id': _authController.user.value!.leads.indexOf(lead),
+                      'customerName': lead.fullName
                     })
                 .toList(),
             dashboardController: _dashboardController));
@@ -201,7 +211,7 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                           columns: newLeadsColumns,
                                           source: _authController
                                                   .quotesData.value ??
-                                              QuotesData(
+                                              TableDataSource(
                                                   data: [],
                                                   dashboardController:
                                                       _dashboardController),

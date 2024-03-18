@@ -16,46 +16,40 @@ class ProfileDetails extends StatefulWidget {
 }
 
 class _ProfileDetailsState extends State<ProfileDetails> {
-  late final CoreController _coreController;
   late final AuthController _authController;
-  late final DashboardController _dashboardController;
 
   @override
   void initState() {
     super.initState();
 
-    _coreController = Get.find<CoreController>();
     _authController = Get.find<AuthController>();
-    _dashboardController = Get.find<DashboardController>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        decoration:
-            BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            //  user name
-            Obx(
-              () => Text(_authController.user.value?.userName ?? '',
-                  style: Theme.of(context).textTheme.titleLarge),
-            ),
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      decoration:
+          BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //  user name
+          Obx(
+            () => Text(_authController.user.value?.userName ?? '',
+                style: Theme.of(context).textTheme.titleLarge),
+          ),
 
-            const SizedBox(height: 8),
+          const SizedBox(height: 8),
 
-            //  email
-            Obx(
-              () => Text(_authController.user.value?.email ?? '',
-                  style: Theme.of(context).textTheme.bodyMedium),
-            ),
-          ],
-        ),
+          //  email
+          Obx(
+            () => Text(_authController.user.value?.email ?? '',
+                style: Theme.of(context).textTheme.bodyMedium),
+          ),
+        ],
       ),
     );
   }

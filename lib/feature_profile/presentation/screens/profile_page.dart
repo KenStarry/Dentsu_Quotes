@@ -1,6 +1,11 @@
 import 'package:dentsu_quotes/feature_profile/presentation/components/profile_card.dart';
 import 'package:dentsu_quotes/feature_profile/presentation/components/profile_details.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../../feature_auth/presentation/controller/auth_controller.dart';
+import '../../../theme/colors.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -10,6 +15,15 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late final AuthController _authController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _authController = Get.find<AuthController>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +32,52 @@ class _ProfilePageState extends State<ProfilePage> {
         width: double.infinity,
         height: double.infinity,
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            const ProfileCard(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Column(
+              children: [
+                ProfileCard(),
 
-            //  profile details
-            const ProfileDetails()
+                //  profile details
+                ProfileDetails(),
+              ],
+            ),
+
+            Expanded(child: Text('Hello')),
+
+            //  logout
+            GestureDetector(
+              onTap: () async {
+                await _authController.signOut();
+              },
+              child: UnconstrainedBox(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 24),
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColorLight,
+                      borderRadius: BorderRadius.circular(24)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.logout_rounded, color: textWhite900),
+                      const SizedBox(width: 12),
+                      Text('Logout',
+                          style: TextStyle(
+                              fontSize:
+                                  Theme.of(context).textTheme.bodyLarge!.fontSize,
+                              fontWeight: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .fontWeight,
+                              color: textWhite900,
+                              decoration: TextDecoration.none))
+                    ],
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

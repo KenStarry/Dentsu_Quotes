@@ -31,32 +31,30 @@ class _ProfileCardState extends State<ProfileCard> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        width: double.infinity,
-        height: 150,
-        decoration: BoxDecoration(color: Colors.transparent),
-        child: Stack(
-          children: [
-            //  background purple clipper
-            ClipPath(
-              clipper: OvalBottomBorderClipper(),
-              child: Container(
-                width: double.infinity,
-                height: 100,
-                color: Theme.of(context).primaryColor,
-              ),
+    return Container(
+      width: double.infinity,
+      height: 150,
+      decoration: const BoxDecoration(color: Colors.transparent),
+      child: Stack(
+        children: [
+          //  background purple clipper
+          ClipPath(
+            clipper: OvalBottomBorderClipper(),
+            child: Container(
+              width: double.infinity,
+              height: 100,
+              color: Theme.of(context).primaryColor,
             ),
+          ),
 
-            //  avatar
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: Obx(() => Avatar(
-                      avatarUrl: _authController.user.value?.avatarUrl ?? '',
-                      size: const Size(100, 100),
-                    )))
-          ],
-        ),
+          //  avatar
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Obx(() => Avatar(
+                    avatarUrl: _authController.user.value?.avatarUrl ?? '',
+                    size: const Size(100, 100),
+                  )))
+        ],
       ),
     );
   }

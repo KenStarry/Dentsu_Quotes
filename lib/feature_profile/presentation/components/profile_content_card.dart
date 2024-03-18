@@ -20,7 +20,11 @@ class ProfileContentCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(count, style: Theme.of(context).textTheme.titleMedium),
+          Text(count, style: TextStyle(
+            fontSize: Theme.of(context).textTheme.titleMedium!.fontSize,
+            fontWeight: Theme.of(context).textTheme.titleMedium!.fontWeight,
+            color: Theme.of(context).primaryColorLight
+          )),
           Text(title, style: TextStyle(
             fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
             fontWeight: Theme.of(context).textTheme.titleMedium!.fontWeight,

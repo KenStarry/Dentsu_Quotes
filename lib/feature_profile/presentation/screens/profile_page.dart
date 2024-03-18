@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/feature_profile/presentation/components/profile_card.dart';
+import 'package:dentsu_quotes/feature_profile/presentation/components/profile_content_card.dart';
 import 'package:dentsu_quotes/feature_profile/presentation/components/profile_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,13 +49,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Container(
               width: double.infinity,
               height: double.infinity,
-              color: Colors.red,
+              color: Theme.of(context).scaffoldBackgroundColor,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   //  leads
-
+                  const ProfileContentCard(title: 'Leads', count: '1.2k'),
                   //  quotes
+                  Obx(() => ProfileContentCard(
+                      title: 'Quotes',
+                      count: _authController.user.value?.quotes.length
+                              .toString() ??
+                          '0')),
                   //  Products
+                  const ProfileContentCard(title: 'Products', count: '200'),
                 ],
               ),
             )),

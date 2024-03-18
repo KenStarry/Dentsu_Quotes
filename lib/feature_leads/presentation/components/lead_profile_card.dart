@@ -1,8 +1,12 @@
+import 'package:dentsu_quotes/core/domain/model/lead.dart';
+import 'package:dentsu_quotes/core/presentation/components/avatar.dart';
 import 'package:dentsu_quotes/feature_leads/presentation/components/profile_card_detail_card.dart';
 import 'package:flutter/material.dart';
 
 class LeadProfileCard extends StatelessWidget {
-  const LeadProfileCard({super.key});
+  final Lead lead;
+
+  const LeadProfileCard({super.key, required this.lead});
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +25,19 @@ class LeadProfileCard extends StatelessWidget {
                 Container(
                   width: 60,
                   height: 60,
-                  decoration:
-                      BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).primaryColorDark),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Theme.of(context).primaryColorDark),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(120),
-                    child: Image.asset(
-                      'assets/images/profile.jpg',
-                      width: double.infinity,
-                      height: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                    child: Avatar(avatarUrl: lead.avatarUrl, size: Size(double.infinity, double.infinity))
                   ),
                 ),
                 const SizedBox(width: 12),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Joseph Kimeu Walter',
+                    Text(lead.fullName,
                         style: TextStyle(
                             fontWeight: Theme.of(context)
                                 .textTheme
@@ -47,7 +47,7 @@ class LeadProfileCard extends StatelessWidget {
                             color:
                                 Theme.of(context).textTheme.titleSmall!.color)),
                     const SizedBox(height: 8),
-                    Text('Nairobi, Kenya',
+                    Text(lead.location,
                         style: TextStyle(
                             fontWeight: Theme.of(context)
                                 .textTheme
@@ -70,14 +70,14 @@ class LeadProfileCard extends StatelessWidget {
             const SizedBox(height: 24),
 
             // details
-            const ProfileCardDetailCard(
-                title: 'Lead Created', date: '10 August 2022'),
+            ProfileCardDetailCard(
+                title: 'Lead Created', date: lead.leadCreated),
             const SizedBox(height: 16),
-            const ProfileCardDetailCard(
-                title: 'Last Contacted', date: '16 August 2022'),
+            ProfileCardDetailCard(
+                title: 'Last Contacted', date: lead.lastContacted),
             const SizedBox(height: 16),
-            const ProfileCardDetailCard(
-                title: 'Next Appointment', date: '29 August 2022'),
+            ProfileCardDetailCard(
+                title: 'Next Appointment', date: lead.nextAppointment),
           ],
         ),
       ),

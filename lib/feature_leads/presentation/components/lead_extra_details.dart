@@ -1,8 +1,11 @@
 import 'package:dentsu_quotes/feature_leads/presentation/components/extra_details_content.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/domain/model/lead.dart';
+
 class LeadExtraDetailsSection extends StatelessWidget {
-  const LeadExtraDetailsSection({super.key});
+  final Lead lead;
+  const LeadExtraDetailsSection({super.key, required this.lead});
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +38,20 @@ class LeadExtraDetailsSection extends StatelessWidget {
               width: double.infinity,
               height: 400,
               color: Colors.transparent,
-              child: const TabBarView(children: [
+              child: TabBarView(children: [
                 ExtraDetailsContent(details: {
-                  'Lead Source': 'Bulk Upload',
-                  'Product Requested': 'Mortgage',
-                  'Product Sold': 'Mortgage Account',
-                  'Lead Close Reason': 'Lost to competition',
-                  'Recording Agent': 'Khary Fagbure'
+                  'Lead Source': lead.leadSource,
+                  'Product Requested': lead.productRequested,
+                  'Product Sold': lead.productSold,
+                  'Lead Close Reason': lead.leadCloseReason,
+                  'Recording Agent': lead.recordingAgent
                 }),
                 ExtraDetailsContent(details: {
-                  'Lead Source': 'Bulk Upload',
-                  'Product Requested': 'Mortgage',
-                  'Product Sold': 'Mortgage Account',
-                  'Lead Close Reason': 'Lost to competition',
-                  'Recording Agent': 'Khary Fagbure'
+                  'Lead Source': lead.leadSource,
+                  'Product Requested': lead.productRequested,
+                  'Product Sold': lead.productSold,
+                  'Lead Close Reason': lead.leadCloseReason,
+                  'Recording Agent': lead.recordingAgent
                 }),
               ]),
             )

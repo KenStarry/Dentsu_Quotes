@@ -72,12 +72,12 @@ class _ViewLeadPageState extends State<ViewLeadPage> {
                 },
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
-              const LeadProfileCard(),
+              LeadProfileCard(lead: widget.lead),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
 
               //  extra details section
-              const LeadExtraDetailsSection(),
+              LeadExtraDetailsSection(lead: widget.lead),
 
               const SliverToBoxAdapter(child: SizedBox(height: 48)),
             ],

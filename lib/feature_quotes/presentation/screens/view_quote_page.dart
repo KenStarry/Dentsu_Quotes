@@ -44,6 +44,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
   late final CoreController _coreController;
   late final AuthController _authController;
   late final TabController _tabController;
+  Quote? activeQuote;
 
   @override
   void initState() {
@@ -72,7 +73,14 @@ class _ViewQuotePageState extends State<ViewQuotePage>
     _authController = Get.find<AuthController>();
     _tabController = TabController(length: 3, vsync: this);
 
-    addControllerListeners();
+    if (!widget.isNewQuote) {
+      activeQuote = _authController
+          .user.value!.quotes[_dashboardController.viewQuoteIndex.value];
+    }
+
+    if (widget.isNewQuote) {
+      addControllerListeners();
+    }
   }
 
   void addControllerListeners() {
@@ -226,6 +234,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                           : const BouncingScrollPhysics(),
                       children: [
                         ViewQuoteInformation(
+                            quote: activeQuote,
                             controllers: <TextEditingController>[
                               _firstNameController,
                               _middleNameController,
@@ -239,6 +248,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                             ],
                             isNewQuote: widget.isNewQuote),
                         ViewQuoteSetup(
+                            quote: activeQuote,
                             isNewQuote: widget.isNewQuote,
                             controllers: <TextEditingController>[
                               _ageBracketController,
@@ -249,6 +259,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                               _spouseAgeController
                             ]),
                         ViewQuoteBenefits(
+                          quote: activeQuote,
                           controllers: <TextEditingController>[
                             _inPatientCoverController
                           ],
@@ -284,7 +295,8 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                                           iconData: Icons.done_rounded);
 
                                       //  navigate back to view quotes page
-                                      _dashboardController.setViewQuoteActive(active: false);
+                                      _dashboardController.setViewQuoteActive(
+                                          active: false);
                                       break;
                                     case ResponseState.loading:
                                       break;
@@ -298,7 +310,8 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                                 });
                           },
                           onDiscard: () {
-                            _dashboardController.setViewQuoteActive(active: false);
+                            _dashboardController.setViewQuoteActive(
+                                active: false);
                           },
                         ),
                       ]),

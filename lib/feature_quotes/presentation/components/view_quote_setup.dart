@@ -1,12 +1,16 @@
 import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_textfield.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/domain/model/quote.dart';
+
 class ViewQuoteSetup extends StatefulWidget {
+  final Quote? quote;
   final List<TextEditingController> controllers;
   final bool isNewQuote;
 
   const ViewQuoteSetup(
       {super.key,
+      required this.quote,
       required this.controllers,
       required this.isNewQuote});
 
@@ -22,16 +26,24 @@ class _ViewQuoteSetupState extends State<ViewQuoteSetup> {
     super.initState();
 
     information = <String, dynamic>{
-      'Age Bracket':
-          widget.isNewQuote ? 'Choose Age Bracket' : '18 to 30 years',
-      'Inpatient Cover Limit':
-          widget.isNewQuote ? 'Inpatient Cover Limit' : 'KES 500,000',
-      'Spouse Covered?': widget.isNewQuote ? 'Spouse Covered?' : 'Yes',
-      'How many children?':
-          widget.isNewQuote ? 'How many children?' : '6 children',
-      'Cover Children?': widget.isNewQuote ? 'Cover Children?' : 'Yes',
-      'Spouse Age Bracket':
-          widget.isNewQuote ? 'Spouse Age Bracket' : '18 to 30 years',
+      'Age Bracket': widget.isNewQuote || widget.quote == null
+          ? 'Choose Age Bracket'
+          : widget.quote!.ageBracket,
+      'Inpatient Cover Limit': widget.isNewQuote || widget.quote == null
+          ? 'Inpatient Cover Limit'
+          : widget.quote!.inPatientCoverLimit,
+      'Spouse Covered?': widget.isNewQuote || widget.quote == null
+          ? 'Spouse Covered?'
+          : widget.quote!.spouseCovered,
+      'How many children?': widget.isNewQuote || widget.quote == null
+          ? 'How many children?'
+          : widget.quote!.howManyChildren.toString(),
+      'Cover Children?': widget.isNewQuote || widget.quote == null
+          ? 'Cover Children?'
+          : widget.quote!.coverChildren,
+      'Spouse Age Bracket': widget.isNewQuote || widget.quote == null
+          ? 'Spouse Age Bracket'
+          : widget.quote!.spouseAgeBracket,
     };
   }
 

@@ -5,9 +5,11 @@ import 'package:dentsu_quotes/feature_quotes/presentation/components/quote_info_
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/domain/model/quote.dart';
 import '../../../theme/colors.dart';
 
 class ViewQuoteBenefits extends StatefulWidget {
+  final Quote? quote;
   final List<TextEditingController> controllers;
   final bool isNewQuote;
   final VoidCallback onSave;
@@ -15,6 +17,7 @@ class ViewQuoteBenefits extends StatefulWidget {
 
   const ViewQuoteBenefits(
       {super.key,
+      required this.quote,
       required this.controllers,
       required this.isNewQuote,
       required this.onSave,
@@ -36,9 +39,10 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
     _coreController = Get.find<CoreController>();
     information = <String, dynamic>{
       'Inpatient Cover Limit':
-          widget.isNewQuote && widget.controllers[0].text.isEmpty
+          (widget.isNewQuote && widget.controllers[0].text.isEmpty) ||
+                  widget.quote == null
               ? 'Inpatient Cover Limit'
-              : 'KES 1,000,000',
+              : widget.quote!.inPatientCoverLimit,
     };
 
     _benefits = <String>[
@@ -137,9 +141,10 @@ class _ViewQuoteBenefitsState extends State<ViewQuoteBenefits> {
                                       updatedQuote: newQuote);
                                 }
                               : null,
-                          isSelected: widget.isNewQuote
+                          isSelected: widget.isNewQuote || widget.quote == null
                               ? newQuoteContainsBenefit
-                              : index == 0);
+                              : widget.quote!.benefits
+                                  .contains(_benefits[index]));
                     },
                   ),
                   separatorBuilder: (context, index) => Divider(

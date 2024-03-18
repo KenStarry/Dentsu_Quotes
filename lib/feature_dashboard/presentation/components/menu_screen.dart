@@ -131,7 +131,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 8),
-                        decoration: BoxDecoration(color: Colors.transparent),
+                        decoration: const BoxDecoration(color: Colors.transparent),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -139,7 +139,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               'assets/images/leads.svg',
                               width: 20,
                               height: 20,
-                              colorFilter: ColorFilter.mode(
+                              colorFilter: const ColorFilter.mode(
                                   textWhite900, BlendMode.srcIn),
                             ),
                             const SizedBox(width: 12),
@@ -181,7 +181,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               'assets/images/quotes.svg',
                               width: 20,
                               height: 20,
-                              colorFilter: ColorFilter.mode(
+                              colorFilter: const ColorFilter.mode(
                                   textWhite900, BlendMode.srcIn),
                             ),
                             const SizedBox(width: 12),
@@ -220,7 +220,7 @@ class _MenuScreenState extends State<MenuScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.logout_rounded, color: textWhite900),
+                  const Icon(Icons.logout_rounded, color: textWhite900),
                   const SizedBox(width: 12),
                   Text('Logout',
                       style: TextStyle(

@@ -27,7 +27,7 @@ abstract class AuthRepository {
       {required String email,
       required String password,
       required bool keepLoggedIn,
-        required Function(ResponseState response) onResponse});
+        required Function(ResponseState response, String? errorMessage) onResponse});
 
   /// Sign Out
   Future<void> signOut();

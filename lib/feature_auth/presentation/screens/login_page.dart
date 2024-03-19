@@ -161,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                                   email: _usernameController.text,
                                   password: _passwordController.text,
                                   keepLoggedIn: keepMeLoggedIn,
-                                  onResponse: (response) {
+                                  onResponse: (response, errorMessage) {
                                     switch (response) {
                                       case ResponseState.loading:
                                         _authController.setIsLoginLoading(
@@ -172,8 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                                             isLoading: false);
                                         showSnackbar(
                                             title: 'Error!',
-                                            message:
-                                                'Something went wrong. Please Check your email or password and try again.',
+                                            message: errorMessage!,
                                             iconData: Icons.done_rounded);
                                         break;
                                       case ResponseState.success:

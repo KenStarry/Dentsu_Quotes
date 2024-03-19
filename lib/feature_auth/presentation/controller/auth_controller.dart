@@ -105,7 +105,7 @@ class AuthController extends GetxController {
           {required String email,
           required String password,
           required bool keepLoggedIn,
-          required Function(ResponseState response) onResponse}) async =>
+          required Function(ResponseState response, String? errorMessage) onResponse}) async =>
       await authUseCase.signIn.call(
           email: email,
           password: password,

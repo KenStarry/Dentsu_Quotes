@@ -80,13 +80,13 @@ class AuthRepositoryImpl extends AuthRepository {
       {required String email,
       required String password,
       required bool keepLoggedIn,
-      required Function(ResponseState response) onResponse}) async {
+      required Function(ResponseState response, String? errorMessage) onResponse}) async {
     try {
-      onResponse(ResponseState.loading);
+      onResponse(ResponseState.loading, null);
       final response = await supabase.auth
           .signInWithPassword(email: email, password: password)
           .then((value) {
-        onResponse(ResponseState.success);
+        onResponse(ResponseState.success, null);
       });
 
       if (response.user != null) {
@@ -94,7 +94,7 @@ class AuthRepositoryImpl extends AuthRepository {
         await sharedPrefs.setBool('keep_logged_in', keepLoggedIn);
       }
     } catch (error) {
-      onResponse(ResponseState.failure);
+      onResponse(ResponseState.failure, error.toString());
     }
   }
 

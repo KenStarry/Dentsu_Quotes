@@ -35,7 +35,7 @@ class _MenuScreenState extends State<MenuScreen> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      padding: const EdgeInsets.only(top: 60, bottom: 50, left: 12),
+      padding: const EdgeInsets.only(top: 60, bottom: 50, left: 24),
       color: Theme.of(context).primaryColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -147,7 +147,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 style: TextStyle(
                                     fontSize: Theme.of(context)
                                         .textTheme
-                                        .titleSmall!
+                                        .bodyLarge!
                                         .fontSize,
                                     fontWeight: Theme.of(context)
                                         .textTheme
@@ -189,7 +189,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 style: TextStyle(
                                     fontSize: Theme.of(context)
                                         .textTheme
-                                        .titleSmall!
+                                        .bodyLarge!
                                         .fontSize,
                                     fontWeight: Theme.of(context)
                                         .textTheme

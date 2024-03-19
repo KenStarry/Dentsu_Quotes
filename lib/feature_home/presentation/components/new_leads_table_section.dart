@@ -61,7 +61,7 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
         quotesData: TableDataSource(
             data: _authController.user.value!.quotes
                 .map((quote) => {
-                      'id': _authController.user.value!.quotes.indexOf(quote),
+                      'id': _authController.user.value!.quotes.indexOf(quote) + 1,
                       'customerName':
                           '${quote.firstName} ${quote.middleName} ${quote.lastName}'
                     })
@@ -78,7 +78,7 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
         leadsData: TableDataSource(
             data: _authController.user.value!.leads
                 .map((lead) => {
-                      'id': _authController.user.value!.leads.indexOf(lead),
+                      'id': _authController.user.value!.leads.indexOf(lead) + 1,
                       'customerName': lead.fullName
                     })
                 .toList(),

@@ -246,7 +246,8 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                               _sourceController,
                               _capturingUserController
                             ],
-                            isNewQuote: widget.isNewQuote),
+                            isNewQuote: widget.isNewQuote,
+                            onNext: () {}),
                         ViewQuoteSetup(
                             quote: activeQuote,
                             isNewQuote: widget.isNewQuote,

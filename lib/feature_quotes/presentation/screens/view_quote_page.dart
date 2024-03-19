@@ -197,6 +197,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                   const SizedBox(height: 8),
                   TabBar(
                       isScrollable: true,
+                      controller: _tabController,
                       physics: widget.isNewQuote
                           ? const NeverScrollableScrollPhysics()
                           : const BouncingScrollPhysics(),
@@ -232,6 +233,7 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                       physics: widget.isNewQuote
                           ? const NeverScrollableScrollPhysics()
                           : const BouncingScrollPhysics(),
+                      controller: _tabController,
                       children: [
                         ViewQuoteInformation(
                             quote: activeQuote,
@@ -247,7 +249,9 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                               _capturingUserController
                             ],
                             isNewQuote: widget.isNewQuote,
-                            onNext: () {}),
+                            onNext: () {
+                              _tabController.animateTo(1);
+                            }),
                         ViewQuoteSetup(
                             quote: activeQuote,
                             isNewQuote: widget.isNewQuote,
@@ -258,7 +262,10 @@ class _ViewQuotePageState extends State<ViewQuotePage>
                               _childrenCountController,
                               _coverChildrenController,
                               _spouseAgeController
-                            ]),
+                            ],
+                            onNext: () {
+                              _tabController.animateTo(2);
+                            }),
                         ViewQuoteBenefits(
                           quote: activeQuote,
                           controllers: <TextEditingController>[

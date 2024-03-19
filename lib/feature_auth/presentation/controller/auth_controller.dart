@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dentsu_quotes/core/domain/model/lead.dart';
 import 'package:dentsu_quotes/core/presentation/controller/core_controller.dart';
 import 'package:dentsu_quotes/feature_quotes/presentation/model/quotes_data.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,8 @@ class AuthController extends GetxController {
   final user = Rxn<MyUser>();
   final quotesData = Rxn<TableDataSource>();
   final leadsData = Rxn<TableDataSource>();
+
+  final filteredLeads = <Lead>[].obs;
 
   @override
   void onInit() {
@@ -46,6 +49,22 @@ class AuthController extends GetxController {
   void onClose() {
     _subscription.cancel();
     super.onClose();
+  }
+
+  void filterLeads({required String filterString}) {
+    final allLeads = [...user.value?.leads ?? <Lead>[]];
+
+    filteredLeads.value = allLeads
+        .where((lead) =>
+            lead.fullName
+                .replaceAll(' ', '')
+                .toLowerCase()
+                .startsWith(filterString.replaceAll(' ', '').toLowerCase()) ||
+            lead.fullName
+                .replaceAll(' ', '')
+                .toLowerCase()
+                .contains(filterString.replaceAll(' ', '').toLowerCase()))
+        .toList();
   }
 
   void setIsLoginLoading({required bool isLoading}) =>

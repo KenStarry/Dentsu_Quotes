@@ -44,6 +44,10 @@ class _DashboardMainState extends State<DashboardMain> {
     _authController.listenToUserDataonDB(onGetUserData: (user) {
       _authController.setUser(user: user);
     });
+
+    _searchController.addListener(() {
+      _authController.filterLeads(filterString: _searchController.text);
+    });
   }
 
   @override

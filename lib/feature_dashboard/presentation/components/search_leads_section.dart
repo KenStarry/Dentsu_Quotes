@@ -1,4 +1,5 @@
 import 'package:dentsu_quotes/feature_dashboard/presentation/components/search_item_card.dart';
+import 'package:dentsu_quotes/feature_dashboard/presentation/controller/dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -15,11 +16,13 @@ class SearchLeadsSection extends StatefulWidget {
 
 class _SearchLeadsSectionState extends State<SearchLeadsSection> {
   late final AuthController _authController;
+  late final DashboardController _dashboardController;
 
   @override
   void initState() {
     super.initState();
     _authController = Get.find<AuthController>();
+    _dashboardController = Get.find<DashboardController>();
   }
 
   @override
@@ -40,13 +43,18 @@ class _SearchLeadsSectionState extends State<SearchLeadsSection> {
                 delegate: SliverChildBuilderDelegate(
                     (context, index) => SearchItemCard(
                         index: index,
-                        title:
-                            _authController.user.value?.leads[index].fullName ??
-                                '',
+                        title: _authController
+                                .filteredLeads.value[index].fullName ??
+                            '',
                         onTap: () {
                           //  open view lead screen
+                          _dashboardController.setViewLeadActive(
+                              active: true,
+                              index: _authController.user.value!.leads.indexOf(
+                                  _authController.filteredLeads.value[index]));
+                          _dashboardController.toggleSearchModeEnabled();
                         }),
-                    childCount: _authController.user.value?.leads.length ?? 0)),
+                    childCount: _authController.filteredLeads.value.length)),
           )
         ]),
       ),

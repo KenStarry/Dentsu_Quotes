@@ -13,23 +13,26 @@ class SearchItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 55,
-      color: index % 2 == 0
-          ? const Color(0xffFAF8F8)
-          : Theme.of(context).primaryColorDark,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          //  index
-          Text(index.toString(), style: Theme.of(context).textTheme.bodyMedium),
-          const SizedBox(width: 24),
-          Expanded(
-              child:
-                  Text(title, style: Theme.of(context).textTheme.bodyMedium)),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 55,
+        color: index % 2 == 0
+            ? const Color(0xffFAF8F8)
+            : Theme.of(context).primaryColorDark,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //  index
+            Text(index.toString(), style: Theme.of(context).textTheme.bodyMedium),
+            const SizedBox(width: 24),
+            Expanded(
+                child:
+                    Text(title, style: Theme.of(context).textTheme.bodyMedium)),
+          ],
+        ),
       ),
     );
   }

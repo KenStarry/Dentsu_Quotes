@@ -86,13 +86,13 @@ class AuthRepositoryImpl extends AuthRepository {
       final response = await supabase.auth
           .signInWithPassword(email: email, password: password)
           .then((value) {
-        onResponse(ResponseState.success, null);
       });
 
       if (response.user != null) {
         final sharedPrefs = await SharedPreferences.getInstance();
         await sharedPrefs.setBool('keep_logged_in', keepLoggedIn);
       }
+      onResponse(ResponseState.success, null);
     } catch (error) {
       onResponse(ResponseState.failure, error.toString());
     }

@@ -61,7 +61,8 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
         quotesData: TableDataSource(
             data: _authController.user.value!.quotes
                 .map((quote) => {
-                      'id': _authController.user.value!.quotes.indexOf(quote) + 1,
+                      'id':
+                          _authController.user.value!.quotes.indexOf(quote) + 1,
                       'customerName':
                           '${quote.firstName} ${quote.middleName} ${quote.lastName}'
                     })
@@ -268,8 +269,10 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                         _quotesPaginatorController.isAttached
                                             ? NewLeadsPaginationItem(
                                                 activeIndex:
-                                                    _quotesPaginatorController
-                                                        .currentRowIndex,
+                                                    (_leadsPaginatorController
+                                                                .currentRowIndex /
+                                                            10)
+                                                        .ceil(),
                                                 numberOfPages: _quotesPaginatorController
                                                                 .rowCount %
                                                             _quotesPaginatorController
@@ -374,8 +377,10 @@ class _NewLeadsTableSectionState extends State<NewLeadsTableSection> {
                                         _leadsPaginatorController.isAttached
                                             ? NewLeadsPaginationItem(
                                                 activeIndex:
-                                                    _leadsPaginatorController
-                                                        .currentRowIndex,
+                                                    (_leadsPaginatorController
+                                                                .currentRowIndex /
+                                                            10)
+                                                        .ceil(),
                                                 numberOfPages: _leadsPaginatorController
                                                                 .rowCount %
                                                             _leadsPaginatorController
